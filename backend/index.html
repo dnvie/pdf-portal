@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PDF File Upload</title>
+</head>
+<body>
+	<form action="http://localhost:3000/upload" method="post" enctype="multipart/form-data">
+		<input type="file" name="pdfFile" accept=".pdf" />
+		<input type="text" name="tags" placeholder="Add tags separated by commas" />
+		<input type="submit" value="Upload" />
+	</form>
+
+</body>
+</html>
