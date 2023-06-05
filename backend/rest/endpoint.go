@@ -37,7 +37,7 @@ func UploadPDF(w http.ResponseWriter, r *http.Request) {
 	tags := strings.Split(r.FormValue("tags"), ",")
 
 	pdfInfo := utility.GetPdfInfo(id.String(), file, header)
-	if database.CheckIfMd5Exists(pdfInfo.Md5) {
+	if database.CheckIfFilenameExists(pdfInfo.Filename) {
 		err := os.Remove(constants.PDF_PATH + id.String() + ".pdf")
 		if err != nil {
 			panic(err)

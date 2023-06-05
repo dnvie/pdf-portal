@@ -2,11 +2,8 @@ package utility
 
 import (
 	structs "PDFLib/data"
-	"crypto/md5"
 	"encoding/base64"
-	"encoding/hex"
 	"fmt"
-	"io"
 	"log"
 	"mime/multipart"
 	"time"
@@ -33,7 +30,6 @@ func GetPdfInfo(id string, file multipart.File, header *multipart.FileHeader) st
 		PdfInfo.Title = header.Filename[:len(header.Filename)-4]
 		PdfInfo.CreationDate = ""
 		PdfInfo.NumPages = -1
-		PdfInfo.Md5, _ = hash_file_md5(file)
 		PdfInfo.Image, _ = ConvertPDFToImage(id)
 		return PdfInfo
 	}
@@ -67,7 +63,6 @@ func GetPdfInfo(id string, file multipart.File, header *multipart.FileHeader) st
 
 	PdfInfo.NumPages = int64(numPages)
 	PdfInfo.Size = header.Size
-	PdfInfo.Md5, _ = hash_file_md5(file)
 	PdfInfo.Image, _ = ConvertPDFToImage(id)
 
 	return PdfInfo
@@ -88,20 +83,4 @@ func ConvertPDFToImage(id string) (string, error) {
 	image := base64.StdEncoding.EncodeToString(imageBuffer)
 
 	return image, nil
-}
-
-func hash_file_md5(file multipart.File) (string, error) {
-
-	var returnMD5String string
-
-	hash := md5.New()
-
-	if _, err := io.Copy(hash, file); err != nil {
-		return returnMD5String, err
-	}
-
-	hashInBytes := hash.Sum(nil)[:16]
-
-	returnMD5String = hex.EncodeToString(hashInBytes)
-	return returnMD5String, nil
 }

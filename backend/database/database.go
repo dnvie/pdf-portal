@@ -11,17 +11,21 @@ var Database *sql.DB
 
 func ConnectDatabase() {
 	database, _ := sql.Open("sqlite3", "./database/pdflib.db")
-	statement, _ := database.Prepare("CREATE TABLE IF NOT EXISTS pdf (id TEXT PRIMARY KEY NOT NULL, filename TEXT NOT NULL, title TEXT NOT NULL, author TEXT, creation_date TEXT, size INTEGER, number_of_pages INTEGER, md5hash TEXT UNIQUE NOT NULL, image TEXT)")
+	statement, _ := database.Prepare("CREATE TABLE IF NOT EXISTS pdf (id TEXT PRIMARY KEY NOT NULL, filename TEXT NOT NULL, title TEXT NOT NULL, author TEXT, creation_date TEXT, size INTEGER, number_of_pages INTEGER, image TEXT)")
 	statement.Exec()
-	statement, _ = database.Prepare("CREATE TABLE IF NOT EXISTS pdf_tags (id INTEGER PRIMARY KEY AUTOINCREMENT, pdf_id TEXT NOT NULL, tag TEXT NOT NULL, FOREIGN KEY (pdf_id) REFERENCES pdf (id));")
+	//statement, _ = database.Prepare("CREATE TABLE IF NOT EXISTS pdf_tags (id INTEGER PRIMARY KEY AUTOINCREMENT, pdf_id TEXT NOT NULL, tag TEXT NOT NULL, FOREIGN KEY (pdf_id) REFERENCES pdf (id));")
+	//statement.Exec()
+	statement, _ = database.Prepare("CREATE TABLE IF NOT EXISTS tags (name TEXT PRIMARY KEY, color TEXT)")
+	statement.Exec()
+	statement, _ = database.Prepare("CREATE TABLE IF NOT EXISTS pdf_tags (pdf_id TEXT, tag_name TEXT, FOREIGN KEY (pdf_id) REFERENCES pdf(id), FOREIGN KEY (tag_name) REFERENCES tags(name), PRIMARY KEY (pdf_id, tag_name))")
 	statement.Exec()
 
 	Database = database
 }
 
-func CheckIfMd5Exists(md5 string) bool {
-	statement := `SELECT md5hash FROM pdf WHERE md5hash = ?`
-	err := Database.QueryRow(statement, md5).Scan(&md5)
+func CheckIfFilenameExists(filename string) bool {
+	statement := `SELECT filename FROM pdf WHERE filename = ?`
+	err := Database.QueryRow(statement, filename).Scan(&filename)
 	if err != nil {
 		if err != sql.ErrNoRows {
 			panic(err)
@@ -43,16 +47,55 @@ func CheckIfFileExists(id string) bool {
 	return true
 }
 
+func CheckIfTagExists(name string) bool {
+	statement := `SELECT name FROM tags WHERE name = ?`
+	err := Database.QueryRow(statement, name).Scan(&name)
+	if err != nil {
+		if err != sql.ErrNoRows {
+			panic(err)
+		}
+		return false
+	}
+	return true
+}
+
 func AddPdfFile(pdf structs.PDFInfo) {
-	statement, _ := Database.Prepare("INSERT INTO pdf (id, filename, title, author, creation_date, size, number_of_pages, md5hash, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-	statement.Exec(pdf.Uuid, pdf.Filename, pdf.Title, pdf.Author, pdf.CreationDate, pdf.Size, pdf.NumPages, pdf.Md5, pdf.Image)
+	statement, _ := Database.Prepare("INSERT INTO pdf (id, filename, title, author, creation_date, size, number_of_pages, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
+	statement.Exec(pdf.Uuid, pdf.Filename, pdf.Title, pdf.Author, pdf.CreationDate, pdf.Size, pdf.NumPages, pdf.Image)
 }
 
 func AddTags(id string, tags []string) {
-	statement, _ := Database.Prepare("INSERT INTO pdf_tags (pdf_id, tag) VALUES (?, ?)")
 	for _, tag := range tags {
-		statement.Exec(id, tag)
+		if CheckIfTagExists(tag) {
+			statement, _ := Database.Prepare("INSERT INTO pdf_tags (pdf_id, tag_name) VALUES (?, ?)")
+			statement.Exec(id, tag)
+		} else {
+			statement, _ := Database.Prepare("INSERT INTO tags (name) VALUES (?)")
+			statement.Exec(tag)
+			statement, _ = Database.Prepare("INSERT INTO pdf_tags (pdf_id, tag_name) VALUES (?, ?)")
+			statement.Exec(id, tag)
+		}
 	}
+}
+
+func getTags(id string) []string {
+	var tags []string
+
+	statement, _ := Database.Prepare("SELECT tags.* FROM tags JOIN pdf_tags ON tags.name = pdf_tags.tag_name WHERE pdf_tags.pdf_id = ?")
+	rows, err := statement.Query(id)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var tag string
+		if err := rows.Scan(&tag); err != nil {
+			panic(err)
+		}
+		tags = append(tags, tag)
+	}
+	return tags
 }
 
 func GetPdfData(uuid string) structs.PDFpreview {
@@ -68,24 +111,4 @@ func GetPdfData(uuid string) structs.PDFpreview {
 	res.Tags = getTags(id)
 
 	return res
-}
-
-func getTags(id string) []string {
-	var tags []string
-
-	statement, _ := Database.Prepare("SELECT tag FROM pdf_tags WHERE pdf_id = ?")
-	rows, err := statement.Query(id)
-	if err != nil {
-		panic(err)
-	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var tag string
-		if err := rows.Scan(&tag); err != nil {
-			panic(err)
-		}
-		tags = append(tags, tag)
-	}
-	return tags
 }

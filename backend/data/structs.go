@@ -13,7 +13,6 @@ type PDFInfo struct {
 	CreationDate string
 	Author       string
 	Tags         []string
-	Md5          string
 	Image        string
 }
 
