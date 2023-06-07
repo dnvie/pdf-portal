@@ -1,0 +1,24 @@
+import {HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs';
+import { PDFPreview, PDFPreviews } from '../data/pdfpreview';
+
+
+const baseUrl = 'http://localhost:3000';
+
+@Injectable({
+    providedIn: 'root'
+  })
+  
+
+export class PdfService {
+
+    constructor(
+        private http: HttpClient
+    ) { }
+
+    getAllPdfs(): Observable<PDFPreview[]> {
+        return this.http.get<PDFPreview[]>(baseUrl + '/pdfs');
+    }
+
+}

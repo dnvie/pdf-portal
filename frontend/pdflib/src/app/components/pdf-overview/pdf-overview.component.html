@@ -1,0 +1,19 @@
+<div class="cardContainer">
+    <div class="cardContainerHelper">
+        <div class="card" *ngFor="let pdf of pdfs.data; let i = index">
+            <div class="cardContent" (click)="test(pdf)">
+                <button class="editButton">Edit</button>
+                <div class="image">
+                    <img class="thumbnail" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
+                    <img class="bgBlur" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
+                </div>
+                <div class="infoContent">
+                    <div *ngIf="pdf.Title.length !== 0" class="title">{{pdf.Title}}</div>
+                    <div *ngIf="pdf.Title.length === 0" class="titleEmpty" style="opacity: 0.25">Title missing: <button class="addButton">Add +</button> </div>
+                    <div *ngIf="pdf.Author.length !== 0" class="author">{{pdf.Author}}</div>
+                    <div *ngIf="pdf.Author.length === 0" class="authorEmpty" style="opacity: 0.25">Author(s) missing: <button class="addButton">Add +</button> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
