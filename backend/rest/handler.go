@@ -21,7 +21,8 @@ func Serve() {
 	}))
 
 	r.Post("/upload", UploadPDF)
-	r.Get("/get", GetPDF)
+	r.Get("/pdf/{id}", GetPDF)
+	r.Get("/pdfs", GetAllPDFs)
 
 	http.ListenAndServe(":3000", r)
 }

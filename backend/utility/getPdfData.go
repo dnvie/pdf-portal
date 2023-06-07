@@ -3,7 +3,6 @@ package utility
 import (
 	structs "PDFLib/data"
 	"encoding/base64"
-	"fmt"
 	"log"
 	"mime/multipart"
 	"time"
@@ -34,8 +33,6 @@ func GetPdfInfo(id string, file multipart.File, header *multipart.FileHeader) st
 		return PdfInfo
 	}
 
-	fmt.Println(pdfData)
-
 	numPages, err := reader.GetNumPages()
 	if err != nil {
 		numPages = -1
@@ -56,7 +53,6 @@ func GetPdfInfo(id string, file multipart.File, header *multipart.FileHeader) st
 	if pdfData.CreationDate != nil {
 		dateString := pdfData.CreationDate.ToGoTime().Format(time.RFC3339)
 		PdfInfo.CreationDate = dateString
-		fmt.Println(dateString)
 	} else {
 		PdfInfo.CreationDate = ""
 	}
