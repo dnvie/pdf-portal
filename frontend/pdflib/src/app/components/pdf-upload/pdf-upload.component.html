@@ -1,0 +1,29 @@
+<!--<form action="http://localhost:3000/upload" method="post" enctype="multipart/form-data">
+    <input multiple type="file" name="pdfFile" accept=".pdf" />
+    <input type="text" name="tags" placeholder="Add tags separated by commas" />
+    <input type="submit" value="Upload" />
+</form>-->
+
+
+<input multiple type="file" class="file-input" accept=".pdf"
+       (change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload">
+
+   {{fileName || "No file uploaded yet."}}
+
+    <button class="uploadButton" (click)="fileUpload.click()">Upload</button>
+</div>
+
+<div class="progress">
+
+    <mat-progress-bar class="progress-bar pbwidth" mode="determinate"
+                      [value]="uploadProgress" *ngIf="uploadProgress">
+  
+    </mat-progress-bar>
+  
+  </div>
+
+  <div class="uploadFinished" *ngIf="uploadFinished">
+    Upload finished!
+  </div>

@@ -1,0 +1,73 @@
+.headerContainer {
+    position: fixed;
+    width: 100%;
+    height: fit-content;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    align-items: center;
+    z-index: 100;
+    pointer-events: none;
+}
+
+header {
+    width: fit-content;
+    height: fit-content;
+    padding: 10px 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 5px 20px 15px rgba(0, 0, 0, 0.251);
+    transition: all 0.25s ease-in-out;
+    pointer-events: all !important;
+    .logo {
+        margin-left: 30px;
+    }
+    .nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: fit-content;
+        gap: 25px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    .navItem {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+        color: rgb(223, 223, 223);
+        font-family: 'Inter';
+        font-weight: 500;
+        font-size: 18px;
+        padding: 10px 18px;
+        border-radius: 15px;
+        transition: all 0.15s ease-in-out;
+        bottom: 0px;
+    }
+    .navItemSelected {
+        position: relative;
+        color: rgb(141, 223, 90);
+        background-color: rgba(141, 223, 90, 0.1);
+    }
+    .navItemHidden {
+        opacity: 0;
+    }
+    .navItem:hover {
+        color: rgb(141, 223, 90);
+        cursor: pointer;
+    }
+}
+
+.headerHidden {
+   opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+}
