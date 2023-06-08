@@ -44,10 +44,10 @@ header {
         justify-content: center;
         align-items: center;
         gap: 7px;
-        color: rgb(223, 223, 223);
+        color: rgb(255, 255, 255);
         font-family: 'Inter';
         font-weight: 500;
-        font-size: 18px;
+        font-size: 16px;
         padding: 10px 18px;
         border-radius: 15px;
         transition: all 0.15s ease-in-out;
@@ -55,8 +55,8 @@ header {
     }
     .navItemSelected {
         position: relative;
-        color: rgb(141, 223, 90);
-        background-color: rgba(141, 223, 90, 0.1);
+        color: rgb(151, 242, 95);
+        background-color: rgba(129, 221, 71, 0.1);
     }
     .navItemHidden {
         opacity: 0;
