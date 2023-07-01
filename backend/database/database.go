@@ -116,13 +116,14 @@ func getTags(id string) []string {
 func GetPdfData(uuid string) structs.PDFpreview {
 	var res structs.PDFpreview
 	var id, title, author, image string
+	var size, numPages int64
 
-	statement := `SELECT id, title, author, image FROM pdf WHERE id = ?`
-	err := Database.QueryRow(statement, uuid).Scan(&id, &title, &author, &image)
+	statement := `SELECT id, title, author, image, size, number_of_pages FROM pdf WHERE id = ?`
+	err := Database.QueryRow(statement, uuid).Scan(&id, &title, &author, &image, &size, &numPages)
 	if err != nil {
 		panic(err)
 	}
-	res.Uuid, res.Title, res.Author, res.Image = id, title, author, image
+	res.Uuid, res.Title, res.Author, res.Image, res.Size, res.NumPages = id, title, author, image, size, numPages
 	res.Tags = getTags(id)
 
 	return res
@@ -131,8 +132,9 @@ func GetPdfData(uuid string) structs.PDFpreview {
 func GetAllPdfData() []structs.PDFpreview {
 	var pdfs []structs.PDFpreview
 	var id, title, author, image string
+	var size, numPages int64
 
-	statement, _ := Database.Prepare(`SELECT id, title, author, image FROM pdf`)
+	statement, _ := Database.Prepare(`SELECT id, title, author, image, size, number_of_pages FROM pdf`)
 	rows, err := statement.Query()
 	if err != nil {
 		panic(err)
@@ -141,10 +143,10 @@ func GetAllPdfData() []structs.PDFpreview {
 
 	for rows.Next() {
 		var pdf structs.PDFpreview
-		if err := rows.Scan(&id, &title, &author, &image); err != nil {
+		if err := rows.Scan(&id, &title, &author, &image, &size, &numPages); err != nil {
 			panic(err)
 		}
-		pdf.Uuid, pdf.Title, pdf.Author, pdf.Image = id, title, author, image
+		pdf.Uuid, pdf.Title, pdf.Author, pdf.Image, pdf.Size, pdf.NumPages = id, title, author, image, size, numPages
 		pdf.Tags = getTags(id)
 		pdfs = append(pdfs, pdf)
 	}

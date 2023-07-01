@@ -4,6 +4,8 @@ export interface PDFPreview {
     Author: string;
     Tags: string[];
     Image: string;
+    Size: number;
+    NumPages: number;
 }
 
 export interface PDFPreviews {

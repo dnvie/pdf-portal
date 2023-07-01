@@ -5,6 +5,7 @@ import { PdfUploadComponent } from './components/pdf-upload/pdf-upload.component
 
 const routes: Routes = [
   {path: "", component: PdfOverviewComponent},
+  {path: "all", component: PdfOverviewComponent},
   {path: "upload", component: PdfUploadComponent}
 ];
 

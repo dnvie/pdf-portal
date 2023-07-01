@@ -17,9 +17,11 @@ type PDFInfo struct {
 }
 
 type PDFpreview struct {
-	Uuid   string
-	Title  string
-	Author string
-	Tags   []string
-	Image  string
+	Uuid     string
+	Title    string
+	Author   string
+	Tags     []string
+	Image    string
+	Size     int64
+	NumPages int64
 }

@@ -1,7 +1,10 @@
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { finalize, Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
+import { EventService } from 'src/app/event-service.service';
 
 @Component({
   selector: 'app-pdf-upload',
@@ -9,13 +12,14 @@ import { finalize, Subscription } from 'rxjs';
   styleUrls: ['./pdf-upload.component.scss']
 })
 export class PdfUploadComponent {
-
+  @ViewChild(HeaderComponent)
+  headerComponent!: HeaderComponent;
   fileName = '';
   uploadProgress: number | null = null;
   uploadSub: Subscription | null = null;
   uploadFinished: boolean = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private eventService: EventService) {}
 
   onFileSelected(event: any) {
 
@@ -51,6 +55,21 @@ export class PdfUploadComponent {
     this.uploadSub = null;
     this.uploadFinished = true;
     this.fileName = 'No file uploaded yet.'
+  }
+
+  updateProgress(event: any) {
+    const inputValue = event.target.value;
+    this.uploadProgress = +inputValue;
+  }
+
+  /////////////////////////////////////
+
+  triggerClearInHeader() {
+    this.eventService.triggerClearEvent();
+  }
+
+  triggerUnclearInHeader() {
+    this.eventService.triggerUnclearEvent();
   }
 }
 

@@ -9,6 +9,7 @@ import { PdfService } from 'src/app/service/pdf.service';
 })
 export class PdfOverviewComponent implements OnInit {
 
+  listView = false
   pdfs: PDFPreviews = {
     data: undefined
   }
@@ -26,8 +27,6 @@ export class PdfOverviewComponent implements OnInit {
     this.service.getAllPdfs().subscribe(
       data => {
         this.pdfs.data = data
-        console.log(this.pdfs.data[0]);
-        
       },
       error => {
         console.log("error loading network info", error);
@@ -35,8 +34,17 @@ export class PdfOverviewComponent implements OnInit {
     );
   }
 
-  test(pdf: PDFPreview) {
-    console.log(pdf);
-    
+  /////////////////////////////////////
+
+  toggleListView() {
+    this.listView = true;
+  }
+
+  toggleGridView() {
+    this.listView = false;
+  }
+
+  isListView(): boolean {
+    return this.listView
   }
 }

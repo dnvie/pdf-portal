@@ -13,18 +13,20 @@
 }
 
 header {
-    width: fit-content;
-    height: fit-content;
-    padding: 10px 0;
-    background-color: rgba(0, 0, 0, 0.7);
+    //width: fit-content;
+    //height: fit-content;
+    width: 718px;
+    height: 64px;
+    //padding: 10px 0;
+    background-color: rgba(35, 35, 35, 0.7);
     backdrop-filter: saturate(180%) blur(20px);
     border-radius: 25px;
     display: flex;
-    flex-direction: column;
+    //flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 5px 20px 15px rgba(0, 0, 0, 0.251);
-    transition: all 0.25s ease-in-out;
+    box-shadow: 0 5px 25px 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.25s;
     pointer-events: all !important;
     .logo {
         margin-left: 30px;
@@ -37,6 +39,13 @@ header {
         gap: 25px;
         margin-right: 10px;
         margin-left: 10px;
+        transition: all 0.25s ease-in-out;
+    }
+    .nav.hidden {
+        filter: blur(3px);
+        transform: scale(0.975);
+        opacity: 0;
+        pointer-events: none !important;
     }
     .navItem {
         position: relative;
@@ -69,5 +78,42 @@ header {
 
 .headerHidden {
    opacity: 0;
-    transform: translateY(-10px) scale(0.95);
+    transform: translateY(-20px) scale(0.95);
+    //transform: translateY(-90px);
+}
+
+.viewModeContainer {
+    z-index: 200;
+    position: fixed;
+    top: 25px;
+    right: calc(50% - 450px);
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.viewMode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 64px;
+    background-color: rgba(35, 35, 35, 0.7);
+    backdrop-filter: saturate(180%) blur(20px);
+    box-shadow: 0 5px 25px 10px rgba(0, 0, 0, 0.5);
+    color: rgb(255, 255, 255);
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 25px;
+    display: flex;
+    gap: 7px;
+    transition: all 0.1s ease-in-out;
+    }
+
+.viewMode:hover {
+    cursor: pointer;
+    color: rgb(151, 242, 95);
 }

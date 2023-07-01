@@ -9,3 +9,52 @@
 .uploadButton {
     background-color: white;
 }
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    top: 150px;
+    .uploadContainer {
+        width: 800px;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.progressBarContainer {
+    position: fixed;
+    width: 100%;
+    height: fit-content;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    z-index: 101;
+    .progressBarBackground {
+        width: 718px;
+        height: 64px;
+        //padding: 10px 0;
+        border-radius: 25px;
+        display: flex;
+        align-items: flex-start;
+        //flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        transition: all 0.25s;
+        overflow: hidden;
+        .progressBar {
+            height: 100%;
+            border-radius: 0px;
+            transition: all 0.25s;
+            background-color: rgba(193, 255, 154, 0.12);
+        }
+    }
+}

@@ -14,7 +14,7 @@ func Serve() {
 	r.Use(cors.Handler(cors.Options{
 		AllowedOrigins:   []string{"https://*", "http://*"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
-		AllowedHeaders:   []string{"Accept", "Content-Type", "X-CSRF-Token"},
+		AllowedHeaders:   []string{"Accept", "Content-Type", "X-CSRF-Token", "enctype"},
 		ExposedHeaders:   []string{"Link"},
 		AllowCredentials: false,
 		MaxAge:           300,

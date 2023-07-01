@@ -4,26 +4,30 @@
     <input type="submit" value="Upload" />
 </form>-->
 
-
-<input multiple type="file" class="file-input" accept=".pdf"
-       (change)="onFileSelected($event)" #fileUpload>
-
-<div class="file-upload">
-
-   {{fileName || "No file uploaded yet."}}
-
-    <button class="uploadButton" (click)="fileUpload.click()">Upload</button>
+<div class="progressBarContainer">
+  <div class="progressBarBackground">
+    <div class="progressBar" style="width: {{ uploadProgress }}%"></div>
+  </div>
 </div>
 
-<div class="progress">
-
-    <mat-progress-bar class="progress-bar pbwidth" mode="determinate"
-                      [value]="uploadProgress" *ngIf="uploadProgress">
-  
-    </mat-progress-bar>
-  
-  </div>
+<!--<div class="progress">
+  <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress"></mat-progress-bar>
+</div>-->
 
   <div class="uploadFinished" *ngIf="uploadFinished">
     Upload finished!
+  </div>
+
+  <div class="container">
+    <div class="uploadContainer">
+      <!--<input type="range" min="0" max="100" [(ngModel)]="uploadProgress" (input)="updateProgress($event)" />-->
+      <h1> Progress: {{ uploadProgress }}%</h1>
+      <input multiple type="file" class="file-input" accept=".pdf" (change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload">
+  {{fileName || "No file uploaded yet."}}
+  <button class="uploadButton" (click)="fileUpload.click()">Upload</button>
+  <button (click)="triggerClearInHeader()">Test</button>
+</div>
+    </div>
   </div>
