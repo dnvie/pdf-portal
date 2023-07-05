@@ -5,16 +5,29 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class EventService {
-  private clearEventSubject = new Subject<void>();
+  private reduceEventSubject = new Subject<void>();
+  private expandEventSubject = new Subject<void>();
+  private expandClearEventSubject = new Subject<void>();
+  private unclearEventSubject = new Subject<void>();
 
-  clearEvent$ = this.clearEventSubject.asObservable();
-  unclearEvent$ = this.clearEventSubject.asObservable();
+  reduceEvent$ = this.reduceEventSubject.asObservable();
+  expandEvent$ = this.expandEventSubject.asObservable();
+  expandClearEvent$ = this.expandClearEventSubject.asObservable();
+  unclearEvent$ = this.reduceEventSubject.asObservable();
 
-  triggerClearEvent() {
-    this.clearEventSubject.next();
+  triggerReduceEvent() {
+    this.reduceEventSubject.next();
   }
 
-  triggerUnclearEvent() {
-    this.clearEventSubject.next();
+  triggerExpandEvent() {
+    this.expandEventSubject.next();
   }
+
+  triggerExpandClearEvent() {
+    this.expandClearEventSubject.next();
+  }
+
+  /*triggerUnclearEvent() {
+    this.unclearEventSubject.next();
+  }*/
 }

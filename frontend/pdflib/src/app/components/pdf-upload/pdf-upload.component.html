@@ -1,18 +1,17 @@
-<!--<form action="http://localhost:3000/upload" method="post" enctype="multipart/form-data">
-    <input multiple type="file" name="pdfFile" accept=".pdf" />
-    <input type="text" name="tags" placeholder="Add tags separated by commas" />
-    <input type="submit" value="Upload" />
-</form>-->
-
-<div class="progressBarContainer">
-  <div class="progressBarBackground">
-    <div class="progressBar" style="width: {{ uploadProgress }}%"></div>
+<div class="loaderContainer" id="loaderContainer">
+  <div class="spinner" id="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="spinner" id="check">
+    <span class="material-symbols-rounded">check_circle</span>
+  </div>
+  <div class="spinner" id="error">
+    <span class="material-symbols-rounded">error</span>
+  </div>
+  <div class="errorMessage" id="errorMessage">
+    This file already exists on the server!
   </div>
 </div>
-
-<!--<div class="progress">
-  <mat-progress-bar class="progress-bar" mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress"></mat-progress-bar>
-</div>-->
 
   <div class="uploadFinished" *ngIf="uploadFinished">
     Upload finished!
@@ -20,14 +19,10 @@
 
   <div class="container">
     <div class="uploadContainer">
-      <!--<input type="range" min="0" max="100" [(ngModel)]="uploadProgress" (input)="updateProgress($event)" />-->
-      <h1> Progress: {{ uploadProgress }}%</h1>
       <input multiple type="file" class="file-input" accept=".pdf" (change)="onFileSelected($event)" #fileUpload>
-
-<div class="file-upload">
-  {{fileName || "No file uploaded yet."}}
-  <button class="uploadButton" (click)="fileUpload.click()">Upload</button>
-  <button (click)="triggerClearInHeader()">Test</button>
-</div>
+      <div class="file-upload">
+        {{fileName || "No file uploaded yet."}}
+        <button *ngIf="!uploading" class="uploadButton" (click)="fileUpload.click()">Upload</button>
+      </div>
     </div>
   </div>

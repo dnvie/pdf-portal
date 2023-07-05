@@ -8,7 +8,7 @@ import { PdfOverviewComponent } from './components/pdf-overview/pdf-overview.com
 import { HeaderComponent } from './components/header/header.component';
 import { PdfUploadComponent } from './components/pdf-upload/pdf-upload.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatProgressBarModule,
+    MatProgressSpinnerModule,
     FormsModule
   ],
   providers: [],

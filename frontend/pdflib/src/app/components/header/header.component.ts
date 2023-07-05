@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { EventService } from 'src/app/event-service.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,7 @@ import { EventService } from 'src/app/event-service.service';
 })
 export class HeaderComponent implements OnInit {
   cleared = false;
+  reduced = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -93,13 +95,45 @@ export class HeaderComponent implements OnInit {
     this.cleared = false;
   }
 
+  reduce() {  
+    setTimeout(this.clear, 1);
+    setTimeout(function(){ document.getElementById('header')?.classList.add('headerCompact');}, 200)
+    this.cleared = true;
+    this.reduced = true;
+  }
+
+  expand() {
+    setTimeout(function(){ document.getElementById('header')?.classList.remove('headerCompact');}, 1)
+    setTimeout(this.unclear, 200)
+    this.cleared = false;
+    this.reduced = false;
+  }
+
+  expandClear() {
+    setTimeout(function(){ document.getElementById('header')?.classList.remove('headerCompact');}, 1)
+    this.reduced = false;
+    setTimeout(this.unclear, 2300)
+    this.cleared = false;
+  }
+
+  test() {
+    this.clear();
+    this.reduce();
+  }
+
   ngOnInit() {
-    this.eventService.clearEvent$.subscribe(() => {
-      this.clear();
+    this.eventService.reduceEvent$.subscribe(() => {
+      this.reduce();
     });
-    this.eventService.unclearEvent$.subscribe(() => {
+    this.eventService.expandEvent$.subscribe(() => {
+      this.expand();
+    });
+    this.eventService.expandClearEvent$.subscribe(() => {
+      this.expandClear();
+    });
+    /*this.eventService.unclearEvent$.subscribe(() => {
       this.unclear();
-    });
+    });*/
   }
 
 }
