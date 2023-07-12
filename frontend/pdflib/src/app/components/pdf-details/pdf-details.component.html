@@ -1,0 +1,28 @@
+<!--<div>Title: {{pdf.Title}}</div>
+<div>Uuid: {{pdf.Uuid}}</div>
+<div>Author: {{pdf.Author}}</div>
+<div>Filename: {{pdf.Filename}}</div>
+<div>Size: {{pdf.Size}}kB</div>
+<div>Number of Pages: {{pdf.NumPages}}</div>
+<div>Tags: {{pdf.Tags}}</div>
+<div>Upload Date: {{pdf.UploadDate}}</div>
+<div>Creation Date: {{pdf.CreationDate}}</div>
+<img src='data:image/jpeg;base64,{{pdf.Image}}' alt="">-->
+<div class="main">
+    <div class="container">
+        <div class="imageContainer">
+            <img src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
+            <div class="category">Category</div>
+        </div>
+        <div class="infoContainer">
+            <div *ngIf="pdf.Title!.length != 0" class="title">{{pdf.Title}}</div>
+            <div *ngIf="pdf.Title!.length == 0" class="title missing">Title missing</div>
+            <div *ngIf="pdf.Author!.length != 0"class="author">{{pdf.Author}}</div>
+            <div *ngIf="pdf.Author!.length == 0" class="author missing">Author(s) missing</div>
+            <div class="pagesAndSize">{{pdf.NumPages}} Pages, {{(pdf.Size!/1000).toFixed(0)}} KB</div>
+            <div class="date">Creation Date: {{this.formatDate(pdf.CreationDate!)}}</div>
+            <div class="date">Upload Date: {{this.formatDate(pdf.UploadDate!)}}</div>
+        </div>
+        
+    </div>
+</div>

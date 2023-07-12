@@ -24,7 +24,7 @@
 
 <div class="cardContainer">
     <div *ngIf="listView" class="cardContainerHelper">
-        <div class="itemContainer" *ngFor="let pdf of pdfs.data; let i = index">
+        <div class="itemContainer" *ngFor="let pdf of pdfs.data; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
             <div class="itemContent">
                 <div class="imageContainer">
                     <img src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
@@ -46,7 +46,7 @@
     </div>
 
     <div *ngIf="!listView" class="cardContainerHelper">
-        <div class="card" *ngFor="let pdf of pdfs.data; let i = index">
+        <div class="card" *ngFor="let pdf of pdfs.data; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
             <div class="cardContent">
                 <button class="editButton">Edit</button>
                 <div class="image">

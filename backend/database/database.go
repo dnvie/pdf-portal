@@ -1,4 +1,4 @@
-package database
+/*package database
 
 import (
 	structs "PDFLib/data"
@@ -150,5 +150,222 @@ func GetAllPdfData() []structs.PDFpreview {
 		pdf.Tags = getTags(id)
 		pdfs = append(pdfs, pdf)
 	}
+	return pdfs
+}*/
+
+package database
+
+import (
+	structs "PDFLib/data"
+	"database/sql"
+
+	_ "github.com/lib/pq"
+)
+
+var Database *sql.DB
+
+func ConnectDatabase() {
+	database, err := sql.Open("postgres", "postgres://dnvie:password@localhost/PDFLib?sslmode=disable")
+	if err != nil {
+		panic(err)
+	}
+
+	statement2 := `DROP TABLE pdf_tags`
+	_, err = database.Exec(statement2)
+	if err != nil {
+		panic(err)
+	}
+	statement1 := `DROP TABLE tags`
+	_, err = database.Exec(statement1)
+	if err != nil {
+		panic(err)
+	}
+	statement3 := `DROP TABLE pdf`
+	_, err = database.Exec(statement3)
+	if err != nil {
+		panic(err)
+	}
+
+	statement := `CREATE TABLE IF NOT EXISTS pdf (
+		id TEXT PRIMARY KEY NOT NULL,
+		filename TEXT NOT NULL,
+		title TEXT NOT NULL,
+		author TEXT,
+		creation_date TEXT,
+		upload_date TEXT,
+		size INTEGER,
+		number_of_pages INTEGER,
+		image TEXT
+	)`
+	_, err = database.Exec(statement)
+	if err != nil {
+		panic(err)
+	}
+
+	statement = `CREATE TABLE IF NOT EXISTS tags (
+		id SERIAL PRIMARY KEY,
+		name TEXT UNIQUE,
+		color TEXT
+	)`
+	_, err = database.Exec(statement)
+	if err != nil {
+		panic(err)
+	}
+
+	statement = `CREATE TABLE IF NOT EXISTS pdf_tags (
+		pdf_id TEXT,
+		tag_id INTEGER,
+		FOREIGN KEY (pdf_id) REFERENCES pdf(id),
+		FOREIGN KEY (tag_id) REFERENCES tags(id),
+		PRIMARY KEY (pdf_id, tag_id)
+	)`
+	_, err = database.Exec(statement)
+	if err != nil {
+		panic(err)
+	}
+
+	Database = database
+}
+
+func CheckIfFilenameExists(filename string) bool {
+	statement := `SELECT filename FROM pdf WHERE filename = $1`
+	var result string
+	err := Database.QueryRow(statement, filename).Scan(&result)
+	if err != nil {
+		if err != sql.ErrNoRows {
+			panic(err)
+		}
+		return false
+	}
+	return true
+}
+
+func CheckIfFileExists(id string) bool {
+	statement := `SELECT id FROM pdf WHERE id = $1`
+	var result string
+	err := Database.QueryRow(statement, id).Scan(&result)
+	if err != nil {
+		if err != sql.ErrNoRows {
+			panic(err)
+		}
+		return false
+	}
+	return true
+}
+
+func CheckIfTagExists(name string) bool {
+	statement := `SELECT name FROM tags WHERE name = $1`
+	var result string
+	err := Database.QueryRow(statement, name).Scan(&result)
+	if err != nil {
+		if err != sql.ErrNoRows {
+			panic(err)
+		}
+		return false
+	}
+	return true
+}
+
+func getTagIDByName(name string) int {
+	var id int
+	statement := `SELECT id FROM tags WHERE name = $1`
+	err := Database.QueryRow(statement, name).Scan(&id)
+	if err != nil {
+		if err != sql.ErrNoRows {
+			panic(err)
+		}
+		return -1
+	}
+	return id
+}
+
+func AddPdfFile(pdf structs.PDFInfo) {
+	statement := `INSERT INTO pdf (id, filename, title, author, creation_date, upload_date, size, number_of_pages, image)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
+	_, err := Database.Exec(statement, pdf.Uuid, pdf.Filename, pdf.Title, pdf.Author, pdf.CreationDate, pdf.UploadDate, pdf.Size, pdf.NumPages, pdf.Image)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func AddTags(id string, tags []string) {
+	for _, tag := range tags {
+		if CheckIfTagExists(tag) {
+			tagID := getTagIDByName(tag)
+			statement := `INSERT INTO pdf_tags (pdf_id, tag_id) VALUES ($1, $2)`
+			_, err := Database.Exec(statement, id, tagID)
+			if err != nil {
+				panic(err)
+			}
+		} else {
+			statement := `INSERT INTO tags (name) VALUES ($1) RETURNING id`
+			var tagID int
+			err := Database.QueryRow(statement, tag).Scan(&tagID)
+			if err != nil {
+				panic(err)
+			}
+
+			statement = `INSERT INTO pdf_tags (pdf_id, tag_id) VALUES ($1, $2)`
+			_, err = Database.Exec(statement, id, tagID)
+			if err != nil {
+				panic(err)
+			}
+		}
+	}
+}
+
+func getTags(id string) []string {
+	statement := `SELECT tags.name FROM tags JOIN pdf_tags ON tags.id = pdf_tags.tag_id WHERE pdf_tags.pdf_id = $1`
+	rows, err := Database.Query(statement, id)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	var tags []string
+	for rows.Next() {
+		var tag string
+		err := rows.Scan(&tag)
+		if err != nil {
+			panic(err)
+		}
+		tags = append(tags, tag)
+	}
+
+	return tags
+}
+
+func GetPdfData(uuid string) structs.PDFInfo {
+	statement := `SELECT id, title, author, image, size, number_of_pages, creation_date, upload_date FROM pdf WHERE id = $1`
+	var res structs.PDFInfo
+	err := Database.QueryRow(statement, uuid).Scan(&res.Uuid, &res.Title, &res.Author, &res.Image, &res.Size, &res.NumPages, &res.CreationDate, &res.UploadDate)
+	if err != nil {
+		panic(err)
+	}
+
+	res.Tags = getTags(res.Uuid.String())
+
+	return res
+}
+
+func GetAllPdfData() []structs.PDFpreview {
+	statement := `SELECT id, title, author, image, size, number_of_pages FROM pdf ORDER BY upload_date DESC`
+	rows, err := Database.Query(statement)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	var pdfs []structs.PDFpreview
+	for rows.Next() {
+		var pdf structs.PDFpreview
+		err := rows.Scan(&pdf.Uuid, &pdf.Title, &pdf.Author, &pdf.Image, &pdf.Size, &pdf.NumPages)
+		if err != nil {
+			panic(err)
+		}
+		pdf.Tags = getTags(pdf.Uuid)
+		pdfs = append(pdfs, pdf)
+	}
+
 	return pdfs
 }

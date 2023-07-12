@@ -32,7 +32,7 @@ export class PdfUploadComponent {
         formData.append('pdfFile', pdfFile);
       }
   
-      this.fileName = pdfFiles.length === 1 ? pdfFiles.item(0).name : pdfFiles.length + ' files';
+      this.fileName = pdfFiles.length === 1 ? 'Uploading: ' + pdfFiles.item(0).name : 'Uploading: ' + pdfFiles.length + ' files';
   
       const upload$ = this.http.post('http://localhost:3000/upload', formData, {
         reportProgress: true,
@@ -60,7 +60,7 @@ export class PdfUploadComponent {
     this.uploadProgress = null;
     this.uploadSub = null;
     this.uploadFinished = true;
-    this.fileName = 'No file uploaded yet.'
+    this.fileName = ''
   }
 
   updateProgress(event: any) {

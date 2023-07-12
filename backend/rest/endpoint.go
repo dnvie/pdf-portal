@@ -83,7 +83,9 @@ func UploadPDF(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, "File already exists on server", http.StatusBadRequest)
 			} else {
 				database.AddPdfFile(pdfInfo)
-				database.AddTags(id.String(), tags)
+				if len(tags) != 1 {
+					database.AddTags(id.String(), tags)
+				}
 				w.WriteHeader(200)
 			}
 		}(fileHeader)
@@ -95,8 +97,15 @@ func GetPDF(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	if database.CheckIfFileExists(id) {
 		pdf := database.GetPdfData(id)
+		//fileContent, err := utility.ReadPDFFile("library/pdfs/" + id + ".pdf")
+		//if err != nil {
+		//	panic(err)
+		//}
+
+		//pdf.File = base64.StdEncoding.EncodeToString(fileContent)
 		w.Header().Set("Content-Type", "application/json")
 		pdfJSON, err := json.Marshal(pdf)
+
 		if err != nil {
 			io.WriteString(w, "Received Invalid PDF JSON Object")
 		} else {

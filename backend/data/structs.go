@@ -11,9 +11,11 @@ type PDFInfo struct {
 	NumPages     int64
 	Title        string
 	CreationDate string
+	UploadDate   string
 	Author       string
 	Tags         []string
 	Image        string
+	//File         string
 }
 
 type PDFpreview struct {

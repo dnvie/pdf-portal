@@ -13,16 +13,12 @@
   </div>
 </div>
 
-  <div class="uploadFinished" *ngIf="uploadFinished">
-    Upload finished!
-  </div>
-
   <div class="container">
     <div class="uploadContainer">
       <input multiple type="file" class="file-input" accept=".pdf" (change)="onFileSelected($event)" #fileUpload>
       <div class="file-upload">
-        {{fileName || "No file uploaded yet."}}
-        <button *ngIf="!uploading" class="uploadButton" (click)="fileUpload.click()">Upload</button>
+        {{fileName || "Select one or multiple files to upload."}}
+        <button *ngIf="!uploading" class="uploadButton" (click)="fileUpload.click()">Select</button>
       </div>
     </div>
   </div>
