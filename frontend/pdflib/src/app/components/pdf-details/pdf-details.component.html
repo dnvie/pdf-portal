@@ -1,15 +1,15 @@
 <div class="main">
     <div class="container">
         <div class="imageContainer">
-            <img src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
+            <img class="card" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
             <div class="category">Category</div>
         </div>
         <div class="infoContainer">
-            <div *ngIf="pdf.Title!.length != 0" class="title">{{pdf.Title}}</div>
-            <div *ngIf="pdf.Title!.length == 0" class="title missing">Title missing</div>
-            <div *ngIf="pdf.Author!.length != 0"class="author">{{pdf.Author}}</div>
-            <div *ngIf="pdf.Author!.length == 0" class="author missing">Author(s) missing</div>
-            <div class="tagsContainer">
+            <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
+            <div *ngIf="!pdf.Title" class="title missing">Title missing</div>
+            <div *ngIf="pdf.Author"class="author">{{pdf.Author}}</div>
+            <div *ngIf="!pdf.Author" class="author missing">Author(s) missing</div>
+            <div *ngIf="pdf.Tags" class="tagsContainer">
                 <div class="tag" *ngFor="let tag of pdf.Tags">{{tag}}</div>
             </div>
             <div class="pagesAndSize">{{pdf.NumPages}} Pages, {{(pdf.Size!/1000000).toFixed(2)}} MB</div>

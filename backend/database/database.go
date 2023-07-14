@@ -356,9 +356,15 @@ func GetPdfData(uuid string) structs.PDFInfo {
 	return res
 }
 
-func GetAllPdfData() []structs.PDFpreview {
-	statement := `SELECT id, title, author, image, size, number_of_pages FROM pdf ORDER BY upload_date DESC`
-	rows, err := Database.Query(statement)
+func GetAllPdfData(page int) structs.PDFPreviews {
+	var res structs.PDFPreviews
+
+	pageSize := 48
+	offset := (page) * pageSize
+	limit := pageSize
+
+	statement := `SELECT id, title, author, image, size, number_of_pages FROM pdf ORDER BY upload_date DESC OFFSET $1 LIMIT $2`
+	rows, err := Database.Query(statement, offset, limit)
 	if err != nil {
 		panic(err)
 	}
@@ -374,7 +380,17 @@ func GetAllPdfData() []structs.PDFpreview {
 		pdf.Tags = getTags(pdf.Uuid)
 		pdfs = append(pdfs, pdf)
 	}
-	return pdfs
+	res.Previews = pdfs
+
+	statement = `SELECT COUNT(*) FROM pdf`
+	var count int64
+	err = Database.QueryRow(statement).Scan(&count)
+	if err != nil {
+		panic(err)
+	}
+	res.TotalCount = count
+
+	return res
 }
 
 func SetLastViewed(uuid string) {

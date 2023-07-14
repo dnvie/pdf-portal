@@ -12,6 +12,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
+	"strconv"
 	"sync"
 
 	"github.com/go-chi/chi"
@@ -145,8 +146,20 @@ func GetPDFFile(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAllPDFs(w http.ResponseWriter, r *http.Request) {
+	pageStr := r.URL.Query().Get("page")
 
-	pdfs := database.GetAllPdfData()
+	if pageStr == "" {
+		http.Error(w, "Page parameter is missing", http.StatusBadRequest)
+		return
+	}
+
+	page, err := strconv.Atoi(pageStr)
+	if err != nil {
+		http.Error(w, "Invalid page parameter", http.StatusBadRequest)
+		return
+	}
+
+	pdfs := database.GetAllPdfData(page)
 	w.Header().Set("Content-Type", "application/json")
 	pdfJSON, err := json.Marshal(pdfs)
 	if err != nil {

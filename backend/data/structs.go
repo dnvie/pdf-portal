@@ -31,3 +31,8 @@ type PDFpreview struct {
 	Size     int64
 	NumPages int64
 }
+
+type PDFPreviews struct {
+	Previews   []PDFpreview
+	TotalCount int64
+}

@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import { PDF, PDFFile } from '../data/pdf';
@@ -18,8 +18,10 @@ export class PdfService {
         private http: HttpClient
     ) { }
 
-    getAllPdfs(): Observable<PDFPreview[]> {
-        return this.http.get<PDFPreview[]>(baseUrl + '/pdfs');
+    getAllPdfs(page: number): Observable<PDFPreviews> {
+        const params = new HttpParams()
+            .set('page', String(page));
+        return this.http.get<PDFPreviews>(baseUrl + '/pdfs', { params });
     }
 
     getPdfByUuid(uuid: string): Observable<PDF> {

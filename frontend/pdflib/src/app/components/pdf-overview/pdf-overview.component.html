@@ -1,21 +1,6 @@
 <!--
-    Upload Progress komplett in Header verschieben
-    in header dann nach upload nav items ausblenden und "saving to server mit loading symbol einblenden"
-    wenn fertig dann das ausblenden und "upload complete mit checkmark oder so" einblenden
-    (bzw. vlt sogar direkt beim uploaded navitems ausblenden und header zu progressbar machen mit prozentzahl etc
-    aber muss man schauen mit timeouts dass nicht alles zu schnell weg is bei kleinen dateien).
-
-    vlt upload progress nicht ganzen header sondern normale bar im header mit infos links und rechts, z.b links prozentzahl, rechts dann status zb. uploading... oder saving to server etc.
-    dann kann das auch mit scroll indicator kombiniert werden.
-
     bei suche, nav items in header ausblenden und header zu einer suchleiste machen
-
-    scroll indicator in header (ganz subtil ohne farbe), klare unterscheidung zu file upload progress!
-
-    pdf overview:
-    pdf element größer, wie z.b hier: https://skiff.com/pricing
-    und on hover dann bild klein in ecke oben link soder so und extra infos anzeigen, z.b größe, page number, tags etc...
-
+    scroll indicator in header (ganz subtil ohne farbe)
 -->
 <div class="viewModeContainer">
     <div *ngIf="listView" class="viewMode" (click)="listView = !listView"><span class="material-symbols-rounded">view_module</span></div>
@@ -24,21 +9,21 @@
 
 <div class="cardContainer">
     <div *ngIf="listView" class="cardContainerHelper">
-        <div class="itemContainer" *ngFor="let pdf of pdfs.data; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
+        <div class="itemContainer" *ngFor="let pdf of pdfs.Previews; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
             <div class="itemContent">
                 <div class="imageContainer">
                     <img src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
                 </div>
                 <div class="itemInfo">
                     <div class="titleAuthorContainer">
-                        <div *ngIf="pdf.Title.length !== 0" class="title">{{pdf.Title}}</div>
-                        <div *ngIf="pdf.Title.length === 0" class="title" style="opacity: 0.25">Title missing: <button class="addButton">Add +</button> </div>
-                        <div *ngIf="pdf.Author.length !== 0" class="author">{{pdf.Author}}</div>
-                        <div *ngIf="pdf.Author.length === 0" class="author" style="opacity: 0.25">Author(s) missing: <button class="addButton">Add +</button> </div>
+                        <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
+                        <div *ngIf="!pdf.Title" class="title" style="opacity: 0.25">Title missing: <button class="addButton">Add +</button> </div>
+                        <div *ngIf="pdf.Author" class="author">{{pdf.Author}}</div>
+                        <div *ngIf="!pdf.Author" class="author" style="opacity: 0.25">Author(s) missing: <button class="addButton">Add +</button> </div>
                     </div>
                     <div class="tagsContainer">
                         <div class="tag">{{pdf.NumPages}} Pages</div>
-                        <div class="tag">{{(pdf.Size/1000).toFixed(2)}} KB</div>
+                        <div class="tag">{{(pdf.Size/1000000).toFixed(2)}} MB</div>
                         <div class="tag" *ngFor="let tag of pdf.Tags">{{tag}}</div>
                     </div>
                 </div>
@@ -47,19 +32,28 @@
     </div>
 
     <div *ngIf="!listView" class="cardContainerHelper">
-        <div class="card" *ngFor="let pdf of pdfs.data; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
+        <div class="card" *ngFor="let pdf of pdfs.Previews; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
             <div class="cardContent">
                 <button class="editButton">Edit</button>
                 <div class="image">
                     <img class="thumbnail" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
                 </div>
                 <div class="infoContent">
-                    <div *ngIf="pdf.Title.length !== 0" class="title">{{pdf.Title}}</div>
-                    <div *ngIf="pdf.Title.length === 0" class="titleEmpty" style="opacity: 0.25">Title missing: <button class="addButton">Add +</button> </div>
-                    <div *ngIf="pdf.Author.length !== 0" class="author">{{pdf.Author}}</div>
-                    <div *ngIf="pdf.Author.length === 0" class="authorEmpty" style="opacity: 0.25">Author(s) missing: <button class="addButton">Add +</button> </div>
+                    <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
+                    <div *ngIf="!pdf.Title" class="titleEmpty" style="opacity: 0.25">Title missing: <button class="addButton">Add +</button> </div>
+                    <div *ngIf="pdf.Author" class="author">{{pdf.Author}}</div>
+                    <div *ngIf="!pdf.Author" class="authorEmpty" style="opacity: 0.25">Author(s) missing: <button class="addButton">Add +</button> </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <mat-paginator class="paginator"
+                 [length]="totalPages"
+                 [pageSize]="pageSize"
+                 [pageIndex]="currentPage"
+                 [showFirstLastButtons]="true"
+                 (page)="onPageChange($event)"
+  ></mat-paginator>
+
 </div>

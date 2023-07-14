@@ -9,5 +9,6 @@ export interface PDFPreview {
 }
 
 export interface PDFPreviews {
-    data?: PDFPreview[]
+    Previews?: PDFPreview[]
+    TotalCount: number;
 }
