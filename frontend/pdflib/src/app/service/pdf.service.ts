@@ -24,6 +24,12 @@ export class PdfService {
         return this.http.get<PDFPreviews>(baseUrl + '/pdfs', { params });
     }
 
+    getAllPdfsByTag(page: number, tag: string): Observable<PDFPreviews> {
+        const params = new HttpParams()
+            .set('page', String(page));
+        return this.http.get<PDFPreviews>(baseUrl + '/pdfs/tag/' + tag, { params });
+    }
+
     getPdfByUuid(uuid: string): Observable<PDF> {
         return this.http.get<PDF>(baseUrl + '/pdf/' + uuid);
     }

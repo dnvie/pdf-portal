@@ -16,6 +16,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { PdfTagResultsComponent } from './components/pdf-tag-results/pdf-tag-results.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     PdfOverviewComponent,
     HeaderComponent,
     PdfUploadComponent,
-    PdfDetailsComponent
+    PdfDetailsComponent,
+    PdfTagResultsComponent
   ],
   imports: [
     BrowserModule,

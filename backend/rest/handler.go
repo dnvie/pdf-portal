@@ -24,6 +24,7 @@ func Serve() {
 	r.Get("/pdf/{id}", GetPDF)
 	r.Get("/pdfs", GetAllPDFs)
 	r.Get("/pdf/file/{id}", GetPDFFile)
+	r.Get("/pdfs/tag/{tag}", GetAllPDFsByTag)
 
 	http.ListenAndServe(":3000", r)
 }
