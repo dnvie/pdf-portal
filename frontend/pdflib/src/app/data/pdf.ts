@@ -9,5 +9,8 @@ export interface PDF {
     UploadDate?: string;
     CreationDate?: string;
     Filename?: string;
-    //File?: string;
+}
+
+export interface PDFFile {
+    File?: string;
 }

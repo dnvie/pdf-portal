@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PDF } from 'src/app/data/pdf';
+import { PDF, PDFFile } from 'src/app/data/pdf';
 import { PdfService } from 'src/app/service/pdf.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -23,8 +23,11 @@ export class PdfDetailsComponent implements OnInit {
     UploadDate: undefined,
     CreationDate: undefined,
     Filename: undefined,
-    //File: undefined
   };
+
+  pdfFile: PDFFile = {
+    File: undefined
+  }
 
   constructor(
     private service: PdfService,
@@ -60,5 +63,38 @@ export class PdfDetailsComponent implements OnInit {
 
   formatDate(date: string): string {
     return date.substring(8,10) + "." + date.substring(5,7) + "." + date.substring(0,4)
+  }
+
+  getPdf(type: number) {
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      this.service.getPdfFileByUuid(id).subscribe({
+        next: res => {
+          this.pdfFile = res;
+          console.log(this.pdfFile);
+          const byteCharacters = atob(this.pdfFile.File!);
+          const byteNumbers = new Array(byteCharacters.length);
+          for (let i = 0; i < byteCharacters.length; i++) {
+            byteNumbers[i] = byteCharacters.charCodeAt(i);
+          }
+          const byteArray = new Uint8Array(byteNumbers);
+          const pdfData = new Blob([byteArray], { type: 'application/pdf' });
+          const pdfUrl = URL.createObjectURL(pdfData);
+
+          if(type == 1) {
+            window.open(pdfUrl, '_blank');
+          } else {
+            const link = document.createElement('a');
+            link.href = pdfUrl;
+            link.download = this.pdf.Filename!;
+            link.click();
+            window.URL.revokeObjectURL(pdfUrl);
+          }
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+    });
   }
 }

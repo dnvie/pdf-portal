@@ -18,6 +18,10 @@ type PDFInfo struct {
 	//File         string
 }
 
+type PDFFile struct {
+	File string
+}
+
 type PDFpreview struct {
 	Uuid     string
 	Title    string

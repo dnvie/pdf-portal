@@ -3,7 +3,8 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 1500px;
+    height: fit-content;
+    padding-bottom: 50px;
     .container {
         width: 1400px;
         height: 800px;
@@ -39,11 +40,10 @@
             display: flex;
             flex-direction: column;
             row-gap: 12px;
-            width: 754px;
+            width: fit-content;
             height: fit-content;
-            background-color: rgb(28, 28, 28);
-            padding: 30px;
-            border-radius: 14px;
+            align-items: center;
+            text-align: center;
             .title {
                 font-family: 'Inter', sans-serif;
                 font-size: 32px;
@@ -53,7 +53,7 @@
             }
             .author {
                 font-family: 'Inter', sans-serif;
-                font-size: 24px;
+                font-size: 22px;
                 color: rgba(235, 235, 235, 0.6);
                 font-weight: 400;
                 transition: all 0.15s ease-in-out;
@@ -64,15 +64,76 @@
             .pagesAndSize {
                 margin-top: 25px;
                 font-family: 'Inter', sans-serif;
-                font-size: 20px;
+                font-size: 18px;
                 color: rgba(235, 235, 235, 0.4);
                 font-weight: 400;
             }
             .date {
                 font-family: 'Inter', sans-serif;
-                font-size: 20px;
+                font-size: 18px;
                 color: rgba(235, 235, 235, 0.4);
                 font-weight: 400;
+            }
+            .tagsContainer {
+                margin-top: 25px;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                column-gap: 7px;
+                max-width: 1000px;
+                height: fit-content;
+                margin-bottom: 8px;
+                overflow: hidden;
+                .tag {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: fit-content;
+                    padding: 0 12px;
+                    height: 34px;
+                    line-height: 34px;
+                    background-color: rgb(6, 6, 6);
+                    border-radius: 16px;
+                    font-family: 'Inter';
+                    font-weight: 500;
+                    font-size: 15px;
+                    color: rgb(228, 228, 228);
+                }
+            }
+            .buttons {
+                margin-top: 25px;
+                display: flex;
+                width: 355px;
+                height: fit-content;
+                justify-content: space-between;
+                .button {
+                    display: flex;
+                    gap: 7px;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: 'Inter';
+                    font-size: 18px;
+                    font-weight: 500;
+                    height: 50px;
+                    width: 170px;
+                    border-radius: 12px;
+                    margin-bottom: 25px;
+                    transition: all 0.1s ease-in-out;
+                }
+                .read {
+                    color: var(--green);
+                    background-color: rgba(129, 221, 71, 0.1);
+                    
+                }
+                .download {
+                    background-color: var(--green);
+                    color: rgb(19, 36, 9);
+                }
+                .button:hover {
+                    transform: translateY(-1px);
+                    cursor: pointer;
+                    box-shadow: 0 10px 15px 1px rgba(0, 0, 0, 0.351);
+                }
             }
         }
     }

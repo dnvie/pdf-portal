@@ -1,16 +1,17 @@
 package rest
 
 import (
+	"PDFLib/data"
 	constants "PDFLib/data"
 	"PDFLib/database"
 	"PDFLib/utility"
 	"bufio"
+	"encoding/base64"
 	"encoding/json"
 	"io"
 	"mime/multipart"
 	"net/http"
 	"os"
-	"strings"
 	"sync"
 
 	"github.com/go-chi/chi"
@@ -18,6 +19,7 @@ import (
 )
 
 func UploadPDF(w http.ResponseWriter, r *http.Request) {
+	includedDuplicates := false
 	err := r.ParseMultipartForm(0)
 	if err != nil {
 		http.Error(w, "Failed to parse multipart form data", http.StatusInternalServerError)
@@ -72,7 +74,10 @@ func UploadPDF(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-			tags := strings.Split(r.FormValue("tags"), ",")
+			jsonTags := r.FormValue("tags")
+			var tags []string
+			_ = json.Unmarshal([]byte(jsonTags), &tags)
+			tags = utility.RemoveDuplicateTags(tags)
 
 			pdfInfo := utility.GetPdfInfo(id.String(), file, fileHeader)
 			if database.CheckIfFilenameExists(pdfInfo.Filename) {
@@ -80,29 +85,29 @@ func UploadPDF(w http.ResponseWriter, r *http.Request) {
 				if err != nil {
 					panic(err)
 				}
-				http.Error(w, "File already exists on server", http.StatusBadRequest)
+				includedDuplicates = true
 			} else {
 				database.AddPdfFile(pdfInfo)
-				if len(tags) != 1 {
+				if len(tags) != 0 {
 					database.AddTags(id.String(), tags)
 				}
-				w.WriteHeader(200)
 			}
 		}(fileHeader)
 	}
 	wg.Wait()
+	if includedDuplicates {
+		w.WriteHeader(http.StatusConflict)
+	} else {
+		w.WriteHeader(http.StatusOK)
+	}
 }
 
 func GetPDF(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	if database.CheckIfFileExists(id) {
+		database.SetLastViewed(id)
 		pdf := database.GetPdfData(id)
-		//fileContent, err := utility.ReadPDFFile("library/pdfs/" + id + ".pdf")
-		//if err != nil {
-		//	panic(err)
-		//}
 
-		//pdf.File = base64.StdEncoding.EncodeToString(fileContent)
 		w.Header().Set("Content-Type", "application/json")
 		pdfJSON, err := json.Marshal(pdf)
 
@@ -110,6 +115,29 @@ func GetPDF(w http.ResponseWriter, r *http.Request) {
 			io.WriteString(w, "Received Invalid PDF JSON Object")
 		} else {
 			w.Write(pdfJSON)
+		}
+	} else {
+		http.Error(w, "File does not exist on server", http.StatusBadRequest)
+	}
+}
+
+func GetPDFFile(w http.ResponseWriter, r *http.Request) {
+	var file data.PDFFile
+	id := chi.URLParam(r, "id")
+	if database.CheckIfFileExists(id) {
+		fileContent, err := utility.ReadPDFFile(constants.PDF_PATH + id + ".pdf")
+		if err != nil {
+			panic(err)
+		}
+		file.File = base64.StdEncoding.EncodeToString(fileContent)
+
+		w.Header().Set("Content-Type", "application/json")
+
+		fileJSON, err := json.Marshal(file)
+		if err != nil {
+			io.WriteString(w, "Received Invalid PDF JSON Object")
+		} else {
+			w.Write(fileJSON)
 		}
 	} else {
 		http.Error(w, "File does not exist on server", http.StatusBadRequest)

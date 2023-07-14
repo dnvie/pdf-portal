@@ -158,11 +158,14 @@ package database
 import (
 	structs "PDFLib/data"
 	"database/sql"
+	"sync"
+	"time"
 
 	_ "github.com/lib/pq"
 )
 
 var Database *sql.DB
+var tagMutex sync.Mutex
 
 func ConnectDatabase() {
 	database, err := sql.Open("postgres", "postgres://dnvie:password@localhost/PDFLib?sslmode=disable")
@@ -193,6 +196,7 @@ func ConnectDatabase() {
 		author TEXT,
 		creation_date TEXT,
 		upload_date TEXT,
+		last_viewed TEXT,
 		size INTEGER,
 		number_of_pages INTEGER,
 		image TEXT
@@ -205,7 +209,8 @@ func ConnectDatabase() {
 	statement = `CREATE TABLE IF NOT EXISTS tags (
 		id SERIAL PRIMARY KEY,
 		name TEXT UNIQUE,
-		color TEXT
+		background_color TEXT,
+		text_color TEXT
 	)`
 	_, err = database.Exec(statement)
 	if err != nil {
@@ -280,15 +285,18 @@ func getTagIDByName(name string) int {
 }
 
 func AddPdfFile(pdf structs.PDFInfo) {
-	statement := `INSERT INTO pdf (id, filename, title, author, creation_date, upload_date, size, number_of_pages, image)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
-	_, err := Database.Exec(statement, pdf.Uuid, pdf.Filename, pdf.Title, pdf.Author, pdf.CreationDate, pdf.UploadDate, pdf.Size, pdf.NumPages, pdf.Image)
+	statement := `INSERT INTO pdf (id, filename, title, author, creation_date, upload_date, last_viewed, size, number_of_pages, image)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`
+	_, err := Database.Exec(statement, pdf.Uuid, pdf.Filename, pdf.Title, pdf.Author, pdf.CreationDate, pdf.UploadDate, nil, pdf.Size, pdf.NumPages, pdf.Image)
 	if err != nil {
 		panic(err)
 	}
 }
 
 func AddTags(id string, tags []string) {
+	tagMutex.Lock()
+	defer tagMutex.Unlock()
+
 	for _, tag := range tags {
 		if CheckIfTagExists(tag) {
 			tagID := getTagIDByName(tag)
@@ -336,9 +344,9 @@ func getTags(id string) []string {
 }
 
 func GetPdfData(uuid string) structs.PDFInfo {
-	statement := `SELECT id, title, author, image, size, number_of_pages, creation_date, upload_date FROM pdf WHERE id = $1`
+	statement := `SELECT id, filename, title, author, image, size, number_of_pages, creation_date, upload_date FROM pdf WHERE id = $1`
 	var res structs.PDFInfo
-	err := Database.QueryRow(statement, uuid).Scan(&res.Uuid, &res.Title, &res.Author, &res.Image, &res.Size, &res.NumPages, &res.CreationDate, &res.UploadDate)
+	err := Database.QueryRow(statement, uuid).Scan(&res.Uuid, &res.Filename, &res.Title, &res.Author, &res.Image, &res.Size, &res.NumPages, &res.CreationDate, &res.UploadDate)
 	if err != nil {
 		panic(err)
 	}
@@ -366,6 +374,16 @@ func GetAllPdfData() []structs.PDFpreview {
 		pdf.Tags = getTags(pdf.Uuid)
 		pdfs = append(pdfs, pdf)
 	}
-
 	return pdfs
+}
+
+func SetLastViewed(uuid string) {
+	if CheckIfFileExists(uuid) {
+		currentTime := time.Now().Format("2006-01-02T15:04:05-07:00")
+		statement := `UPDATE pdf SET last_viewed = $1 WHERE id = $2`
+		_, err := Database.Exec(statement, currentTime, uuid)
+		if err != nil {
+			panic(err)
+		}
+	}
 }

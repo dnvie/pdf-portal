@@ -11,6 +11,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import { PdfDetailsComponent } from './components/pdf-details/pdf-details.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +31,11 @@ import { PdfDetailsComponent } from './components/pdf-details/pdf-details.compon
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
-    FormsModule
+    FormsModule,
+    MatIconModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

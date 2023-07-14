@@ -30,3 +30,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle, .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: var(--green, transparent) !important;
 }
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color:rgb(193, 193, 193) !important;
+}
+
+.mdc-notched-outline__leading {
+  border-color: rgb(91, 91, 91) !important;
+}
+
+.mdc-notched-outline__notch {
+  border-color: rgb(91, 91, 91) !important;
+}
+
+.mdc-notched-outline__trailing {
+  border-color: rgb(91, 91, 91) !important;
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading, .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch, .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
+  border-color: rgb(193, 193, 193) !important;
+}
+
+.mdc-text-field .mdc-text-field__input {
+  caret-color: rgb(193, 193, 193) !important;
+}

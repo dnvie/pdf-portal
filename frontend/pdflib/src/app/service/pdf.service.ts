@@ -1,7 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import { PDF } from '../data/pdf';
+import { PDF, PDFFile } from '../data/pdf';
 import { PDFPreview, PDFPreviews } from '../data/pdfpreview';
 
 
@@ -24,6 +24,10 @@ export class PdfService {
 
     getPdfByUuid(uuid: string): Observable<PDF> {
         return this.http.get<PDF>(baseUrl + '/pdf/' + uuid);
+    }
+    
+    getPdfFileByUuid(uuid: string): Observable<PDFFile> {
+        return this.http.get<PDFFile>(baseUrl + '/pdf/file/' + uuid);
     }
 
 }

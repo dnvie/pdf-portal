@@ -39,6 +39,7 @@
                     <div class="tagsContainer">
                         <div class="tag">{{pdf.NumPages}} Pages</div>
                         <div class="tag">{{(pdf.Size/1000).toFixed(2)}} KB</div>
+                        <div class="tag" *ngFor="let tag of pdf.Tags">{{tag}}</div>
                     </div>
                 </div>
             </div>

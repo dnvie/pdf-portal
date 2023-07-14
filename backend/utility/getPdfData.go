@@ -1,6 +1,7 @@
 package utility
 
 import (
+	constants "PDFLib/data"
 	structs "PDFLib/data"
 	"encoding/base64"
 	"fmt"
@@ -70,7 +71,7 @@ func GetPdfInfo(id string, file multipart.File, header *multipart.FileHeader) st
 
 func ConvertPDFToImage(id string) (string, error) {
 
-	pdfImage, err := bimg.Read("library/pdfs/" + id + ".pdf")
+	pdfImage, err := bimg.Read(constants.PDF_PATH + id + ".pdf")
 	if err != nil {
 		return "", err
 	}
@@ -107,4 +108,16 @@ func ReadPDFFile(filePath string) ([]byte, error) {
 	fmt.Println(fileSize)
 
 	return fileContent, nil
+}
+
+func RemoveDuplicateTags(strSlice []string) []string {
+	allKeys := make(map[string]bool)
+	list := []string{}
+	for _, item := range strSlice {
+		if _, value := allKeys[item]; !value {
+			allKeys[item] = true
+			list = append(list, item)
+		}
+	}
+	return list
 }

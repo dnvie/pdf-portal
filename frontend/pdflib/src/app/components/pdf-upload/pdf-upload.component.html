@@ -20,5 +20,20 @@
         {{fileName || "Select one or multiple files to upload."}}
         <button *ngIf="!uploading" class="uploadButton" (click)="fileUpload.click()">Select</button>
       </div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Tags</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Enter tags">
+          <mat-chip-row *ngFor="let tag of tags" (removed)="removeTag(tag)">
+            {{tag}}
+            <button matChipRemove aria-label="'remove ' + tag">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        </mat-chip-grid>
+        <input placeholder="New tag (Press Enter to add)"
+               [matChipInputFor]="chipGrid"
+               (matChipInputTokenEnd)="add($event)"/>
+      </mat-form-field>
+      <button *ngIf="!uploading" class="uploadButton" (click)="uploadFiles()">Upload</button>
     </div>
   </div>
