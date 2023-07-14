@@ -3,9 +3,9 @@
     <div *ngIf="!listView" class="viewMode" (click)="listView = !listView"><span class="material-symbols-rounded">view_list</span></div>
 </div>
 
-<div class="heading">
-    Showing all PDF Files with Tag: <span>{{this.tag}}</span>
-</div>
+<div *ngIf="this.mode == 0" class="heading">Showing all PDF Files with Tag: <span>{{this.tag}}</span></div>
+<div *ngIf="this.mode == 1" class="heading">Showing all PDF Files with Author: <span>{{this.author}}</span></div>
+
 
 <div class="cardContainer">
     <div *ngIf="listView" class="cardContainerHelper">

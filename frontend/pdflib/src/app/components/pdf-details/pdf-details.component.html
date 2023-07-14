@@ -7,7 +7,7 @@
         <div class="infoContainer">
             <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
             <div *ngIf="!pdf.Title" class="title missing">Title missing</div>
-            <div *ngIf="pdf.Author"class="author">{{pdf.Author}}</div>
+            <div *ngIf="pdf.Author" class="author" routerLink="/pdfs/author/{{pdf.Author}}">{{pdf.Author}}</div>
             <div *ngIf="!pdf.Author" class="author missing">Author(s) missing</div>
             <div *ngIf="pdf.Tags" class="tagsContainer">
                 <div routerLink="/pdfs/tag/{{tag}}" class="tag" *ngFor="let tag of pdf.Tags">{{tag}}</div>

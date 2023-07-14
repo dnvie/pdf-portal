@@ -405,8 +405,8 @@ func GetAllPdfDataByTag(page int, tagname string) structs.PDFPreviews {
 	FROM pdf
 	INNER JOIN pdf_tags ON pdf.id = pdf_tags.pdf_id
 	INNER JOIN tags ON pdf_tags.tag_id = tags.id
-	WHERE tags.name ILIKE $1
-	ORDER BY pdf.upload_date DESC OFFSET $2 LIMIT $3
+	WHERE REPLACE(tags.name, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+	ORDER BY pdf.upload_date, pdf.id DESC OFFSET $2 LIMIT $3
 	`
 	rows, err := Database.Query(statement, tagname, offset, limit)
 	if err != nil {
@@ -431,10 +431,56 @@ func GetAllPdfDataByTag(page int, tagname string) structs.PDFPreviews {
 	FROM pdf
 	INNER JOIN pdf_tags ON pdf.id = pdf_tags.pdf_id
 	INNER JOIN tags ON pdf_tags.tag_id = tags.id
-	WHERE tags.name ILIKE $1
+	WHERE REPLACE(tags.name, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
 	`
 	var count int64
 	err = Database.QueryRow(statement, tagname).Scan(&count)
+	if err != nil {
+		panic(err)
+	}
+	res.TotalCount = count
+
+	return res
+}
+
+func GetAllPdfDataByAuthor(page int, author string) structs.PDFPreviews {
+	var res structs.PDFPreviews
+
+	pageSize := 48
+	offset := (page) * pageSize
+	limit := pageSize
+
+	statement := `
+	SELECT pdf.id, pdf.title, pdf.author, pdf.image, pdf.size, pdf.number_of_pages
+	FROM pdf
+	WHERE REPLACE(pdf.author, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+	ORDER BY pdf.upload_date, pdf.id DESC OFFSET $2 LIMIT $3
+	`
+	rows, err := Database.Query(statement, author, offset, limit)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	var pdfs []structs.PDFpreview
+	for rows.Next() {
+		var pdf structs.PDFpreview
+		err := rows.Scan(&pdf.Uuid, &pdf.Title, &pdf.Author, &pdf.Image, &pdf.Size, &pdf.NumPages)
+		if err != nil {
+			panic(err)
+		}
+		pdf.Tags = getTags(pdf.Uuid)
+		pdfs = append(pdfs, pdf)
+	}
+	res.Previews = pdfs
+
+	statement = `
+	SELECT COUNT(*)
+	FROM pdf
+	WHERE REPLACE(pdf.author, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+	`
+	var count int64
+	err = Database.QueryRow(statement, author).Scan(&count)
 	if err != nil {
 		panic(err)
 	}
