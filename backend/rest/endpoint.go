@@ -220,3 +220,29 @@ func GetAllPDFsByAuthor(w http.ResponseWriter, r *http.Request) {
 		w.Write(pdfJSON)
 	}
 }
+
+func GetAllPDFsBySearch(w http.ResponseWriter, r *http.Request) {
+	pageStr := r.URL.Query().Get("page")
+
+	if pageStr == "" {
+		http.Error(w, "Page parameter is missing", http.StatusBadRequest)
+		return
+	}
+
+	page, err := strconv.Atoi(pageStr)
+	if err != nil {
+		http.Error(w, "Invalid page parameter", http.StatusBadRequest)
+		return
+	}
+
+	search := chi.URLParam(r, "search")
+
+	pdfs := database.GetAllPdfDataBySearch(page, search)
+	w.Header().Set("Content-Type", "application/json")
+	pdfJSON, err := json.Marshal(pdfs)
+	if err != nil {
+		io.WriteString(w, "Received Invalid PDFs JSON Object")
+	} else {
+		w.Write(pdfJSON)
+	}
+}

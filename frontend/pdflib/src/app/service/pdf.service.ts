@@ -36,6 +36,12 @@ export class PdfService {
         return this.http.get<PDFPreviews>(baseUrl + '/pdfs/author/' + author, { params });
     }
 
+    getAllPdfsBySearch(page: number, search: string): Observable<PDFPreviews> {
+        const params = new HttpParams()
+            .set('page', String(page));
+        return this.http.get<PDFPreviews>(baseUrl + '/pdfs/search/' + search, { params });
+    }
+
     getPdfByUuid(uuid: string): Observable<PDF> {
         return this.http.get<PDF>(baseUrl + '/pdf/' + uuid);
     }

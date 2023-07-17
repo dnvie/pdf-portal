@@ -22,9 +22,9 @@ export class HeaderComponent implements OnInit {
         this.removeActive();
         if (this.router.url === '/upload') {
           this.setActiveNav(3);
-        } else if (this.router.url === '/search') {
+        } else if (this.router.url.startsWith('/pdfs/')) {
           this.setActiveNav(2);
-        } else if (this.router.url === '/profile') {
+        } else if (this.router.url === '/categories') {
           this.setActiveNav(4);
         } else if (this.router.url === '/all') {
           this.setActiveNav(1);
@@ -116,9 +116,30 @@ export class HeaderComponent implements OnInit {
     this.cleared = false;
   }
 
-  test() {
-    this.clear();
-    this.reduce();
+  addSearch() {
+    setTimeout(this.clear, 1);
+    setTimeout(function(){ document.getElementById('search')?.classList.add('active');}, 250);
+    setTimeout(function(){ document.getElementById('closeSearch')?.classList.add('active');}, 300);
+  }
+
+  removeSearch() {
+    setTimeout(function(){ document.getElementById('search')?.classList.remove('active');},1);
+    setTimeout(function(){ document.getElementById('closeSearch')?.classList.remove('active');}, 50);
+    setTimeout(this.unclear, 250);
+  }
+
+  search(event: KeyboardEvent, searchValue: string) {    
+    if (event.keyCode === 13 || event.key === 'Enter' || event.code === 'Enter') {
+      if (searchValue.length != 0) {
+        this.router.navigate(['/pdfs/search/' + searchValue]);
+      }
+    }
+  }
+
+  searchByButton(searchValue: string) {    
+    if (searchValue.length != 0) {
+      this.router.navigate(['/pdfs/search/' + searchValue]);
+    }
   }
 
   ngOnInit() {

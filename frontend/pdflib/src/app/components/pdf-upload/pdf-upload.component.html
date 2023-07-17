@@ -18,7 +18,7 @@
       <input multiple type="file" class="file-input" accept=".pdf" (change)="onFileSelected($event)" #fileUpload>
       <div class="file-upload">
         {{fileName || "Select one or multiple files to upload."}}
-        <button *ngIf="!uploading" class="uploadButton" (click)="fileUpload.click()">Select</button>
+        <div *ngIf="!uploading" class="uploadButton" (click)="fileUpload.click()">Select Files</div>
       </div>
       <mat-form-field class="full-width" appearance="outline">
         <mat-label>Tags</mat-label>
@@ -34,6 +34,9 @@
                [matChipInputFor]="chipGrid"
                (matChipInputTokenEnd)="add($event)"/>
       </mat-form-field>
-      <button *ngIf="!uploading" class="uploadButton" (click)="uploadFiles()">Upload</button>
+      <div *ngIf="!uploading" class="uploadButton" (click)="uploadFiles()">Upload</div>
+      <div class="fileNameContainer">
+        <div class="fileName" *ngFor="let pdf of this.pdfFiles">{{pdf.name}}</div>
+      </div>
     </div>
   </div>

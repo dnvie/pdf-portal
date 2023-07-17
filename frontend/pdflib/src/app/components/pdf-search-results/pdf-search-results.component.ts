@@ -7,16 +7,17 @@ import { PdfService } from 'src/app/service/pdf.service';
 
 export enum ResultMode {
   tag,
-  author
+  author,
+  search
 };
 
 
 @Component({
-  selector: 'app-pdf-tag-results',
-  templateUrl: './pdf-tag-results.component.html',
-  styleUrls: ['./pdf-tag-results.component.scss']
+  selector: 'app-pdf-search-results',
+  templateUrl: './pdf-search-results.component.html',
+  styleUrls: ['./pdf-search-results.component.scss']
 })
-export class PdfTagResultsComponent implements OnInit{
+export class PdfSearchResultsComponent implements OnInit{
 
   mode: ResultMode = ResultMode.author;
   currentPage = 0;
@@ -25,6 +26,7 @@ export class PdfTagResultsComponent implements OnInit{
   listView = false
   tag = ''
   author = ''
+  search = ''
   pdfs: PDFPreviews = {
     Previews: undefined,
     TotalCount: 0
@@ -40,9 +42,7 @@ export class PdfTagResultsComponent implements OnInit{
   ngOnInit(): void {
     window.scrollTo(0, 0);
     this.route.data.subscribe(data => {
-      this.mode = data['mode'];
-      console.log(this.mode);
-      
+      this.mode = data['mode'];      
     });
 
     this.route.params.subscribe(params => {
@@ -54,6 +54,10 @@ export class PdfTagResultsComponent implements OnInit{
         this.author = params['author'];
         this.titleService.setTitle('Author: ' + this.author)
         this.loadPdfs(this.author)
+      } else {
+        this.search = params['search'];
+        this.titleService.setTitle('Search: ' + this.search)
+        this.loadPdfs(this.search)
       }
       
     });
@@ -80,6 +84,16 @@ export class PdfTagResultsComponent implements OnInit{
           console.log(err);
         }
       });
+    } else {
+      this.service.getAllPdfsBySearch(this.currentPage, query).subscribe({
+        next: res => {
+          this.pdfs = res
+          this.totalPages = res.TotalCount;
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
     }
   }
 
@@ -91,6 +105,8 @@ export class PdfTagResultsComponent implements OnInit{
       this.loadPdfs(this.tag);
     } else if (this.mode == 1) {
       this.loadPdfs(this.author);
+    } else {
+      this.loadPdfs(this.search);
     }
     window.scrollTo(0, 0);
   }

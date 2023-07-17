@@ -57,7 +57,11 @@
                 font-size: 22px;
                 color: rgba(235, 235, 235, 0.6);
                 font-weight: 400;
-                transition: all 0.15s ease-in-out;
+                transition: all 0.1s ease-in-out;
+            }
+            .author:hover {
+                cursor: pointer;
+                filter: brightness(1.1);
             }
             .missing {
                 opacity: 0.2;

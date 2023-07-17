@@ -363,7 +363,7 @@ func GetAllPdfData(page int) structs.PDFPreviews {
 	offset := (page) * pageSize
 	limit := pageSize
 
-	statement := `SELECT id, title, author, image, size, number_of_pages FROM pdf ORDER BY upload_date DESC OFFSET $1 LIMIT $2`
+	statement := `SELECT id, title, author, image, size, number_of_pages FROM pdf ORDER BY upload_date, pdf.id DESC OFFSET $1 LIMIT $2`
 	rows, err := Database.Query(statement, offset, limit)
 	if err != nil {
 		panic(err)
@@ -481,6 +481,67 @@ func GetAllPdfDataByAuthor(page int, author string) structs.PDFPreviews {
 	`
 	var count int64
 	err = Database.QueryRow(statement, author).Scan(&count)
+	if err != nil {
+		panic(err)
+	}
+	res.TotalCount = count
+
+	return res
+}
+
+func GetAllPdfDataBySearch(page int, search string) structs.PDFPreviews {
+	var res structs.PDFPreviews
+
+	pageSize := 48
+	offset := (page) * pageSize
+	limit := pageSize
+
+	statement := `
+	SELECT DISTINCT pdf.id, pdf.title, pdf.author, pdf.image, pdf.size, pdf.number_of_pages, pdf.upload_date
+	FROM pdf
+	LEFT JOIN pdf_tags ON pdf.id = pdf_tags.pdf_id
+	LEFT JOIN tags ON pdf_tags.tag_id = tags.id
+	WHERE
+		REPLACE(pdf.title, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+		OR REPLACE(pdf.author, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+		OR REPLACE(tags.name, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+	ORDER BY pdf.upload_date, pdf.id DESC
+	OFFSET $2 LIMIT $3
+`
+	rows, err := Database.Query(statement, search, offset, limit)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	var pdfs []structs.PDFpreview
+	for rows.Next() {
+		var pdf structs.PDFpreview
+		var upload_date string
+		err := rows.Scan(&pdf.Uuid, &pdf.Title, &pdf.Author, &pdf.Image, &pdf.Size, &pdf.NumPages, &upload_date)
+		if err != nil {
+			panic(err)
+		}
+		pdf.Tags = getTags(pdf.Uuid)
+		pdfs = append(pdfs, pdf)
+	}
+	res.Previews = pdfs
+
+	statement = `
+	SELECT COUNT(*)
+	FROM (
+		SELECT DISTINCT pdf.id
+		FROM pdf
+		LEFT JOIN pdf_tags ON pdf.id = pdf_tags.pdf_id
+		LEFT JOIN tags ON pdf_tags.tag_id = tags.id
+		WHERE
+			REPLACE(pdf.title, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+			OR REPLACE(pdf.author, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+			OR REPLACE(tags.name, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+	) AS unique_pdfs
+	`
+	var count int64
+	err = Database.QueryRow(statement, search).Scan(&count)
 	if err != nil {
 		panic(err)
 	}

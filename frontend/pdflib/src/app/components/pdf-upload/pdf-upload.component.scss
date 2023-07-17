@@ -3,6 +3,10 @@
 }
 
 .file-upload {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
     color: white;
     font-size: 22px;
     font-weight: 500;
@@ -10,6 +14,21 @@
 
 .uploadButton {
     background-color: white;
+    width: fit-content;
+    padding: 0px 30px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 10px;
+    color: black;
+}
+
+.uploadButton:hover {
+    filter: brightness(0.9);
+    cursor: pointer;
 }
 
 .container {
@@ -165,4 +184,18 @@
 .full-width {
     margin-top: 25px;
     width: 500px;
+}
+
+.fileNameContainer {
+    margin-top: 25px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    .fileName {
+        color: rgb(255, 255, 255);
+        font-family: 'Inter';
+        font-weight: 400;
+        font-size: 14px;
+    }
 }

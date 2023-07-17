@@ -3,8 +3,9 @@
     <div *ngIf="!listView" class="viewMode" (click)="listView = !listView"><span class="material-symbols-rounded">view_list</span></div>
 </div>
 
-<div *ngIf="this.mode == 0" class="heading">Showing all PDF Files with Tag: <span>{{this.tag}}</span></div>
-<div *ngIf="this.mode == 1" class="heading">Showing all PDF Files with Author: <span>{{this.author}}</span></div>
+<div *ngIf="this.mode == 0" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> with tag: <span class="em">{{this.tag}}</span></div>
+<div *ngIf="this.mode == 1" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> with author: <span class="em">{{this.author}}</span></div>
+<div *ngIf="this.mode == 2" class="heading">{{this.totalPages}} Result <span *ngIf="this.totalPages != 1">s&nbsp;</span> for: <span class="em">{{this.search}}</span></div>
 
 
 <div class="cardContainer">
@@ -52,6 +53,7 @@
                  [length]="totalPages"
                  [pageSize]="pageSize"
                  [pageIndex]="currentPage"
+                 [hidePageSize]="true"
                  [showFirstLastButtons]="true"
                  (page)="onPageChange($event)"
   ></mat-paginator>

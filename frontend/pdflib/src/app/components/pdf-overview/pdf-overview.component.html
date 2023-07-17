@@ -51,6 +51,7 @@
     <mat-paginator class="paginator"
                  [length]="totalPages"
                  [pageSize]="pageSize"
+                 [hidePageSize]="true"
                  [pageIndex]="currentPage"
                  [showFirstLastButtons]="true"
                  (page)="onPageChange($event)"

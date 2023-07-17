@@ -1,11 +1,21 @@
 <div class="headerContainer">
-    <header id="header">
+    <header id="header" class="header">
         <div class="nav">
             <div class="navItem" routerLink="/">Home<span class="material-symbols-rounded">home</span></div>
             <div class="navItem" routerLink="/all">View All<span class="material-symbols-rounded">view_module</span></div>
-            <div class="navItem">Search<span class="material-symbols-rounded">search</span></div>
+            <div class="navItem" (click)="addSearch()">Search<span class="material-symbols-rounded">search</span></div>
             <div class="navItem" routerLink="/upload">Upload<span class="material-symbols-rounded">upload</span></div>
             <div class="navItem">Categories<span class="material-symbols-rounded">folder</span></div>
+        </div>
+    </header>
+    <div class="closeSearchContainer">
+        <div class="closeSearch" id="closeSearch" (click)="removeSearch()"><span class="material-symbols-rounded">cancel</span></div>
+    </div>
+    <header class="header search" id="search">
+        <div class="searchBarContainer">
+            <div class="searchLabel">Search: </div>
+            <input class="searchBar" id="searchBar" type="text" placeholder="Enter a Title, Author or Tag" #searchInput (keydown)="search($event, searchInput.value)" spellcheck="false">
+            <div class="searchLabel" (click)="searchByButton(searchInput.value)"><span class="material-symbols-rounded">arrow_circle_right</span></div>
         </div>
     </header>
 </div>

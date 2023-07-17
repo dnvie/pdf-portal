@@ -23,6 +23,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   --green: rgb(151, 242, 95);
 }
 
+::placeholder {
+  color: rgb(150, 150, 150);
+}
+
+:-ms-input-placeholder { 
+  color: rgb(150, 150, 150);
+}
+
+::-ms-input-placeholder {
+  color: rgb(150, 150, 150);
+}
+
 .mdc-circular-progress--indeterminate .mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: var(--green, transparent) !important;
 }

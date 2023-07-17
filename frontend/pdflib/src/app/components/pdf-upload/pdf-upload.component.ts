@@ -198,6 +198,9 @@ export class PdfUploadComponent {
 
   onFileSelected(event: any) {
     this.pdfFiles = event.target.files;
+    for (let i = 0; i < this.pdfFiles.length; i++) {
+      console.log(this.pdfFiles[i].name);
+    }
   }
 
   uploadFiles() {
