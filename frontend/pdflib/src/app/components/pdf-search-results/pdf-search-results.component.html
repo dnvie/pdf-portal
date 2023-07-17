@@ -5,7 +5,7 @@
 
 <div *ngIf="this.mode == 0" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> with tag: <span class="em">{{this.tag}}</span></div>
 <div *ngIf="this.mode == 1" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> with author: <span class="em">{{this.author}}</span></div>
-<div *ngIf="this.mode == 2" class="heading">{{this.totalPages}} Result <span *ngIf="this.totalPages != 1">s&nbsp;</span> for: <span class="em">{{this.search}}</span></div>
+<div *ngIf="this.mode == 2" class="heading"><span class="em">{{this.totalPages}}&nbsp;</span> Search Result <span *ngIf="this.totalPages != 1">s</span>:</div>
 
 
 <div class="cardContainer">

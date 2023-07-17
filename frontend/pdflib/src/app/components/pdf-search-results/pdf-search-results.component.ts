@@ -49,21 +49,30 @@ export class PdfSearchResultsComponent implements OnInit{
       if (this.mode == 0) {
         this.tag = params['tag'];
         this.titleService.setTitle('Tag: ' + this.tag)
-        this.loadPdfs(this.tag)
+        this.loadPdfsByAuthorOrTag(this.tag)
       } else if (this.mode == 1) {
         this.author = params['author'];
         this.titleService.setTitle('Author: ' + this.author)
-        this.loadPdfs(this.author)
+        this.loadPdfsByAuthorOrTag(this.author)
       } else {
-        this.search = params['search'];
-        this.titleService.setTitle('Search: ' + this.search)
-        this.loadPdfs(this.search)
+        this.route.queryParamMap.subscribe(queryParams => {
+          let title = queryParams.get('title');
+          let author = queryParams.get('author');
+          let tag = queryParams.get('tag');
+          if (title || author || tag) {
+            if (title == null) title = '';
+            if (author == null) author = '';
+            if (tag == null) tag = '';
+            this.titleService.setTitle('Search');
+            this.loadPdfs(title, author, tag);
+          }
+        });
       }
       
     });
   }
 
-  loadPdfs(query: string) {
+  loadPdfsByAuthorOrTag(query: string) {
     if (this.mode == 0) {
       this.service.getAllPdfsByTag(this.currentPage, query).subscribe({
         next: res => {
@@ -84,17 +93,19 @@ export class PdfSearchResultsComponent implements OnInit{
           console.log(err);
         }
       });
-    } else {
-      this.service.getAllPdfsBySearch(this.currentPage, query).subscribe({
-        next: res => {
-          this.pdfs = res
-          this.totalPages = res.TotalCount;
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
     }
+  }
+
+  loadPdfs(title: string, author: string, tag: string) {
+    this.service.getAllPdfsBySearch(this.currentPage, title, author, tag).subscribe({
+      next: res => {
+        this.pdfs = res
+        this.totalPages = res.TotalCount;
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
   }
 
   onPageChange(event: PageEvent) {
@@ -102,11 +113,11 @@ export class PdfSearchResultsComponent implements OnInit{
     this.pageSize = event.pageSize;
     //this.loaded = false;
     if (this.mode == 0) {
-      this.loadPdfs(this.tag);
+      this.loadPdfsByAuthorOrTag(this.tag);
     } else if (this.mode == 1) {
-      this.loadPdfs(this.author);
+      this.loadPdfsByAuthorOrTag(this.author);
     } else {
-      this.loadPdfs(this.search);
+      //this.loadPdfs(this.search);
     }
     window.scrollTo(0, 0);
   }

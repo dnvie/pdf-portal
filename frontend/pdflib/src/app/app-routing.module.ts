@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: "pdf/view/:id", component: PdfDetailsComponent},
   {path: "pdfs/tag/:tag", component: PdfSearchResultsComponent, data: {mode: ResultMode.tag}},
   {path: "pdfs/author/:author", component: PdfSearchResultsComponent, data: {mode: ResultMode.author}},
-  {path: "pdfs/search/:search", component: PdfSearchResultsComponent, data: {mode: ResultMode.search}}
+  {path: "pdfs/search", component: PdfSearchResultsComponent, data: {mode: ResultMode.search}}
 ];
 
 @NgModule({

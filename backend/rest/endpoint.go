@@ -235,9 +235,11 @@ func GetAllPDFsBySearch(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	search := chi.URLParam(r, "search")
+	title := r.URL.Query().Get("title")
+	author := r.URL.Query().Get("author")
+	tag := r.URL.Query().Get("tag")
 
-	pdfs := database.GetAllPdfDataBySearch(page, search)
+	pdfs := database.GetAllPdfDataBySearch(page, title, author, tag)
 	w.Header().Set("Content-Type", "application/json")
 	pdfJSON, err := json.Marshal(pdfs)
 	if err != nil {

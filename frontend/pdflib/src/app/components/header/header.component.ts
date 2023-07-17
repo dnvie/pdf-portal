@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { EventService } from 'src/app/event-service.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -11,6 +11,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 export class HeaderComponent implements OnInit {
   cleared = false;
   reduced = false;
+
+  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('searchInput2') searchInput2!: ElementRef<HTMLInputElement>;
+  @ViewChild('searchInput3') searchInput3!: ElementRef<HTMLInputElement>;
 
   constructor(
     private route: ActivatedRoute,
@@ -117,6 +121,7 @@ export class HeaderComponent implements OnInit {
   }
 
   addSearch() {
+    this.clearSearchBars();
     setTimeout(this.clear, 1);
     setTimeout(function(){ document.getElementById('search')?.classList.add('active');}, 250);
     setTimeout(function(){ document.getElementById('closeSearch')?.classList.add('active');}, 300);
@@ -128,17 +133,43 @@ export class HeaderComponent implements OnInit {
     setTimeout(this.unclear, 250);
   }
 
-  search(event: KeyboardEvent, searchValue: string) {    
+  clearSearchBars() {
+      this.searchInput.nativeElement.value = '';
+      this.searchInput2.nativeElement.value = '';
+      this.searchInput3.nativeElement.value = '';
+  }
+
+  search(event: KeyboardEvent, searchValueTitle: string, searchValueAuthor: string, searchValueTag: string) {    
     if (event.keyCode === 13 || event.key === 'Enter' || event.code === 'Enter') {
-      if (searchValue.length != 0) {
-        this.router.navigate(['/pdfs/search/' + searchValue]);
+      if (searchValueTitle.length != 0 || searchValueAuthor.length != 0 || searchValueTag.length != 0) {
+        const queryParams: any = {};
+      if (searchValueTitle.length !== 0) {
+        queryParams.title = searchValueTitle;
+      }
+      if (searchValueAuthor.length !== 0) {
+        queryParams.author = searchValueAuthor;
+      }
+      if (searchValueTag.length !== 0) {
+        queryParams.tag = searchValueTag;
+      }
+      this.router.navigate(['/pdfs/search'], { queryParams });
       }
     }
   }
 
-  searchByButton(searchValue: string) {    
-    if (searchValue.length != 0) {
-      this.router.navigate(['/pdfs/search/' + searchValue]);
+  searchByButton(searchValueTitle: string, searchValueAuthor: string, searchValueTag: string) {    
+    if (searchValueTitle.length != 0 || searchValueAuthor.length != 0 || searchValueTag.length != 0) {
+      const queryParams: any = {};
+      if (searchValueTitle.length !== 0) {
+        queryParams.title = searchValueTitle;
+      }
+      if (searchValueAuthor.length !== 0) {
+        queryParams.author = searchValueAuthor;
+      }
+      if (searchValueTag.length !== 0) {
+        queryParams.tag = searchValueTag;
+      }
+      this.router.navigate(['/pdfs/search'], { queryParams });
     }
   }
 

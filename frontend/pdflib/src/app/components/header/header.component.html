@@ -13,9 +13,10 @@
     </div>
     <header class="header search" id="search">
         <div class="searchBarContainer">
-            <div class="searchLabel">Search: </div>
-            <input class="searchBar" id="searchBar" type="text" placeholder="Enter a Title, Author or Tag" #searchInput (keydown)="search($event, searchInput.value)" spellcheck="false">
-            <div class="searchLabel" (click)="searchByButton(searchInput.value)"><span class="material-symbols-rounded">arrow_circle_right</span></div>
+            <input class="searchBar" id="searchBar" type="text" placeholder="Search by Title" #searchInput (keydown)="search($event, searchInput.value, searchInput2.value, searchInput3.value)" spellcheck="false">
+            <input class="searchBar" id="searchBar1" type="text" placeholder="Search by Author" #searchInput2 (keydown)="search($event, searchInput.value, searchInput2.value, searchInput3.value)" spellcheck="false">
+            <input class="searchBar" id="searchBar2" type="text" placeholder="Search by Tag" #searchInput3 (keydown)="search($event, searchInput.value, searchInput2.value, searchInput3.value)" spellcheck="false">
+            <div class="searchLabel" (click)="searchByButton(searchInput.value, searchInput2.value, searchInput3.value)"><span class="material-symbols-rounded">arrow_circle_right</span></div>
         </div>
     </header>
 </div>

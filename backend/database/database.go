@@ -489,7 +489,7 @@ func GetAllPdfDataByAuthor(page int, author string) structs.PDFPreviews {
 	return res
 }
 
-func GetAllPdfDataBySearch(page int, search string) structs.PDFPreviews {
+func GetAllPdfDataBySearch(page int, title string, author string, tag string) structs.PDFPreviews {
 	var res structs.PDFPreviews
 
 	pageSize := 48
@@ -502,13 +502,13 @@ func GetAllPdfDataBySearch(page int, search string) structs.PDFPreviews {
 	LEFT JOIN pdf_tags ON pdf.id = pdf_tags.pdf_id
 	LEFT JOIN tags ON pdf_tags.tag_id = tags.id
 	WHERE
-		REPLACE(pdf.title, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
-		OR REPLACE(pdf.author, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
-		OR REPLACE(tags.name, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+		(REPLACE(pdf.title, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%' OR $1 = '')
+		AND (REPLACE(pdf.author, ' ', '') ILIKE '%' || REPLACE($2, ' ', '') || '%' OR $2 = '')
+		AND (REPLACE(tags.name, ' ', '') ILIKE '%' || REPLACE($3, ' ', '') || '%' OR $3 = '')
 	ORDER BY pdf.upload_date, pdf.id DESC
-	OFFSET $2 LIMIT $3
+	OFFSET $4 LIMIT $5
 `
-	rows, err := Database.Query(statement, search, offset, limit)
+	rows, err := Database.Query(statement, title, author, tag, offset, limit)
 	if err != nil {
 		panic(err)
 	}
@@ -535,13 +535,13 @@ func GetAllPdfDataBySearch(page int, search string) structs.PDFPreviews {
 		LEFT JOIN pdf_tags ON pdf.id = pdf_tags.pdf_id
 		LEFT JOIN tags ON pdf_tags.tag_id = tags.id
 		WHERE
-			REPLACE(pdf.title, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
-			OR REPLACE(pdf.author, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
-			OR REPLACE(tags.name, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+			(REPLACE(pdf.title, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%' OR $1 = '')
+			AND (REPLACE(pdf.author, ' ', '') ILIKE '%' || REPLACE($2, ' ', '') || '%' OR $2 = '')
+			AND (REPLACE(tags.name, ' ', '') ILIKE '%' || REPLACE($3, ' ', '') || '%' OR $3 = '')
 	) AS unique_pdfs
 	`
 	var count int64
-	err = Database.QueryRow(statement, search).Scan(&count)
+	err = Database.QueryRow(statement, title, author, tag).Scan(&count)
 	if err != nil {
 		panic(err)
 	}
