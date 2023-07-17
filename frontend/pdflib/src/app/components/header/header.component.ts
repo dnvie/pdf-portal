@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
           this.setActiveNav(4);
         } else if (this.router.url === '/all') {
           this.setActiveNav(1);
-        } else {
+        } else if (this.router.url === '/') {
           this.setActiveNav(0);
         }
       }

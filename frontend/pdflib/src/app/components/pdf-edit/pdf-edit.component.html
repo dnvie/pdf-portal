@@ -1,0 +1,36 @@
+<div class="main">
+    <div class="container">
+        <div class="imageContainer">
+            <img class="card" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
+            <div class="category">Category</div>
+        </div>
+        <div class="infoContainer">
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Title</mat-label>
+                <input type="text" matInput name="title" [(ngModel)]="pdf.Title">
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="fill">
+                <mat-label>Author</mat-label>
+                <input type="text" matInput name="author" [(ngModel)]="pdf.Author">
+            </mat-form-field>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Tags</mat-label>
+                <mat-chip-grid #chipGrid aria-label="Enter tags">
+                  <mat-chip-row *ngFor="let tag of tags" (removed)="removeTag(tag)">
+                    {{tag}}
+                    <button matChipRemove aria-label="'remove ' + tag">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip-row>
+                </mat-chip-grid>
+                <input placeholder="New tag (Press Enter to add)"
+                       [matChipInputFor]="chipGrid"
+                       (matChipInputTokenEnd)="add($event)"/>
+              </mat-form-field>
+            <div class="buttons">
+                <div class="button delete">Delete<span class="material-symbols-rounded">delete_forever</span></div>
+                <div class="button save" (click)="updatePdf()">Save<span class="material-symbols-rounded">save</span></div>
+            </div>
+        </div>
+    </div>
+</div>

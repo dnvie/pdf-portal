@@ -53,4 +53,8 @@ export class PdfService {
         return this.http.get<PDFFile>(baseUrl + '/pdf/file/' + uuid);
     }
 
+    updatePdfByUuid(pdf: PDF, uuid: string): Observable<PDF> {
+        return this.http.put<PDF>(baseUrl + '/pdf/file/' + uuid, pdf);
+    }
+
 }

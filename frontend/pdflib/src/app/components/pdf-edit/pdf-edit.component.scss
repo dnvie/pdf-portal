@@ -22,39 +22,18 @@
                 height: 500px;
                 border-radius: 10px;
             }
-            .imageButton {
-                position: absolute;
-                top: -12px;
-                width: fit-content;
-                height: fit-content;
-                font-weight: 500;
-                backdrop-filter: blur(15px);
-            }
             .category {
-                right: -20px;
-                font-size: 16px;
-                border-radius: 10px;
+                position: absolute;
                 padding: 8px 12px;
                 background-color: rgba(65, 65, 65, 0.8);
-            }
-            .edit {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                left: -20px;
-                font-size: 14px;
-                border-radius: 90px;
-                padding: 8px 8px;
-                background-color: rgba(244, 244, 244, 0.075);
-                transition: all 0.1s ease-in-out;
-                span {
-                    transform: scale(0.85);
-                }
-            }
-            .edit:hover {
-                cursor: pointer;
-                background-color: rgba(249, 201, 111);
-                color: rgb(142, 92, 0);
+                top: -12px;
+                right: -20px;
+                width: fit-content;
+                height: fit-content;
+                border-radius: 10px;
+                font-size: 16px;
+                font-weight: 500;
+                backdrop-filter: blur(15px);
             }
         }
         .infoContainer {
@@ -151,12 +130,12 @@
                     margin-bottom: 25px;
                     transition: all 0.1s ease-in-out;
                 }
-                .read {
-                    color: var(--green);
-                    background-color: rgba(129, 221, 71, 0.1);
+                .delete {
+                    color: rgb(245, 193, 188);
+                    background-color: rgb(201, 0, 13)
                     
                 }
-                .download {
+                .save {
                     background-color: var(--green);
                     color: rgb(19, 36, 9);
                 }
@@ -168,4 +147,8 @@
             }
         }
     }
+}
+
+.full-width {
+    width: 600px;
 }

@@ -214,7 +214,7 @@ export class PdfUploadComponent {
       }
       formData.append('tags', JSON.stringify(this.tags));
 
-    this.fileName = this.tags.length === 1 ? 'Uploading: ' + this.tags[0] : 'Uploading: ' + this.tags.length + ' files';
+    this.fileName = this.pdfFiles.length === 1 ? 'Uploading: ' + this.pdfFiles[0] : 'Uploading: ' + this.pdfFiles.length + ' files';
 
     const upload$ = this.http.post('http://localhost:3000/upload', formData, {
       reportProgress: true,

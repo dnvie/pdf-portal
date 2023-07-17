@@ -2,7 +2,8 @@
     <div class="container">
         <div class="imageContainer">
             <img class="card" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
-            <div class="category">Category</div>
+            <div class="imageButton category">Category</div>
+            <div class="imageButton edit" routerLink="/pdf/edit/{{pdf.Uuid}}"><span class="material-symbols-rounded">edit</span></div>
         </div>
         <div class="infoContainer">
             <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>

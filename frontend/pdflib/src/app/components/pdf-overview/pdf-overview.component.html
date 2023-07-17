@@ -34,7 +34,7 @@
     <div *ngIf="!listView" class="cardContainerHelper">
         <div class="card" *ngFor="let pdf of pdfs.Previews; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
             <div class="cardContent">
-                <button class="editButton">Edit</button>
+                <button class="editButton" routerLink='/pdf/edit/{{pdf.Uuid}}'>Edit</button>
                 <div class="image">
                     <img class="thumbnail" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
                 </div>

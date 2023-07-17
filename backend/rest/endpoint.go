@@ -248,3 +248,20 @@ func GetAllPDFsBySearch(w http.ResponseWriter, r *http.Request) {
 		w.Write(pdfJSON)
 	}
 }
+
+func UpdatePDFFile(w http.ResponseWriter, r *http.Request) {
+	var updatedPdf data.PDFInfo
+	id := chi.URLParam(r, "id")
+	if database.CheckIfFileExists(id) {
+		err := json.NewDecoder(r.Body).Decode(&updatedPdf)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		database.UpdatePdfData(updatedPdf)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+	} else {
+		http.Error(w, "File does not exist on server", http.StatusBadRequest)
+	}
+}

@@ -297,6 +297,12 @@ func AddTags(id string, tags []string) {
 	tagMutex.Lock()
 	defer tagMutex.Unlock()
 
+	statement := `DELETE FROM pdf_tags WHERE pdf_id = $1`
+	_, err := Database.Exec(statement, id)
+	if err != nil {
+		panic(err)
+	}
+
 	for _, tag := range tags {
 		if CheckIfTagExists(tag) {
 			tagID := getTagIDByName(tag)
@@ -354,6 +360,20 @@ func GetPdfData(uuid string) structs.PDFInfo {
 	res.Tags = getTags(res.Uuid.String())
 
 	return res
+}
+
+func UpdatePdfData(pdf structs.PDFInfo) {
+	statement := `
+		UPDATE pdf
+		SET title = $1, author = $2
+		WHERE id = $3
+	`
+	_, err := Database.Exec(statement, pdf.Title, pdf.Author, pdf.Uuid)
+	if err != nil {
+		panic(err)
+	}
+
+	AddTags(pdf.Uuid.String(), pdf.Tags)
 }
 
 func GetAllPdfData(page int) structs.PDFPreviews {

@@ -27,6 +27,7 @@ func Serve() {
 	r.Get("/pdfs/tag/{tag}", GetAllPDFsByTag)
 	r.Get("/pdfs/author/{author}", GetAllPDFsByAuthor)
 	r.Get("/pdfs/search", GetAllPDFsBySearch)
+	r.Put("/pdf/file/{id}", UpdatePDFFile)
 
 	http.ListenAndServe(":3000", r)
 }
