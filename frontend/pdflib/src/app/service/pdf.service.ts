@@ -57,4 +57,12 @@ export class PdfService {
         return this.http.put<PDF>(baseUrl + '/pdf/file/' + uuid, pdf);
     }
 
+    deletePdfByUuid(uuid: string): Observable<PDF> {
+        return this.http.delete<PDF>(baseUrl + '/pdf/delete/' + uuid)
+    }
+
+    getFolders(): Observable<string[]> {
+        return this.http.get<string[]>(baseUrl + '/folders')
+    }
+
 }

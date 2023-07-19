@@ -172,18 +172,19 @@ export class PdfUploadComponent {
 ///
 
 import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { Component, ViewChild } from '@angular/core';
+import { map, Observable, startWith, Subscription } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { EventService } from 'src/app/event-service.service';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-pdf-upload',
   templateUrl: './pdf-upload.component.html',
   styleUrls: ['./pdf-upload.component.scss']
 })
-export class PdfUploadComponent {
+export class PdfUploadComponent implements OnInit{
   @ViewChild(HeaderComponent)
   headerComponent!: HeaderComponent;
   fileName = '';
@@ -193,6 +194,9 @@ export class PdfUploadComponent {
   uploading: boolean = false;
   tags: string[] = [];
   pdfFiles: any = [];
+  myControl = new FormControl('');
+  folders: string[] = [];
+  filteredFolders!: Observable<string[]>;
 
   constructor(private http: HttpClient, private eventService: EventService) {}
 
@@ -213,6 +217,9 @@ export class PdfUploadComponent {
         formData.append('pdfFile', pdfFile);
       }
       formData.append('tags', JSON.stringify(this.tags));
+      if (this.myControl.value) {
+        formData.append('folder', JSON.stringify(this.myControl.value));
+      }
 
     this.fileName = this.pdfFiles.length === 1 ? 'Uploading: ' + this.pdfFiles[0] : 'Uploading: ' + this.pdfFiles.length + ' files';
 
@@ -358,5 +365,18 @@ export class PdfUploadComponent {
       loaderContainer?.classList.remove('active');
     }, 4500);
     setTimeout(this.setUploadingFalse.bind(this), 4500);
+  }
+
+  ngOnInit(): void {
+    this.filteredFolders = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.folders.filter(folder => folder.toLowerCase().includes(filterValue));
   }
 }

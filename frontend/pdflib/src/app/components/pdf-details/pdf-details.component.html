@@ -1,8 +1,11 @@
+<!--
+Wenn PDF geupdated wurde, animation im header anzeigen mit "File Uploaded Successfully" mit gelben farben wie der edit button (oder grün für success)
+-->
 <div class="main">
     <div class="container">
         <div class="imageContainer">
             <img class="card" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
-            <div class="imageButton category">Category</div>
+            <div *ngIf="this.pdf.Folder" class="imageButton folder"><span class="material-symbols-rounded">folder</span>{{this.pdf.Folder}}</div>
             <div class="imageButton edit" routerLink="/pdf/edit/{{pdf.Uuid}}"><span class="material-symbols-rounded">edit</span></div>
         </div>
         <div class="infoContainer">

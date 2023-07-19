@@ -22,7 +22,7 @@
                 height: 500px;
                 border-radius: 10px;
             }
-            .category {
+            .folder {
                 position: absolute;
                 padding: 8px 12px;
                 background-color: rgba(65, 65, 65, 0.8);
@@ -34,6 +34,13 @@
                 font-size: 16px;
                 font-weight: 500;
                 backdrop-filter: blur(15px);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 4px;
+                span {
+                    transform: scale(0.85);
+                }
             }
         }
         .infoContainer {

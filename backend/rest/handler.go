@@ -28,6 +28,9 @@ func Serve() {
 	r.Get("/pdfs/author/{author}", GetAllPDFsByAuthor)
 	r.Get("/pdfs/search", GetAllPDFsBySearch)
 	r.Put("/pdf/file/{id}", UpdatePDFFile)
+	r.Delete("/pdf/delete/{id}", DeletePDFFile)
+	r.Get("/folders", GetFolders)
+	r.Post("/folders/{name}", CreateFolder)
 
 	http.ListenAndServe(":3000", r)
 }

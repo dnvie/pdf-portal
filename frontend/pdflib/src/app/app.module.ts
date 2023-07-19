@@ -20,6 +20,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { PdfSearchResultsComponent } from './components/pdf-search-results/pdf-search-results.component';
 import { PdfEditComponent } from './components/pdf-edit/pdf-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FoldersComponent } from './components/folders/folders.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     PdfUploadComponent,
     PdfDetailsComponent,
     PdfSearchResultsComponent,
-    PdfEditComponent
+    PdfEditComponent,
+    FoldersComponent
   ],
   imports: [
     BrowserModule,

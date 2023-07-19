@@ -15,6 +15,7 @@ type PDFInfo struct {
 	Author       string
 	Tags         []string
 	Image        string
+	Folder       string
 	//File         string
 }
 

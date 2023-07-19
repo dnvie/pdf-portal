@@ -80,7 +80,12 @@ func UploadPDF(w http.ResponseWriter, r *http.Request) {
 			_ = json.Unmarshal([]byte(jsonTags), &tags)
 			tags = utility.RemoveDuplicateTags(tags)
 
+			jsonFolder := r.FormValue("folder")
+			var folder string
+			_ = json.Unmarshal([]byte(jsonFolder), &folder)
+
 			pdfInfo := utility.GetPdfInfo(id.String(), file, fileHeader)
+			pdfInfo.Folder = folder
 			if database.CheckIfFilenameExists(pdfInfo.Filename) {
 				err := os.Remove(constants.PDF_PATH + id.String() + ".pdf")
 				if err != nil {
@@ -263,5 +268,42 @@ func UpdatePDFFile(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 	} else {
 		http.Error(w, "File does not exist on server", http.StatusBadRequest)
+	}
+}
+
+func DeletePDFFile(w http.ResponseWriter, r *http.Request) {
+	id := chi.URLParam(r, "id")
+
+	if database.CheckIfFileExists(id) {
+		database.DeletePdfData(id)
+		err := os.Remove(constants.PDF_PATH + id + ".pdf")
+		if err != nil {
+			panic(err)
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+	} else {
+		http.Error(w, "File does not exist on server", http.StatusBadRequest)
+	}
+}
+
+func GetFolders(w http.ResponseWriter, r *http.Request) {
+	folders := database.GetFolders()
+	w.Header().Set("Content-Type", "application/json")
+	pdfJSON, err := json.Marshal(folders)
+	if err != nil {
+		io.WriteString(w, "Received Invalid PDFs JSON Object")
+	} else {
+		w.Write(pdfJSON)
+	}
+}
+
+func CreateFolder(w http.ResponseWriter, r *http.Request) {
+	name := chi.URLParam(r, "name")
+	if !database.CheckIfFolderExists(name) {
+		database.AddFolder(name)
+		w.WriteHeader(http.StatusOK)
+	} else {
+		http.Error(w, "A Folder with this name already exists!", http.StatusConflict)
 	}
 }

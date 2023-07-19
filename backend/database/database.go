@@ -189,7 +189,22 @@ func ConnectDatabase() {
 		panic(err)
 	}
 
-	statement := `CREATE TABLE IF NOT EXISTS pdf (
+	statement4 := `DROP TABLE folders`
+	_, err = database.Exec(statement4)
+	if err != nil {
+		panic(err)
+	}
+
+	statement := `CREATE TABLE IF NOT EXISTS folders (
+		id SERIAL PRIMARY KEY,
+		name TEXT UNIQUE
+	)`
+	_, err = database.Exec(statement)
+	if err != nil {
+		panic(err)
+	}
+
+	statement = `CREATE TABLE IF NOT EXISTS pdf (
 		id TEXT PRIMARY KEY NOT NULL,
 		filename TEXT NOT NULL,
 		title TEXT NOT NULL,
@@ -199,7 +214,9 @@ func ConnectDatabase() {
 		last_viewed TEXT,
 		size INTEGER,
 		number_of_pages INTEGER,
-		image TEXT
+		image TEXT,
+		folder TEXT,
+		FOREIGN KEY (folder) REFERENCES folders(name)
 	)`
 	_, err = database.Exec(statement)
 	if err != nil {
@@ -271,6 +288,19 @@ func CheckIfTagExists(name string) bool {
 	return true
 }
 
+func CheckIfFolderExists(name string) bool {
+	statement := `SELECT name FROM folders WHERE name = $1`
+	var result string
+	err := Database.QueryRow(statement, name).Scan(&result)
+	if err != nil {
+		if err != sql.ErrNoRows {
+			panic(err)
+		}
+		return false
+	}
+	return true
+}
+
 func getTagIDByName(name string) int {
 	var id int
 	statement := `SELECT id FROM tags WHERE name = $1`
@@ -285,9 +315,31 @@ func getTagIDByName(name string) int {
 }
 
 func AddPdfFile(pdf structs.PDFInfo) {
-	statement := `INSERT INTO pdf (id, filename, title, author, creation_date, upload_date, last_viewed, size, number_of_pages, image)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`
-	_, err := Database.Exec(statement, pdf.Uuid, pdf.Filename, pdf.Title, pdf.Author, pdf.CreationDate, pdf.UploadDate, nil, pdf.Size, pdf.NumPages, pdf.Image)
+	if pdf.Folder == "" {
+		statement := `INSERT INTO pdf (id, filename, title, author, creation_date, upload_date, last_viewed, size, number_of_pages, image, folder)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`
+		_, err := Database.Exec(statement, pdf.Uuid, pdf.Filename, pdf.Title, pdf.Author, pdf.CreationDate, pdf.UploadDate, nil, pdf.Size, pdf.NumPages, pdf.Image, nil)
+		if err != nil {
+			panic(err)
+		}
+	} else {
+		if !CheckIfFolderExists(pdf.Folder) {
+			AddFolder(pdf.Folder)
+		}
+		statement := `INSERT INTO pdf (id, filename, title, author, creation_date, upload_date, last_viewed, size, number_of_pages, image, folder)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`
+		_, err := Database.Exec(statement, pdf.Uuid, pdf.Filename, pdf.Title, pdf.Author, pdf.CreationDate, pdf.UploadDate, nil, pdf.Size, pdf.NumPages, pdf.Image, pdf.Folder)
+		if err != nil {
+			panic(err)
+		}
+	}
+
+}
+
+func AddFolder(name string) {
+	//name = strings.ToLower(name)
+	statement := `INSERT INTO folders (name) VALUES ($1)`
+	_, err := Database.Exec(statement, name)
 	if err != nil {
 		panic(err)
 	}
@@ -349,12 +401,37 @@ func getTags(id string) []string {
 	return tags
 }
 
-func GetPdfData(uuid string) structs.PDFInfo {
-	statement := `SELECT id, filename, title, author, image, size, number_of_pages, creation_date, upload_date FROM pdf WHERE id = $1`
-	var res structs.PDFInfo
-	err := Database.QueryRow(statement, uuid).Scan(&res.Uuid, &res.Filename, &res.Title, &res.Author, &res.Image, &res.Size, &res.NumPages, &res.CreationDate, &res.UploadDate)
+func GetFolders() []string {
+	statement := `SELECT name FROM folders WHERE 1=1 ORDER BY name ASC`
+	rows, err := Database.Query(statement)
 	if err != nil {
 		panic(err)
+	}
+	defer rows.Close()
+
+	var folders []string
+	for rows.Next() {
+		var folder string
+		err := rows.Scan(&folder)
+		if err != nil {
+			panic(err)
+		}
+		folders = append(folders, folder)
+	}
+	return folders
+}
+
+func GetPdfData(uuid string) structs.PDFInfo {
+	statement := `SELECT id, filename, title, author, image, size, number_of_pages, creation_date, upload_date, folder FROM pdf WHERE id = $1`
+	var res structs.PDFInfo
+	var folder sql.NullString
+	err := Database.QueryRow(statement, uuid).Scan(&res.Uuid, &res.Filename, &res.Title, &res.Author, &res.Image, &res.Size, &res.NumPages, &res.CreationDate, &res.UploadDate, &folder)
+	if err != nil {
+		panic(err)
+	}
+
+	if folder.Valid {
+		res.Folder = folder.String
 	}
 
 	res.Tags = getTags(res.Uuid.String())
@@ -363,17 +440,34 @@ func GetPdfData(uuid string) structs.PDFInfo {
 }
 
 func UpdatePdfData(pdf structs.PDFInfo) {
+	if !CheckIfFolderExists(pdf.Folder) {
+		AddFolder(pdf.Folder)
+	}
 	statement := `
 		UPDATE pdf
-		SET title = $1, author = $2
-		WHERE id = $3
+		SET title = $1, author = $2, folder = $3
+		WHERE id = $4
 	`
-	_, err := Database.Exec(statement, pdf.Title, pdf.Author, pdf.Uuid)
+	_, err := Database.Exec(statement, pdf.Title, pdf.Author, pdf.Folder, pdf.Uuid)
 	if err != nil {
 		panic(err)
 	}
 
 	AddTags(pdf.Uuid.String(), pdf.Tags)
+}
+
+func DeletePdfData(uuid string) {
+	statement := `DELETE FROM pdf_tags WHERE pdf_id = $1`
+	_, err := Database.Exec(statement, uuid)
+	if err != nil {
+		panic(err)
+	}
+
+	statement = `DELETE FROM pdf WHERE id = $1`
+	_, err = Database.Exec(statement, uuid)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func GetAllPdfData(page int) structs.PDFPreviews {
@@ -562,6 +656,56 @@ func GetAllPdfDataBySearch(page int, title string, author string, tag string) st
 	`
 	var count int64
 	err = Database.QueryRow(statement, title, author, tag).Scan(&count)
+	if err != nil {
+		panic(err)
+	}
+	res.TotalCount = count
+
+	return res
+}
+
+func GetAllPdfsInFolder(page int, name string) structs.PDFPreviews {
+	var res structs.PDFPreviews
+
+	pageSize := 48
+	offset := (page) * pageSize
+	limit := pageSize
+
+	statement := `
+	SELECT DISTINCT pdf.id, pdf.title, pdf.author, pdf.image, pdf.size, pdf.number_of_pages, pdf.upload_date
+	FROM pdf
+	WHERE folder = $1
+	ORDER BY pdf.upload_date, pdf.id DESC
+	OFFSET $2 LIMIT $3
+`
+	rows, err := Database.Query(statement, name, offset, limit)
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	var pdfs []structs.PDFpreview
+	for rows.Next() {
+		var pdf structs.PDFpreview
+		var upload_date string
+		err := rows.Scan(&pdf.Uuid, &pdf.Title, &pdf.Author, &pdf.Image, &pdf.Size, &pdf.NumPages, &upload_date)
+		if err != nil {
+			panic(err)
+		}
+		pdf.Tags = getTags(pdf.Uuid)
+		pdfs = append(pdfs, pdf)
+	}
+	res.Previews = pdfs
+
+	statement = `
+	SELECT COUNT(*)
+	FROM (
+		SELECT DISTINCT pdf.id, pdf.title, pdf.author, pdf.image, pdf.size, pdf.number_of_pages, pdf.upload_date
+	FROM pdf WHERE folder = $1
+	) AS unique_pdfs
+	`
+	var count int64
+	err = Database.QueryRow(statement, name).Scan(&count)
 	if err != nil {
 		panic(err)
 	}

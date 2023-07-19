@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FoldersComponent } from './components/folders/folders.component';
 import { PdfDetailsComponent } from './components/pdf-details/pdf-details.component';
 import { PdfEditComponent } from './components/pdf-edit/pdf-edit.component';
 import { PdfOverviewComponent } from './components/pdf-overview/pdf-overview.component';
@@ -14,7 +15,9 @@ const routes: Routes = [
   {path: "pdfs/tag/:tag", component: PdfSearchResultsComponent, data: {mode: ResultMode.tag}},
   {path: "pdfs/author/:author", component: PdfSearchResultsComponent, data: {mode: ResultMode.author}},
   {path: "pdfs/search", component: PdfSearchResultsComponent, data: {mode: ResultMode.search}},
-  {path: "pdf/edit/:id", component: PdfEditComponent}
+  {path: "pdf/edit/:id", component: PdfEditComponent},
+  {path: "folders/:name", component: FoldersComponent}
+
 ];
 
 @NgModule({

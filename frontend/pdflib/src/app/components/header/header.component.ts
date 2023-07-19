@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
           this.setActiveNav(3);
         } else if (this.router.url.startsWith('/pdfs/')) {
           this.setActiveNav(2);
-        } else if (this.router.url === '/categories') {
+        } else if (this.router.url.startsWith('/folders')) {
           this.setActiveNav(4);
         } else if (this.router.url === '/all') {
           this.setActiveNav(1);

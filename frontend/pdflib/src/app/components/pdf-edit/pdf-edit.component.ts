@@ -3,8 +3,10 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PDF, PDFFile } from 'src/app/data/pdf';
 import { PdfService } from 'src/app/service/pdf.service';
-import {NgForm, NgModel, NgControl} from '@angular/forms';
+import {NgForm, NgModel, NgControl, FormControl} from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-pdf-edit',
@@ -30,6 +32,10 @@ export class PdfEditComponent implements OnInit {
   }
   tags: string[] = [];
 
+  myControl = new FormControl('');
+  folders: string[] = [];
+  filteredFolders!: Observable<string[]>;
+
   constructor(
     private service: PdfService,
     public route: ActivatedRoute,
@@ -38,6 +44,10 @@ export class PdfEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.filteredFolders = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
     window.scrollTo(0, 0);
     this.route.params.subscribe(params => {
       const id = params['id'];
@@ -47,7 +57,18 @@ export class PdfEditComponent implements OnInit {
           if (this.pdf.Tags !== undefined) {
             this.tags = this.pdf.Tags
           }
+          if (this.pdf.Folder) {
+            this.myControl.patchValue(this.pdf.Folder)
+          }
           this.titleService.setTitle("Editing " + (this.pdf.Title ? this.pdf.Title : this.pdf.Filename!));
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+      this.service.getFolders().subscribe({
+        next: res => {
+          this.folders = res
         },
         error: err => {
           console.log(err);
@@ -82,12 +103,17 @@ export class PdfEditComponent implements OnInit {
   }
 
   updatePdf() {
+    console.log(this.pdf);
+    
     this.route.params.subscribe(params => {
       const id = params['id'];
       if (this.tags) {
         if (this.tags.length != 0) {
           this.pdf.Tags = this.tags
         }
+      }
+      if (this.myControl.value) {
+        this.pdf.Folder = this.myControl.value
       }
       this.service.updatePdfByUuid(this.pdf, id).subscribe({
         next: res => {
@@ -99,6 +125,29 @@ export class PdfEditComponent implements OnInit {
         }
       });
     });
+  }
+
+  deletePdf() {
+    if (confirm('Are you sure you want to delete this file?')) {
+      this.route.params.subscribe(params => {
+        const id = params['id'];
+        this.service.deletePdfByUuid(id).subscribe({
+          next: res => {
+            console.log('Successfully deleted');
+            this.router.navigate(['/'])
+          },
+          error: err => {
+            console.log(err);
+          }
+        });
+      });
+    }
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.folders.filter(folder => folder.toLowerCase().includes(filterValue));
   }
 
 }

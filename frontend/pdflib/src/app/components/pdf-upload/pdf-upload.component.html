@@ -34,6 +34,20 @@
                [matChipInputFor]="chipGrid"
                (matChipInputTokenEnd)="add($event)"/>
       </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Folder</mat-label>
+        <input type="text"
+               placeholder="Select a folder"
+               aria-label="Folder"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let folder of filteredFolders | async" [value]="folder">
+            {{folder}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
       <div *ngIf="!uploading" class="uploadButton" (click)="uploadFiles()">Upload</div>
       <div class="fileNameContainer">
         <div class="fileName" *ngFor="let pdf of this.pdfFiles">{{pdf.name}}</div>

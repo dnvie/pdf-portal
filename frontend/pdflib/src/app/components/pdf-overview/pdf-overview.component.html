@@ -17,9 +17,9 @@
                 <div class="itemInfo">
                     <div class="titleAuthorContainer">
                         <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
-                        <div *ngIf="!pdf.Title" class="title" style="opacity: 0.25">Title missing: <button class="addButton">Add +</button> </div>
+                        <div *ngIf="!pdf.Title" class="title" style="opacity: 0.25">Title missing: <button class="addButton" routerLink='/pdf/edit/{{pdf.Uuid}}'>Add +</button> </div>
                         <div *ngIf="pdf.Author" class="author">{{pdf.Author}}</div>
-                        <div *ngIf="!pdf.Author" class="author" style="opacity: 0.25">Author(s) missing: <button class="addButton">Add +</button> </div>
+                        <div *ngIf="!pdf.Author" class="author" style="opacity: 0.25">Author(s) missing: <button class="addButton" routerLink='/pdf/edit/{{pdf.Uuid}}'>Add +</button> </div>
                     </div>
                     <div class="tagsContainer">
                         <div class="tag">{{pdf.NumPages}} Pages</div>
@@ -40,9 +40,9 @@
                 </div>
                 <div class="infoContent">
                     <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
-                    <div *ngIf="!pdf.Title" class="titleEmpty" style="opacity: 0.25">Title missing: <button class="addButton">Add +</button> </div>
+                    <div *ngIf="!pdf.Title" class="titleEmpty" style="opacity: 0.25">Title missing: <button class="addButton" routerLink='/pdf/edit/{{pdf.Uuid}}'>Add +</button> </div>
                     <div *ngIf="pdf.Author" class="author">{{pdf.Author}}</div>
-                    <div *ngIf="!pdf.Author" class="authorEmpty" style="opacity: 0.25">Author(s) missing: <button class="addButton">Add +</button> </div>
+                    <div *ngIf="!pdf.Author" class="authorEmpty" style="opacity: 0.25">Author(s) missing: <button class="addButton" routerLink='/pdf/edit/{{pdf.Uuid}}'>Add +</button> </div>
                 </div>
             </div>
         </div>
