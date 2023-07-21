@@ -36,6 +36,7 @@ export class PdfEditComponent implements OnInit {
   myControl = new FormControl('');
   folders: string[] = [];
   filteredFolders!: Observable<string[]>;
+  loaded = false
 
   constructor(
     private service: PdfService,
@@ -62,6 +63,7 @@ export class PdfEditComponent implements OnInit {
             this.myControl.patchValue(this.pdf.Folder)
           }
           this.titleService.setTitle("Editing " + (this.pdf.Title ? this.pdf.Title : this.pdf.Filename!));
+          this.loaded = true;
         },
         error: err => {
           console.log(err);

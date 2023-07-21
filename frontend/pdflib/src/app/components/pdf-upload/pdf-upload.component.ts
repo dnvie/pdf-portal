@@ -69,6 +69,8 @@ export class PdfUploadComponent implements OnInit{
         } else if (event.type === HttpEventType.Response) {
           this.pdfFiles = [];
           this.removeLoader();
+          this.tags = [];
+          this.myControl.patchValue("");
           this.service.getFolders().subscribe({
             next: res => {
               this.folders = res

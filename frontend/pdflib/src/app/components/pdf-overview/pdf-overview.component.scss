@@ -262,3 +262,290 @@
     margin-top: 25px;
     transform: scale(1.2);
 }
+
+.skeletonCard {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    width: 250px;
+    background-color: rgb(43, 43, 43);
+    border-radius: 10px;
+    box-shadow: 0 5px 20px 5px rgba(0, 0, 0, 0.051);
+    overflow: hidden;
+    transition: all 0.1s ease-in-out;
+    .skeletonCardContent {
+        position: relative;
+        margin-top: 7px;
+        margin-bottom: 10px;
+        width: 235px;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        row-gap: 10px;
+        .skeletonImage {
+            position: relative;
+            overflow: hidden;
+            height: 310px;
+            width: 235px;
+            background-color: var(--skeleton);
+            border-radius: 8px;
+            &::after {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                transform: translateX(-100%);
+                opacity: var(--skeletonOpacity);
+                filter: var(--skeletonFilter);
+                background-image: linear-gradient(
+                  90deg,
+                  rgba(rgba(255, 255, 255), 0) 0,
+                  rgba(rgba(255, 255, 255), 0.1) 20%,
+                  rgba(rgba(255, 255, 255), 0.2) 60%,
+                  rgba(rgba(255, 255, 255), 0)
+                );
+                animation: shimmer 1s infinite ease-in-out;
+                content: '';
+              }
+        }
+    }
+    .skeletonInfoContent {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        row-gap: 10px;
+        width: 230px;
+        margin-left: 0px;
+        margin-top: 5px;
+    }
+    .skeletonTitle {
+        position: relative;
+        overflow: hidden;
+        width: 200px;
+        height: 25px;
+        border-radius: 10px;
+        background-color: var(--skeleton);
+        &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            opacity: var(--skeletonOpacity);
+            filter: var(--skeletonFilter);
+            background-image: linear-gradient(
+              90deg,
+              rgba(rgba(255, 255, 255), 0) 0,
+              rgba(rgba(255, 255, 255), 0.05) 20%,
+              rgba(rgba(255, 255, 255), 0.1) 60%,
+              rgba(rgba(255, 255, 255), 0)
+            );
+            animation: shimmer 1s infinite ease-in-out;
+            content: '';
+          }
+    }
+    .skeletonAuthor {
+        position: relative;
+        overflow: hidden;
+        width: 150px;
+        height: 20px;
+        border-radius: 8px;
+        background-color: var(--skeleton);
+        margin-bottom: 10px;
+        &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            opacity: var(--skeletonOpacity);
+            filter: var(--skeletonFilter);
+            background-image: linear-gradient(
+              90deg,
+              rgba(rgba(255, 255, 255), 0) 0,
+              rgba(rgba(255, 255, 255), 0.1) 20%,
+              rgba(rgba(255, 255, 255), 0.2) 60%,
+              rgba(rgba(255, 255, 255), 0)
+            );
+            animation: shimmer 1s infinite ease-in-out;
+            content: '';
+          }
+    }
+}
+
+.skeletonContainer {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1000px;
+    height: 120px;
+    background-color: #212121;
+    border-radius: 12px;
+    transition: all 0.1s ease-in-out;
+    .skeletonContent {
+        display: flex;
+        width: 980px;
+        height: 100px;
+        border-radius: 12px;
+        .skeletonImageContainer {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            position: relative;
+            height: 100%;
+            aspect-ratio: 1/1.41;
+            border-radius: 7px;
+            overflow: hidden;
+            background-color: var(--skeleton);
+            &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            opacity: var(--skeletonOpacity);
+            filter: var(--skeletonFilter);
+            background-image: linear-gradient(
+              90deg,
+              rgba(rgba(255, 255, 255), 0) 0,
+              rgba(rgba(255, 255, 255), 0.1) 20%,
+              rgba(rgba(255, 255, 255), 0.2) 60%,
+              rgba(rgba(255, 255, 255), 0)
+            );
+            animation: shimmer 1s infinite ease-in-out;
+            content: '';
+          }
+        }
+        .skeletonItemInfo {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            width: 890px;
+            border-radius: 12px;
+            margin-left: 15px;
+            margin-right: 10px;
+            .skeletonTitleAuthorContainer {
+                display: flex;
+                flex-direction: column;
+                margin-top: 5px;
+                width: 100%;
+                height: 55px;
+                gap: 10px;
+                .skeletonTitle {
+                    position: relative;
+                    overflow: hidden;
+                    height: 50%;
+                    width: 600px;
+                    background-color: var(--skeleton);
+                    border-radius: 10px;
+                    &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            opacity: var(--skeletonOpacity);
+            filter: var(--skeletonFilter);
+            background-image: linear-gradient(
+              90deg,
+              rgba(rgba(255, 255, 255), 0) 0,
+              rgba(rgba(255, 255, 255), 0.1) 20%,
+              rgba(rgba(255, 255, 255), 0.2) 60%,
+              rgba(rgba(255, 255, 255), 0)
+            );
+            animation: shimmer 1s infinite ease-in-out;
+            content: '';
+          }
+                }
+                .skeletonAuthor {
+                    position: relative;
+                    overflow: hidden;
+                    height: 30%;
+                    width: 400px;
+                    background-color: var(--skeleton);
+                    border-radius: 7px;
+                    &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            opacity: var(--skeletonOpacity);
+            filter: var(--skeletonFilter);
+            background-image: linear-gradient(
+              90deg,
+              rgba(rgba(255, 255, 255), 0) 0,
+              rgba(rgba(255, 255, 255), 0.1) 20%,
+              rgba(rgba(255, 255, 255), 0.2) 60%,
+              rgba(rgba(255, 255, 255), 0)
+            );
+            animation: shimmer 1s infinite ease-in-out;
+            content: '';
+          }
+                }
+            }
+            .skeletonTagsContainer {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                column-gap: 7px;
+                width: 890px;
+                height: 25px;
+                margin-bottom: 8px;
+                overflow: hidden;
+                .skeletonTag {
+                    position: relative;
+                    overflow: hidden;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 50px;
+                    padding: 0 12px;
+                    height: 25px;
+                    background-color: var(--skeleton);
+                    border-radius: 12px;
+                    &::after {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        transform: translateX(-100%);
+                        opacity: var(--skeletonOpacity);
+                        filter: var(--skeletonFilter);
+                        background-image: linear-gradient(
+                        90deg,
+                        rgba(rgba(255, 255, 255), 0) 0,
+                        rgba(rgba(255, 255, 255), 0.1) 20%,
+                        rgba(rgba(255, 255, 255), 0.2) 60%,
+                        rgba(rgba(255, 255, 255), 0)
+                        );
+                        animation: shimmer 1s infinite ease-in-out;
+                        content: '';
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+}
+
+
+

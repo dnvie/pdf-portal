@@ -1,9 +1,12 @@
 <div class="main">
     <div class="container">
-        <div class="imageContainer">
+        <div  *ngIf="loaded" class="imageContainer">
             <img class="card" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
             <div *ngIf="this.pdf.Folder" class="imageButton folder"><span class="material-symbols-rounded">folder</span>{{this.pdf.Folder}}</div>
         </div>
+        <div *ngIf="!loaded" class="imageContainer">
+          <div class="skeletonImage"></div>
+      </div>
         <div class="infoContainer">
             <mat-form-field class="full-width" appearance="fill">
                 <mat-label>Title</mat-label>

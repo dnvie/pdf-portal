@@ -1,15 +1,15 @@
 <div class="viewModeContainer">
-    <div *ngIf="listView" class="viewMode" (click)="listView = !listView"><span class="material-symbols-rounded">view_module</span></div>
-    <div *ngIf="!listView" class="viewMode" (click)="listView = !listView"><span class="material-symbols-rounded">view_list</span></div>
+    <div *ngIf="listView" class="viewMode" (click)="toggleGridView()"><span class="material-symbols-rounded">view_module</span></div>
+    <div *ngIf="!listView" class="viewMode" (click)="toggleListView()"><span class="material-symbols-rounded">view_list</span></div>
 </div>
 
-<div *ngIf="this.mode == 0" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> with tag: <span class="em">{{this.tag}}</span></div>
-<div *ngIf="this.mode == 1" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> with author: <span class="em">{{this.author}}</span></div>
+<div *ngIf="this.mode == 0" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> with tag:<span class="em">&nbsp;{{this.tag}}</span></div>
+<div *ngIf="this.mode == 1" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> with author:<span class="em">&nbsp;{{this.author}}</span></div>
 <div *ngIf="this.mode == 2" class="heading"><span class="em">{{this.totalPages}}&nbsp;</span> Search Result <span *ngIf="this.totalPages != 1">s</span>:</div>
-<div *ngIf="this.mode == 3" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> in folder: <span class="em">{{this.folder}}</span></div>
+<div *ngIf="this.mode == 3" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> in folder:<span class="em">&nbsp;{{this.folder}}</span></div>
 
 
-<div class="cardContainer">
+<div *ngIf="loaded" class="cardContainer">
     <div *ngIf="listView" class="cardContainerHelper">
         <div class="itemContainer" *ngFor="let pdf of pdfs.Previews; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
             <div class="itemContent">
@@ -57,4 +57,46 @@
                  [showFirstLastButtons]="true"
                  (page)="onPageChange($event)"
   ></mat-paginator>
+
+  <div *ngIf="!loaded" class="cardContainer">
+    <div *ngIf="listView" class="cardContainerHelper">
+        <div class="skeletonContainer" *ngFor="let skeleton of skeletons; let i = index">
+            <div class="skeletonContent">
+                <div class="skeletonImageContainer"></div>
+                <div class="skeletonItemInfo">
+                    <div class="skeletonTitleAuthorContainer">
+                        <div class="skeletonTitle"></div>
+                        <div class="skeletonAuthor"></div>
+                    </div>
+                    <div class="skeletonTagsContainer">
+                        <div class="skeletonTag"></div>
+                        <div class="skeletonTag"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!listView" class="cardContainerHelper">
+        <div class="skeletonCard" *ngFor="let skeleton of skeletons; let i = index">
+            <div class="skeletonCardContent">
+                <div class="skeletonImage"></div>
+            </div>
+            <div class="skeletonInfoContent">
+                <div class="skeletonTitle"></div>
+                <div class="skeletonAuthor"></div>
+            </div>
+        </div>
+    </div>
+
+    <mat-paginator *ngIf="this.pdfs.TotalCount > 48" class="paginator"
+                 [length]="totalPages"
+                 [pageSize]="pageSize"
+                 [hidePageSize]="true"
+                 [pageIndex]="currentPage"
+                 [showFirstLastButtons]="true"
+                 (page)="onPageChange($event)"
+  ></mat-paginator>
+
+</div>
 

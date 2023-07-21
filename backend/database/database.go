@@ -182,10 +182,15 @@ func AddPdfFile(pdf structs.PDFInfo) {
 }
 
 func AddFolder(name string) {
-	statement := `INSERT INTO folders (name) VALUES ($1)`
-	_, err := Database.Exec(statement, name)
-	if err != nil {
-		panic(err)
+	tagMutex.Lock()
+	defer tagMutex.Unlock()
+
+	if !CheckIfFolderExists(name) {
+		statement := `INSERT INTO folders (name) VALUES ($1)`
+		_, err := Database.Exec(statement, name)
+		if err != nil {
+			panic(err)
+		}
 	}
 }
 
@@ -284,6 +289,12 @@ func GetPdfData(uuid string) structs.PDFInfo {
 }
 
 func UpdatePdfData(pdf structs.PDFInfo) {
+	tx, err := Database.Begin()
+	if err != nil {
+		panic(err)
+	}
+	defer tx.Rollback()
+
 	if !CheckIfFolderExists(pdf.Folder) {
 		if pdf.Folder != "" {
 			AddFolder(pdf.Folder)
@@ -308,8 +319,12 @@ func UpdatePdfData(pdf structs.PDFInfo) {
 			}
 		}
 	}
-
 	AddTags(pdf.Uuid.String(), pdf.Tags)
+
+	err = tx.Commit()
+	if err != nil {
+		panic(err)
+	}
 }
 
 func DeletePdfData(uuid string) {

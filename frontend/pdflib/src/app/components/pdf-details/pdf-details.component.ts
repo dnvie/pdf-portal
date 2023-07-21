@@ -30,6 +30,8 @@ export class PdfDetailsComponent implements OnInit {
     File: undefined
   }
 
+  loaded = false;
+
   constructor(
     private service: PdfService,
     public route: ActivatedRoute,
@@ -44,6 +46,7 @@ export class PdfDetailsComponent implements OnInit {
         next: res => {
           this.pdf = res;
           this.titleService.setTitle(this.pdf.Title ? this.pdf.Title : this.pdf.Filename!);
+          this.loaded = true;
         },
         error: err => {
           console.log(err);

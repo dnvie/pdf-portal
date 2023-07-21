@@ -1,7 +1,8 @@
 .main {
     position: relative;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     height: fit-content;
     padding-bottom: 50px;
@@ -16,7 +17,7 @@
         color: rgb(235, 235, 235);
         font-size: 30px;
         font-weight: 500;
-        font-family: 'Instrument Sans';
+        font-family: "Instrument Sans";
         .imageContainer {
             position: relative;
             img {
@@ -39,7 +40,7 @@
                 text-overflow: ellipsis;
                 right: -20px;
                 font-size: 15px;
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-weight: 400;
                 border-radius: 15px;
                 padding: 8px 12px;
@@ -85,14 +86,14 @@
             align-items: center;
             text-align: center;
             .title {
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 32px;
                 color: rgb(235, 235, 235);
                 font-weight: 600;
                 overflow-wrap: break-word;
             }
             .author {
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 22px;
                 color: rgba(235, 235, 235, 0.6);
                 font-weight: 400;
@@ -107,13 +108,13 @@
             }
             .pagesAndSize {
                 margin-top: 25px;
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 18px;
                 color: rgba(235, 235, 235, 0.4);
                 font-weight: 400;
             }
             .date {
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 18px;
                 color: rgba(235, 235, 235, 0.4);
                 font-weight: 400;
@@ -138,7 +139,7 @@
                     line-height: 34px;
                     background-color: rgb(6, 6, 6);
                     border-radius: 16px;
-                    font-family: 'Instrument Sans';
+                    font-family: "Instrument Sans";
                     font-weight: 500;
                     font-size: 15px;
                     color: rgb(228, 228, 228);
@@ -160,7 +161,7 @@
                     gap: 7px;
                     justify-content: center;
                     align-items: center;
-                    font-family: 'Instrument Sans';
+                    font-family: "Instrument Sans";
                     font-size: 17px;
                     font-weight: 500;
                     height: 50px;
@@ -172,7 +173,6 @@
                 .read {
                     color: var(--blue);
                     background-color: var(--blueBG);
-                    
                 }
                 .download {
                     background-color: var(--blue);
@@ -185,5 +185,181 @@
                 }
             }
         }
+    }
+}
+
+.skeletonImage {
+    position: relative;
+    overflow: hidden;
+    height: 500px;
+    width: 350px;
+    border-radius: 10px;
+    background-color: var(--skeleton);
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        opacity: var(--skeletonOpacity);
+        filter: var(--skeletonFilter);
+        background-image: linear-gradient(
+            90deg,
+            rgba(rgba(255, 255, 255), 0) 0,
+            rgba(rgba(255, 255, 255), 0.1) 20%,
+            rgba(rgba(255, 255, 255), 0.2) 60%,
+            rgba(rgba(255, 255, 255), 0)
+        );
+        animation: shimmer 1s infinite ease-in-out;
+        content: "";
+    }
+}
+
+.skeletonTitle {
+    position: relative;
+    overflow: hidden;
+    width: 300px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: var(--skeleton);
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        opacity: var(--skeletonOpacity);
+        filter: var(--skeletonFilter);
+        background-image: linear-gradient(
+            90deg,
+            rgba(rgba(255, 255, 255), 0) 0,
+            rgba(rgba(255, 255, 255), 0.1) 20%,
+            rgba(rgba(255, 255, 255), 0.2) 60%,
+            rgba(rgba(255, 255, 255), 0)
+        );
+        animation: shimmer 1s infinite ease-in-out;
+        content: "";
+    }
+}
+
+.skeletonAuthor {
+    position: relative;
+    overflow: hidden;
+    width: 200px;
+    height: 25px;
+    border-radius: 8px;
+    background-color: var(--skeleton);
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        opacity: var(--skeletonOpacity);
+        filter: var(--skeletonFilter);
+        background-image: linear-gradient(
+            90deg,
+            rgba(rgba(255, 255, 255), 0) 0,
+            rgba(rgba(255, 255, 255), 0.1) 20%,
+            rgba(rgba(255, 255, 255), 0.2) 60%,
+            rgba(rgba(255, 255, 255), 0)
+        );
+        animation: shimmer 1s infinite ease-in-out;
+        content: "";
+    }
+}
+
+.skeletonTag {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    width: 75px;
+    height: 34px;
+    background-color: var(--skeleton);
+    border-radius: 16px;
+    transition: all 0.1s ease-in-out;
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        opacity: var(--skeletonOpacity);
+        filter: var(--skeletonFilter);
+        background-image: linear-gradient(
+            90deg,
+            rgba(rgba(255, 255, 255), 0) 0,
+            rgba(rgba(255, 255, 255), 0.1) 20%,
+            rgba(rgba(255, 255, 255), 0.2) 60%,
+            rgba(rgba(255, 255, 255), 0)
+        );
+        animation: shimmer 1s infinite ease-in-out;
+        content: "";
+    }
+}
+
+.skeletonPagesAndSize {
+    position: relative;
+    overflow: hidden;
+    width: 200px;
+    height: 25px;
+    border-radius: 8px;
+    background-color: var(--skeleton);
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        opacity: var(--skeletonOpacity);
+        filter: var(--skeletonFilter);
+        background-image: linear-gradient(
+            90deg,
+            rgba(rgba(255, 255, 255), 0) 0,
+            rgba(rgba(255, 255, 255), 0.1) 20%,
+            rgba(rgba(255, 255, 255), 0.2) 60%,
+            rgba(rgba(255, 255, 255), 0)
+        );
+        animation: shimmer 1s infinite ease-in-out;
+        content: "";
+    }
+}
+
+.skeletonDate {
+    position: relative;
+    overflow: hidden;
+    width: 150px;
+    height: 25px;
+    border-radius: 8px;
+    background-color: var(--skeleton);
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        opacity: var(--skeletonOpacity);
+        filter: var(--skeletonFilter);
+        background-image: linear-gradient(
+            90deg,
+            rgba(rgba(255, 255, 255), 0) 0,
+            rgba(rgba(255, 255, 255), 0.1) 20%,
+            rgba(rgba(255, 255, 255), 0.2) 60%,
+            rgba(rgba(255, 255, 255), 0)
+        );
+        animation: shimmer 1s infinite ease-in-out;
+        content: "";
+    }
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
     }
 }

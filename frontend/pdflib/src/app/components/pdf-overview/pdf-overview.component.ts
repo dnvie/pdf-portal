@@ -15,6 +15,8 @@ export class PdfOverviewComponent implements OnInit {
   totalPages = 0;
   pageSize = 48;
   listView = false
+  loaded = false;
+  skeletons: any[] = Array(48).fill({});
   pdfs: PDFPreviews = {
     Previews: undefined,
     TotalCount: 0
@@ -29,6 +31,9 @@ export class PdfOverviewComponent implements OnInit {
   ngOnInit() {
     this.loadPdfs();
     this.titleService.setTitle('View All PDFs');
+    if (localStorage.getItem('listView') == "true") {
+      this.listView = true;
+    }
   }
 
   loadPdfs() {
@@ -36,6 +41,7 @@ export class PdfOverviewComponent implements OnInit {
       data => {
         this.pdfs = data
         this.totalPages = data.TotalCount;
+        this.loaded = true;
       },
       error => {
         console.log("error loading network info", error);
@@ -45,10 +51,12 @@ export class PdfOverviewComponent implements OnInit {
 
   toggleListView() {
     this.listView = true;
+    localStorage.setItem('listView', 'true')
   }
 
   toggleGridView() {
     this.listView = false;
+    localStorage.setItem('listView', 'false')
   }
 
   isListView(): boolean {
@@ -56,9 +64,9 @@ export class PdfOverviewComponent implements OnInit {
   }
 
   onPageChange(event: PageEvent) {
+    this.loaded = false;
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
-    //this.loaded = false;
     this.loadPdfs();
     window.scrollTo(0, 0);
   }

@@ -21,6 +21,8 @@ export enum ResultMode {
 export class PdfSearchResultsComponent implements OnInit{
 
   mode: ResultMode = ResultMode.author;
+  loaded = false
+  skeletons: any[] = Array(24).fill({});
   currentPage = 0;
   totalPages = 0;
   pageSize = 48;
@@ -43,6 +45,9 @@ export class PdfSearchResultsComponent implements OnInit{
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
+    if (localStorage.getItem('listView') == "true") {
+      this.listView = true;
+    }
     this.route.data.subscribe(data => {
       this.mode = data['mode'];      
     });
@@ -74,6 +79,7 @@ export class PdfSearchResultsComponent implements OnInit{
         this.titleService.setTitle('Folder: ' + this.folder)
         this.loadPdfsInFolder(this.folder)
       }
+      this.loaded = true;
     });
   }
 
@@ -83,6 +89,7 @@ export class PdfSearchResultsComponent implements OnInit{
         next: res => {
           this.pdfs = res
           this.totalPages = res.TotalCount;
+          this.loaded = true;
         },
         error: err => {
           console.log(err);
@@ -93,6 +100,7 @@ export class PdfSearchResultsComponent implements OnInit{
         next: res => {
           this.pdfs = res
           this.totalPages = res.TotalCount;
+          this.loaded = true;
         },
         error: err => {
           console.log(err);
@@ -106,6 +114,7 @@ export class PdfSearchResultsComponent implements OnInit{
       next: res => {
         this.pdfs = res
         this.totalPages = res.TotalCount;
+        this.loaded = true;
       },
       error: err => {
         console.log(err);
@@ -118,6 +127,7 @@ export class PdfSearchResultsComponent implements OnInit{
       next: res => {
         this.pdfs = res
         this.totalPages = res.TotalCount;
+        this.loaded = true;
       },
       error: err => {
         console.log(err);
@@ -126,6 +136,7 @@ export class PdfSearchResultsComponent implements OnInit{
   }
 
   onPageChange(event: PageEvent) {
+    this.loaded = false;
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
     //this.loaded = false;
@@ -152,4 +163,13 @@ export class PdfSearchResultsComponent implements OnInit{
     window.scrollTo(0, 0);
   }
 
+  toggleListView() {
+    this.listView = true;
+    localStorage.setItem('listView', 'true')
+  }
+
+  toggleGridView() {
+    this.listView = false;
+    localStorage.setItem('listView', 'false')
+  }
 }
