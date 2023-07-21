@@ -278,3 +278,69 @@
         gap: 30px;
     }
 }
+
+
+@media only screen and (max-width: 850px) {
+    .main {
+        top: 120px;
+        .container {
+            width: 425px;
+            padding: 35px 0px;
+            gap: 25px;
+            .headingContainer {
+                .title {
+                    font-size: 24px;
+                }
+                .smallTitle {
+                    font-size: 14px;
+                }
+            }
+            .dropzone {
+                width: 350px;
+                height: 250px;
+                font-size: 14px;
+                .dropSmallText {
+                    font-size: 12px;
+                }
+                .button {
+                    padding: 8px 16px;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+            }
+            .filesSelected {
+                row-gap: 15px;
+                .numberOfFiles {
+                    font-size: 18px;
+                }
+                .uploadButton {
+                    font-size: 14px;
+                }
+            }
+        }
+        .tagsAndFolder {
+            display: flex;
+            width: 350px;
+            flex-direction: column;
+            border-radius: 12px;
+            justify-content: space-between;
+            gap: 10px;
+            .full-width {
+                width: 100%;
+                font-size: 14px;
+            }
+        }
+        .tagsAndFolderContainer {
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+    }
+    #errorMessage {
+        font-weight: 500;
+        font-size: 14px;
+    }
+}

@@ -197,6 +197,7 @@
                 height: 25px;
                 margin-bottom: 8px;
                 overflow: hidden;
+                //justify-content: center;
                 .tag {
                     display: flex;
                     justify-content: center;
@@ -544,6 +545,95 @@
 @keyframes shimmer {
     100% {
       transform: translateX(100%);
+    }
+}
+
+@media only screen and (max-width: 1110px) {
+    .itemContainer {
+        width: 700px;
+        .itemContent {
+            width: 680px;
+            .itemInfo {
+                width: 580px;
+                .titleAuthorContainer {
+                    width: 100%;
+                    .title {
+                        max-width: 100%;
+                    }
+                }
+                .tagsContainer {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 910px) {
+    .viewModeContainer {
+        right: calc(50% - 230px);
+    }
+
+    .viewMode {
+        width: 64px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .card {
+        width: 200px;
+        .cardContent {
+            width: 185px;
+            .infoContent {
+                row-gap: 7px;
+                max-width: calc(100% - 10px);
+                margin-left: 3px;
+                .title {
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+                .titleEmpty {
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+                .author {
+                    font-size: 12px;
+                    font-weight: 400;
+                }
+                .authorEmpty {
+                    font-size: 12px;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+
+    .itemContainer {
+        width: 500px;
+        .itemContent {
+            width: 480px;
+            .itemInfo {
+                width: 380px;
+                .titleAuthorContainer {
+                    .title {
+                        overflow: hidden;
+                        word-break: break-all;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    .itemContainer {
+        width: 400px;
+        .itemContent {
+            width: 380px;
+            .itemInfo {
+                width: 280px;
+            }
+        }
     }
 }
 

@@ -4,8 +4,17 @@
             <div class="navItem" routerLink="/">Home<span class="material-symbols-rounded">home</span></div>
             <div class="navItem" routerLink="/all">View All<span class="material-symbols-rounded">view_module</span></div>
             <div class="navItem" (click)="addSearch()">Search<span class="material-symbols-rounded">search</span></div>
-            <div class="navItem" routerLink="/upload"ng >Upload<span class="material-symbols-rounded">upload</span></div>
+            <div class="navItem" routerLink="/upload">Upload<span class="material-symbols-rounded">upload</span></div>
             <div class="navItem" routerLink="/folders">Folders<span class="material-symbols-rounded">folder</span></div>
+        </div>
+    </header>
+    <header id="smallHeader" class="smallHeader">
+        <div class="nav">
+            <div class="navItemSmall" routerLink="/"><span class="material-symbols-rounded">home</span></div>
+            <div class="navItemSmall" routerLink="/all"><span class="material-symbols-rounded">view_module</span></div>
+            <div class="navItemSmall" (click)="addSmallSearch()"><span class="material-symbols-rounded">search</span></div>
+            <div class="navItemSmall" routerLink="/upload"><span class="material-symbols-rounded">upload</span></div>
+            <div class="navItemSmall" routerLink="/folders"><span class="material-symbols-rounded">folder</span></div>
         </div>
     </header>
     <div class="closeSearchContainer">
@@ -17,6 +26,18 @@
             <input class="searchBar" id="searchBar1" type="text" placeholder="Search by Author" #searchInput2 (keydown)="search($event, searchInput.value, searchInput2.value, searchInput3.value)" spellcheck="false">
             <input class="searchBar" id="searchBar2" type="text" placeholder="Search by Tag" #searchInput3 (keydown)="search($event, searchInput.value, searchInput2.value, searchInput3.value)" spellcheck="false">
             <div class="searchLabel" (click)="searchByButton(searchInput.value, searchInput2.value, searchInput3.value)"><span class="material-symbols-rounded">arrow_circle_right</span></div>
+        </div>
+    </header>
+    <header class="smallHeader smallSearch" id="smallSearch">
+        <div class="searchBarContainer">
+            <input class="searchBar" id="searchBarSmall" type="text" placeholder="Search by Title" #searchInput4 (keydown)="search($event, searchInput.value, searchInput2.value, searchInput3.value)" spellcheck="false">
+            <input class="searchBar" id="searchBarSmall1" type="text" placeholder="Search by Author" #searchInput5 (keydown)="search($event, searchInput.value, searchInput2.value, searchInput3.value)" spellcheck="false">
+            <input class="searchBar" id="searchBarSmall2" type="text" placeholder="Search by Tag" #searchInput6 (keydown)="search($event, searchInput.value, searchInput2.value, searchInput3.value)" spellcheck="false">
+            <div class="buttons">
+                <div class="searchLabel" (click)="searchByButton(searchInput4.value, searchInput5.value, searchInput6.value)">Search<span class="material-symbols-rounded">search</span></div>
+                <div class="closeButton" (click)="closeSmallSearch()"><span class="material-symbols-rounded">cancel</span></div>
+            </div>
+            
         </div>
     </header>
 </div>

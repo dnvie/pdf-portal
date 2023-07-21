@@ -8,7 +8,7 @@
     padding-bottom: 50px;
     .container {
         width: 1400px;
-        height: 800px;
+        height: fit-content;
         margin-top: 150px;
         display: flex;
         flex-direction: column;
@@ -361,5 +361,179 @@
 @keyframes shimmer {
     100% {
         transform: translateX(100%);
+    }
+}
+
+@media only screen and (max-width: 1920px) {
+    .main {
+        .container {
+            width: 1200px;
+            font-size: 30px;
+            font-weight: 500;
+            font-family: "Instrument Sans";
+            margin-top: 130px;
+            .imageContainer {
+                position: relative;
+                img {
+                    height: 400px;
+                    border-radius: 10px;
+                }
+                .folder {
+                    font-size: 12px;
+                    font-weight: 500;
+                    border-radius: 14px;
+                    padding: 6px 10px;
+                    span {
+                        transform: scale(0.75);
+                    }
+                }
+            }
+            .infoContainer {
+                max-width: 850px;
+                .title {
+                    font-size: 26px;
+                }
+                .author {
+                    font-size: 18px;
+                }
+                .pagesAndSize {
+                    margin-top: 20px;
+                    font-size: 16px;
+                }
+                .date {
+                    font-size: 16px;
+                }
+                .tagsContainer {
+                    margin-top: 20px;
+                    .tag {
+                        padding: 0 12px;
+                        height: 30px;
+                        line-height: 30px;
+                        font-weight: 500;
+                        font-size: 14px;
+                    }
+                }
+                .buttons {
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+    .skeletonImage {
+        height: 400px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .main {
+        .container {
+            width: 850px;
+            font-size: 30px;
+            font-weight: 500;
+            font-family: "Instrument Sans";
+            margin-top: 130px;
+            .imageContainer {
+                position: relative;
+                img {
+                    height: 400px;
+                    border-radius: 10px;
+                }
+                .folder {
+                    font-size: 12px;
+                    font-weight: 500;
+                    border-radius: 14px;
+                    padding: 6px 10px;
+                    span {
+                        transform: scale(0.75);
+                    }
+                }
+            }
+            .infoContainer {
+                max-width: 600px;
+                .title {
+                    font-size: 26px;
+                }
+                .author {
+                    font-size: 18px;
+                }
+                .pagesAndSize {
+                    margin-top: 20px;
+                    font-size: 16px;
+                }
+                .date {
+                    font-size: 16px;
+                }
+                .tagsContainer {
+                    margin-top: 20px;
+                    row-gap: 10px;
+                    justify-content: center;
+                    .tag {
+                        padding: 0 12px;
+                        height: 30px;
+                        line-height: 30px;
+                        font-weight: 500;
+                        font-size: 14px;
+                    }
+                }
+                .buttons {
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+    .skeletonImage {
+        height: 400px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .main {
+        .container {
+            width: 400px;
+            .imageContainer {
+                img {
+                    height: 300px;
+                }
+                .edit {
+                    left: -10px;
+                    padding: 4px 4px;
+                    span {
+                        transform: scale(0.65);
+                    }
+                }
+            }
+            .infoContainer {
+                max-width: 400px;
+                .title {
+                    font-size: 20px;
+                }
+                .author {
+                    font-size: 16px;
+                }
+                .pagesAndSize {
+                    margin-top: 10px;
+                    font-size: 14px;
+                }
+                .date {
+                    font-size: 14px;
+                }
+                .tagsContainer {
+                    margin-top: 10px;
+                    .tag {
+                        padding: 0 12px;
+                        height: 30px;
+                        line-height: 30px;
+                        font-weight: 500;
+                        font-size: 12px;
+                    }
+                }
+                .buttons {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+    .skeletonImage {
+        height: 300px;
     }
 }

@@ -28,7 +28,7 @@
     justify-content: space-between;
     box-shadow: 0 5px 25px 10px rgba(0, 0, 0, 0.5);
     transition: all 0.25s;
-    animation-timing-function: cubic-bezier(.74, -0.01, .26, 1.04);
+    animation-timing-function: cubic-bezier(0.74, -0.01, 0.26, 1.04);
     pointer-events: all !important;
     z-index: 99 !important;
     .logo {
@@ -57,7 +57,7 @@
         align-items: center;
         gap: 7px;
         color: rgb(255, 255, 255);
-        font-family: 'Instrument Sans';
+        font-family: "Instrument Sans";
         font-weight: 500;
         font-size: 16px;
         padding: 10px 18px;
@@ -90,7 +90,7 @@
     user-select: none;
     pointer-events: none;
     transition: all 0.25s;
-    animation-timing-function: cubic-bezier(.74, -0.01, .26, 1.04);
+    animation-timing-function: cubic-bezier(0.74, -0.01, 0.26, 1.04);
     z-index: 98 !important;
     filter: blur(3px);
     box-shadow: none;
@@ -105,7 +105,7 @@
             display: flex;
             align-items: center;
             color: rgb(255, 255, 255);
-            font-family: 'Instrument Sans';
+            font-family: "Instrument Sans";
             font-weight: 500;
             font-size: 16px;
             min-width: fit-content;
@@ -124,7 +124,7 @@
             transition: all 0.1s ease-in-out;
             text-indent: 15px;
             color: white;
-            font-family: 'Instrument Sans';
+            font-family: "Instrument Sans";
             font-weight: 500;
         }
         .searchBar:focus {
@@ -146,7 +146,7 @@
 }
 
 .headerHidden {
-   opacity: 0;
+    opacity: 0;
     transform: translateY(-20px) scale(0.95);
     //transform: translateY(-90px);
 }
@@ -170,7 +170,7 @@
 }
 
 .closeSearch {
-    display: flex;
+    display: flex !important;;
     justify-content: center;
     align-items: center;
     width: 70px;
@@ -179,29 +179,218 @@
     backdrop-filter: saturate(180%) blur(20px);
     box-shadow: 0 5px 25px 10px rgba(0, 0, 0, 0.25);
     color: rgb(255, 255, 255);
-    font-family: 'Instrument Sans';
+    font-family: "Instrument Sans";
     font-weight: 500;
     font-size: 16px;
     border-radius: 25px;
     display: flex;
     gap: 7px;
     transition: all 0.25s;
-    animation-timing-function: cubic-bezier(.74, -0.01, .26, 1.04);
+    animation-timing-function: cubic-bezier(0.74, -0.01, 0.26, 1.04);
     transform: scale(0.9) translateX(10px);
     filter: blur(3px);
     opacity: 0;
     user-select: none;
     pointer-events: none;
-    }
+}
 
-    .closeSearch.active {
-        transform: scale(1) translateX(0px);
-        opacity: 1;
-        filter: blur(0px);
-        pointer-events: initial;
-    }
+.closeSearch.active {
+    transform: scale(1) translateX(0px);
+    opacity: 1;
+    filter: blur(0px);
+    pointer-events: initial;
+}
 
 .closeSearch:hover {
     cursor: pointer;
     color: var(--blue);
+}
+
+.smallHeader {
+    display: none;
+}
+
+@media only screen and (max-width: 910px) {
+    .header {
+        display: none;
+    }
+
+    .closeSearchContainer {
+       display: none !important;
+    }
+
+    .smallHeader {
+        position: absolute;
+        width: 300px;
+        height: 64px;
+        background-color: rgba(35, 35, 35, 0.7);
+        backdrop-filter: saturate(180%) blur(20px);
+        border-radius: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 5px 25px 10px rgba(0, 0, 0, 0.5);
+        transition: all 0.25s;
+        animation-timing-function: cubic-bezier(0.74, -0.01, 0.26, 1.04);
+        pointer-events: all !important;
+        z-index: 99 !important;
+        .nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: fit-content;
+            gap: 15px;
+            margin-right: 10px;
+            margin-left: 10px;
+            transition: all 0.25s ease-in-out;
+        }
+        .nav.hidden {
+            filter: blur(3px);
+            transform: scale(0.975);
+            opacity: 0;
+            pointer-events: none !important;
+        }
+        .navItemSmall {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(255, 255, 255);
+            font-family: "Instrument Sans";
+            font-weight: 500;
+            font-size: 16px;
+            padding: 10px 10px;
+            border-radius: 15px;
+            transition: all 0.15s ease-in-out;
+            bottom: 0px;
+            user-select: none;
+        }
+        .navItemSelected {
+            position: relative;
+            color: var(--blue);
+            background-color: var(--blueBG);
+        }
+        .navItemHidden {
+            opacity: 0;
+        }
+        .navItemSmall:hover {
+            color: var(--blue);
+            cursor: pointer;
+        }
+    }
+
+    .smallSearch {
+        top: 55px;
+        min-height: 64px;
+        height: fit-content;
+        z-index: 98 !important;
+        transform: scale(0.95);
+        filter: blur(5px);
+        opacity: 0;
+        user-select: none !important;
+        pointer-events: none !important;
+        transition: all 0.25s;
+        animation-timing-function: cubic-bezier(0.74, -0.01, 0.26, 1.04);
+        .searchBarContainer {
+            padding: 20px 20px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            .buttons {
+                width: 100%;
+                display: flex;
+                gap: 5px;
+            }
+            .searchLabel {
+                display: flex;
+                gap: 3px;
+                align-items: center;
+                color: var(--blue);
+                justify-content: center;
+                font-family: "Instrument Sans";
+                font-weight: 600;
+                font-size: 14px;
+                min-width: fit-content;
+                transition: all 0.1s ease-in-out;
+                width: 100%;
+                background-color: var(--blueBG);
+                height: 35px;
+                border-radius: 10px;
+                span {
+                    transform: scale(0.8);
+                }
+            }
+            .closeButton {
+                height: 35px;
+                width: 45px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+                background-color: rgb(57, 57, 57);
+                color: rgb(210, 210, 210);
+                transition: all 0.12s ease-in-out;
+                span {
+                    transform: scale(0.8);
+                }
+            }
+            .closeButton:hover {
+                color: rgb(57, 57, 57);
+                background-color: rgb(210, 210, 210);
+                cursor: pointer;
+            }
+            .searchLabel:hover {
+                background-color: var(--blue);
+                color: rgb(9, 21, 36);
+                cursor: pointer;
+            }
+            .searchBar {
+                width: 100%;
+                height: 35px;
+                border-radius: 12px;
+                border: none;
+                background-color: rgba(255, 255, 255, 0.1);
+                transition: all 0.1s ease-in-out;
+                text-indent: 15px;
+                color: white;
+                font-family: "Instrument Sans";
+                font-weight: 500;
+            }
+            .searchBar:focus {
+                border: none;
+                outline: none;
+                text-decoration: none;
+                background-color: rgba(255, 255, 255, 0.15);
+            }
+        }
+    }
+    .smallSearch.active {
+        top: 100px;
+        transform: scale(1);
+        filter: blur(0px);
+        opacity: 1;
+        user-select: initial !important;
+        pointer-events: initial !important;
+    }
+
+    .nav.hidden {
+        filter: blur(3px);
+        transform: scale(0.975);
+        opacity: 0;
+        pointer-events: none !important;
+    }
+
+    .headerHidden {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+        //transform: translateY(-90px);
+    }
+    
+    .headerCompact {
+        width: 64px;
+        border-radius: 100px;
+    }
 }

@@ -16,6 +16,18 @@
         color: rgb(235, 235, 235);
         font-size: 30px;
         font-weight: 500;
+        .title {
+            font-size: 28px;
+            font-weight: 500;
+            color: white;
+            font-family: 'Instrument Sans';
+            margin-bottom: 35px;
+            display: flex;
+            align-items: center;
+            .darker {
+                opacity: 0.6;
+            }
+        }
     }
 }
 

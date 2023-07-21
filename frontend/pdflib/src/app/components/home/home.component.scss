@@ -258,3 +258,100 @@
     font-weight: 400;
     padding: 30px 10px;
 }
+
+@media only screen and (max-width: 1400px) {
+    .container {
+        width: 1060px !important;
+    }
+    .folderContainer {
+        width: 1060px;
+    }
+    .viewAllButton {
+        min-width: 93px;
+    }
+    .card:last-child {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1110px) {
+    .container {
+        width: 790px !important;
+    }
+    .folderContainer {
+        width: 790px;
+    }
+    .itemContainer:nth-child(3) {
+        display: none !important;
+    }
+    .viewAllButton {
+        min-width: 93px;
+    }
+    .card:last-child {
+        display: none;
+    }
+    .card:nth-child(4) {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .container {
+        width: 640px !important;
+    }
+    .folderContainer {
+        width: 640px;
+    }
+    .itemContainer:nth-child(3) {
+        display: none !important;
+    }
+    .viewAllButton {
+        min-width: 93px;
+    }
+
+    .card {
+        width: 200px;
+        .cardContent {
+            width: 185px;
+            .infoContent {
+                row-gap: 7px;
+                max-width: calc(100% - 10px);
+                margin-left: 3px;
+                .title {
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+                .titleEmpty {
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+                .author {
+                    font-size: 12px;
+                    font-weight: 400;
+                }
+                .authorEmpty {
+                    font-size: 12px;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 690px) {
+    .container {
+        width: 420px !important;
+    }
+    .folderContainer {
+        width: 420px;
+        flex-direction: column;
+        align-items: flex-start;
+        .viewAllButton {
+            height: 50px;
+        }
+    }
+
+    .card:nth-child(4) {
+        display: flex;
+    }
+}

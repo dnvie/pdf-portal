@@ -1,5 +1,7 @@
 <div class="main">
     <div class="container">
+        <div *ngIf="this.mode == 0" class="title"><span class="darker"><span class="material-symbols-rounded" style="margin-right: 8px">bookmark_manager</span>Edit folder:</span>&nbsp;{{oldName}}</div>
+        <div *ngIf="this.mode == 1" class="title"><span class="material-symbols-rounded" style="margin-right: 8px">create_new_folder</span>Create new folder</div>
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Folder name</mat-label>
             <input type="text" matInput name="name" [(ngModel)]="this.newName">

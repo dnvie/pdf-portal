@@ -39,33 +39,11 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  previousScrollPosition = 0;
-
-  /*@HostListener('window:scroll', ['$event'])
-  onScroll(event: Event) {
-    const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if ((currentScrollPosition > this.previousScrollPosition) && (currentScrollPosition > 70)) {
-      this.onScrollDown();
-    } else {
-      this.onScrollUp();
-    }
-    this.previousScrollPosition = currentScrollPosition;
-  }*/
-
-  onScrollDown() {
-    this.hideNav();
-  }
-
-  onScrollUp() {
-    this.showNav();
-  }
-
   hideNav() {
     const navItems = document.getElementsByClassName('navItem')
     for (let i = 0; i < navItems.length; i++) {
       setTimeout(function(){navItems[i].classList.add('navItemHidden');}, i*40)
     }
-    //setTimeout(function(){document.getElementById('header')?.classList.add('headerHidden');}, 0)
   }
 
   showNav() {
@@ -73,41 +51,48 @@ export class HeaderComponent implements OnInit {
     for (let i = 0; i < navItems.length; i++) {
       setTimeout(function(){navItems[i].classList.remove('navItemHidden');}, i*40)
     }
-    //setTimeout(function(){document.getElementById('header')?.classList.remove('headerHidden');}, 0)
   }
 
   setActiveNav(id: number) {
     const navItems = document.getElementsByClassName('navItem')
+    const navItemsSmall = document.getElementsByClassName('navItemSmall')
     this.removeActive();
     navItems[id].classList.add('navItemSelected');
+    navItemsSmall[id].classList.add('navItemSelected');
   }
 
   removeActive() {
     const navItems = document.getElementsByClassName('navItem')
+    const navItemsSmall = document.getElementsByClassName('navItemSmall')
     for (let i = 0; i < navItems.length; i++) {
       navItems[i].classList.remove('navItemSelected');
+      navItemsSmall[i].classList.remove('navItemSelected');
     }
   }
 
   clear() {
     document.getElementsByClassName('nav')[0].classList.add('hidden');
+    document.getElementsByClassName('nav')[1].classList.add('hidden');
     this.cleared = true;
   }
 
   unclear() {
     document.getElementsByClassName('nav')[0].classList.remove('hidden');
+    document.getElementsByClassName('nav')[1].classList.remove('hidden');
     this.cleared = false;
   }
 
   reduce() {  
     setTimeout(this.clear, 1);
     setTimeout(function(){ document.getElementById('header')?.classList.add('headerCompact');}, 200)
+    setTimeout(function(){ document.getElementById('smallHeader')?.classList.add('headerCompact');}, 200)
     this.cleared = true;
     this.reduced = true;
   }
 
   expand() {
     setTimeout(function(){ document.getElementById('header')?.classList.remove('headerCompact');}, 1)
+    setTimeout(function(){ document.getElementById('smallHeader')?.classList.remove('headerCompact');}, 1)
     setTimeout(this.unclear, 200)
     this.cleared = false;
     this.reduced = false;
@@ -115,6 +100,7 @@ export class HeaderComponent implements OnInit {
 
   expandClear() {
     setTimeout(function(){ document.getElementById('header')?.classList.remove('headerCompact');}, 1)
+    setTimeout(function(){ document.getElementById('smallHeader')?.classList.remove('headerCompact');}, 1)
     this.reduced = false;
     setTimeout(this.unclear, 2300)
     this.cleared = false;
@@ -137,6 +123,15 @@ export class HeaderComponent implements OnInit {
       this.searchInput.nativeElement.value = '';
       this.searchInput2.nativeElement.value = '';
       this.searchInput3.nativeElement.value = '';
+  }
+
+  addSmallSearch() {
+    this.clearSearchBars();
+    setTimeout(function(){ document.getElementById('smallSearch')?.classList.add('active');}, 1);
+  }
+
+  closeSmallSearch() {
+    setTimeout(function(){ document.getElementById('smallSearch')?.classList.remove('active');}, 1);
   }
 
   search(event: KeyboardEvent, searchValueTitle: string, searchValueAuthor: string, searchValueTag: string) {    
