@@ -26,6 +26,7 @@ export class PdfEditComponent implements OnInit {
     UploadDate: undefined,
     CreationDate: undefined,
     Filename: undefined,
+    Folder: null
   };
   pdfFile: PDFFile = {
     File: undefined
@@ -102,9 +103,7 @@ export class PdfEditComponent implements OnInit {
     event.chipInput?.clear();
   }
 
-  updatePdf() {
-    console.log(this.pdf);
-    
+  updatePdf() {    
     this.route.params.subscribe(params => {
       const id = params['id'];
       if (this.tags) {
@@ -113,7 +112,13 @@ export class PdfEditComponent implements OnInit {
         }
       }
       if (this.myControl.value) {
-        this.pdf.Folder = this.myControl.value
+        if (this.myControl.value !== "") {
+          this.pdf.Folder = this.myControl.value
+        } else {
+          this.pdf.Folder = null
+        }
+      } else {
+        this.pdf.Folder = null
       }
       this.service.updatePdfByUuid(this.pdf, id).subscribe({
         next: res => {

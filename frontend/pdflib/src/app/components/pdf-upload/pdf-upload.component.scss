@@ -2,52 +2,6 @@
     display: none;
 }
 
-.file-upload {
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    align-items: center;
-    color: white;
-    font-size: 22px;
-    font-weight: 500;
-}
-
-.uploadButton {
-    background-color: white;
-    width: fit-content;
-    padding: 0px 30px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 500;
-    border-radius: 10px;
-    color: black;
-}
-
-.uploadButton:hover {
-    filter: brightness(0.9);
-    cursor: pointer;
-}
-
-.container {
-    position: absolute;
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    top: 150px;
-    .uploadContainer {
-        width: 800px;
-        height: fit-content;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
 .progressBarContainer {
     position: fixed;
     width: 100%;
@@ -62,11 +16,9 @@
     .progressBarBackground {
         width: 718px;
         height: 64px;
-        //padding: 10px 0;
         border-radius: 25px;
         display: flex;
         align-items: flex-start;
-        //flex-direction: column;
         align-items: center;
         justify-content: space-between;
         transition: all 0.25s;
@@ -141,7 +93,7 @@
 }
 
 #errorMessage {
-    font-family: 'Inter';
+    font-family: 'Instrument Sans';
     font-weight: 600;
     font-size: 18px;
     color: rgb(255, 70, 70);
@@ -167,7 +119,7 @@
     width: 64px;
     height: 64px;
     color: rgb(255, 255, 255);
-    font-family: 'Inter';
+    font-family: 'Instrument Sans';
     font-weight: 500;
     font-size: 16px;
     border-radius: 200px;
@@ -181,21 +133,148 @@
     transform: scale(0.8);
     }
 
-.full-width {
-    margin-top: 25px;
-    width: 500px;
-}
-
-.fileNameContainer {
-    margin-top: 25px;
-    width: fit-content;
+  .main {
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+    min-height: 100px;
     display: flex;
     flex-direction: column;
-    row-gap: 8px;
-    .fileName {
-        color: rgb(255, 255, 255);
-        font-family: 'Inter';
-        font-weight: 400;
-        font-size: 14px;
+    align-items: center;
+    gap: 50px;
+    top: 150px;
+    .container {
+        width: 725px;
+        height: fit-content;
+        padding: 75px 0px;
+        background-color: rgb(33, 33, 33);
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        .headingContainer {
+            height: fit-content;
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            align-items: center;
+            .title {
+                font-size: 28px;
+                font-weight: 500;
+                color: white;
+                font-family: 'Instrument Sans';
+            }
+            .smallTitle {
+                font-size: 16px;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 0.336);
+                font-family: 'Instrument Sans';
+            }
+        }
+        .dropzone {
+            width: 550px;
+            height: 300px;
+            background-color: var(--blueBG);
+            background-color: rgb(40, 40, 40);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-radius: 20px;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.75);
+            border: 2px dashed var(--blue);
+            transition: all 0.1s ease-in-out;
+            .dropSmallText {
+                font-size: 14px;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 0.25);
+            }
+            .button {
+                padding: 10px 20px;
+                background-color: var(--blueBG);
+                color: var(--blue);
+                border-radius: 12px;
+                font-size: 16px;
+                font-weight: 500;
+                transition: all 0.1s ease-in-out;
+            }
+            .button:hover {
+                cursor: pointer;
+                background-color: var(--blue);
+                color: rgb(9, 21, 36);
+            }
+        }
+        .dropzone:hover {
+            background-color: var(--blueBG);
+        }
+        .filesSelected {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: 20px;
+            .numberOfFiles {
+                font-size: 20px;
+                font-weight: 500;
+                color: white;
+                font-family: 'Instrument Sans';
+            }
+            .uploadButton {
+                padding: 10px 30px;
+                color: rgb(9, 21, 36);
+                background-color: var(--blue);
+                border-radius: 12px;
+                font-size: 16px;
+                font-weight: 500;
+                transition: all 0.1s ease-in-out;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+                transition: all 0.1s ease-in-out;
+                span {
+                    transform: scale(0.9);
+                    transition: all 0.1s ease-in-out;
+                }
+            }
+            .uploadButton:hover {
+                span {
+                    transform: scale(0.9) translateY(-2px);
+                }
+                cursor: pointer;
+                filter: brightness(0.9);
+            }
+            .uploadButton.disabled {
+                background-color: rgb(61, 74, 79);
+                color: rgba(255, 255, 255, 0.482);
+                opacity: 0.5;
+                user-select: none;
+                pointer-events: none;
+            }
+        }
+    }
+    .tagsAndFolder {
+        display: flex;
+        width: 510px;
+        flex-direction: column;
+        border-radius: 12px;
+        justify-content: space-between;
+        gap: 10px;
+        .full-width {
+            width: 100%;
+        }
+    }
+    .tagsAndFolderContainer {
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
     }
 }

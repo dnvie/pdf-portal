@@ -1,0 +1,113 @@
+.cardContainer {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    top: 150px;
+}
+
+.cardContainerHelper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 1660px;
+    justify-content: flex-start;
+}
+
+.itemContainer {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    height: 75px;
+    background-color: #212121;
+    border-radius: 20px;
+    transition: all 0.1s ease-in-out;
+    gap: 10px;
+    .imageContainer {
+        display: flex;
+        height: 100%;
+        width: auto;
+        margin-left: 8px;
+        img {
+            position: relative;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            transform: scale(0.75);
+            transition: all 0.075s ease-in-out;
+        }
+    }
+    .title {
+        height: 100%;
+        width: 100%;
+        margin-right: 12px;
+        display: flex;
+        align-items: center;
+        font-family: 'Instrument Sans';
+        font-size: 16px;
+        color: rgb(228, 228, 228);
+        font-weight: 500;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+    .menu {
+        color: rgb(126, 126, 126);
+        transform: scale(0.8);
+        margin-right: 7px;
+        transition: all 0.075s ease-in-out;
+    }
+    .menu:hover {
+        cursor: pointer;
+        color: rgb(211, 211, 211);
+    }
+}
+
+.itemContainer:hover {
+    cursor: pointer;
+    background-color: #343434;
+    .imageContainer {
+        img{
+            transform: scale(0.8);
+        }
+    }
+}
+
+.viewModeContainer {
+    z-index: 200;
+    position: fixed;
+    top: 25px;
+    right: calc(50% - 450px);
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.viewMode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 64px;
+    background-color: rgba(35, 35, 35, 0.7);
+    backdrop-filter: saturate(180%) blur(20px);
+    box-shadow: 0 5px 25px 10px rgba(0, 0, 0, 0.25);
+    color: rgb(255, 255, 255);
+    font-family: 'Instrument Sans';
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 25px;
+    display: flex;
+    gap: 7px;
+    transition: all 0.1s ease-in-out;
+    }
+
+.viewMode:hover {
+    cursor: pointer;
+    color: var(--blue);
+}

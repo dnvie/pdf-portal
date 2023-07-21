@@ -9,7 +9,7 @@ export interface PDF {
     UploadDate?: string;
     CreationDate?: string;
     Filename?: string;
-    Folder?: string;
+    Folder: string | null;
 }
 
 export interface PDFFile {

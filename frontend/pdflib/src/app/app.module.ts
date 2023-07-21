@@ -21,6 +21,9 @@ import { PdfSearchResultsComponent } from './components/pdf-search-results/pdf-s
 import { PdfEditComponent } from './components/pdf-edit/pdf-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FoldersComponent } from './components/folders/folders.component';
+import { FolderEditComponent } from './components/folder-edit/folder-edit.component';
+import { HomeComponent } from './components/home/home.component';
+import { DropzoneDirective } from 'src/app/directives/dropzone.directive';
 
 
 @NgModule({
@@ -32,7 +35,10 @@ import { FoldersComponent } from './components/folders/folders.component';
     PdfDetailsComponent,
     PdfSearchResultsComponent,
     PdfEditComponent,
-    FoldersComponent
+    FoldersComponent,
+    FolderEditComponent,
+    HomeComponent,
+    DropzoneDirective
   ],
   imports: [
     BrowserModule,

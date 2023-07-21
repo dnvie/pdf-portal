@@ -31,9 +31,11 @@ func GetPdfInfo(id string, file multipart.File, header *multipart.FileHeader) st
 	if err != nil {
 		PdfInfo.Author = ""
 		PdfInfo.Title = strings.ToValidUTF8(header.Filename[:len(header.Filename)-4], "")
-		PdfInfo.CreationDate = ""
+		PdfInfo.CreationDate = time.Now().Format("2006-01-02T15:04:05-07:00")
 		PdfInfo.NumPages = -1
 		PdfInfo.Image, _ = ConvertPDFToImage(id)
+		PdfInfo.UploadDate = time.Now().Format("2006-01-02T15:04:05-07:00")
+		PdfInfo.Size = header.Size
 		return PdfInfo
 	}
 
@@ -58,7 +60,7 @@ func GetPdfInfo(id string, file multipart.File, header *multipart.FileHeader) st
 		dateString := pdfData.CreationDate.ToGoTime().Format(time.RFC3339)
 		PdfInfo.CreationDate = dateString
 	} else {
-		PdfInfo.CreationDate = ""
+		PdfInfo.CreationDate = time.Now().Format("2006-01-02T15:04:05-07:00")
 	}
 
 	PdfInfo.NumPages = int64(numPages)

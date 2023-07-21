@@ -8,7 +8,8 @@ import { PdfService } from 'src/app/service/pdf.service';
 export enum ResultMode {
   tag,
   author,
-  search
+  search,
+  folder
 };
 
 
@@ -27,6 +28,7 @@ export class PdfSearchResultsComponent implements OnInit{
   tag = ''
   author = ''
   search = ''
+  folder = ''
   pdfs: PDFPreviews = {
     Previews: undefined,
     TotalCount: 0
@@ -54,7 +56,7 @@ export class PdfSearchResultsComponent implements OnInit{
         this.author = params['author'];
         this.titleService.setTitle('Author: ' + this.author)
         this.loadPdfsByAuthorOrTag(this.author)
-      } else {
+      } else if (this.mode == 2) {
         this.route.queryParamMap.subscribe(queryParams => {
           let title = queryParams.get('title');
           let author = queryParams.get('author');
@@ -67,8 +69,11 @@ export class PdfSearchResultsComponent implements OnInit{
             this.loadPdfs(title, author, tag);
           }
         });
+      } else {
+        this.folder = params['folder'];
+        this.titleService.setTitle('Folder: ' + this.folder)
+        this.loadPdfsInFolder(this.folder)
       }
-      
     });
   }
 
@@ -108,6 +113,18 @@ export class PdfSearchResultsComponent implements OnInit{
     });
   }
 
+  loadPdfsInFolder(folder: string) {
+    this.service.getAllPdfsInFolder(this.currentPage, folder).subscribe({
+      next: res => {
+        this.pdfs = res
+        this.totalPages = res.TotalCount;
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
+  }
+
   onPageChange(event: PageEvent) {
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
@@ -116,8 +133,21 @@ export class PdfSearchResultsComponent implements OnInit{
       this.loadPdfsByAuthorOrTag(this.tag);
     } else if (this.mode == 1) {
       this.loadPdfsByAuthorOrTag(this.author);
+    } else if (this.mode == 2) {
+      this.route.queryParamMap.subscribe(queryParams => {
+        let title = queryParams.get('title');
+        let author = queryParams.get('author');
+        let tag = queryParams.get('tag');
+        if (title || author || tag) {
+          if (title == null) title = '';
+          if (author == null) author = '';
+          if (tag == null) tag = '';
+          this.titleService.setTitle('Search');
+          this.loadPdfs(title, author, tag);
+        }
+      });
     } else {
-      //this.loadPdfs(this.search);
+      this.loadPdfsInFolder(this.folder)
     }
     window.scrollTo(0, 0);
   }

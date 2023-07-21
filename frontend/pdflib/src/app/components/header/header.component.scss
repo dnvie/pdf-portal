@@ -57,24 +57,25 @@
         align-items: center;
         gap: 7px;
         color: rgb(255, 255, 255);
-        font-family: 'Inter';
+        font-family: 'Instrument Sans';
         font-weight: 500;
         font-size: 16px;
         padding: 10px 18px;
         border-radius: 15px;
         transition: all 0.15s ease-in-out;
         bottom: 0px;
+        user-select: none;
     }
     .navItemSelected {
         position: relative;
-        color: rgb(151, 242, 95);
-        background-color: rgba(129, 221, 71, 0.1);
+        color: var(--blue);
+        background-color: var(--blueBG);
     }
     .navItemHidden {
         opacity: 0;
     }
     .navItem:hover {
-        color: rgb(141, 223, 90);
+        color: var(--blue);
         cursor: pointer;
     }
 }
@@ -104,14 +105,14 @@
             display: flex;
             align-items: center;
             color: rgb(255, 255, 255);
-            font-family: 'Inter';
+            font-family: 'Instrument Sans';
             font-weight: 500;
             font-size: 16px;
             min-width: fit-content;
             transition: all 0.12s ease-in-out;
         }
         .searchLabel:hover {
-            color: var(--green);
+            color: var(--blue);
             cursor: pointer;
         }
         .searchBar {
@@ -123,6 +124,8 @@
             transition: all 0.1s ease-in-out;
             text-indent: 15px;
             color: white;
+            font-family: 'Instrument Sans';
+            font-weight: 500;
         }
         .searchBar:focus {
             border: none;
@@ -156,7 +159,7 @@
 .closeSearchContainer {
     position: fixed;
     top: 25px;
-    right: calc(50% + 400px);
+    right: calc(50% + 380px);
     width: fit-content;
     height: fit-content;
     display: flex;
@@ -174,9 +177,9 @@
     height: 64px;
     background-color: rgba(35, 35, 35, 0.7);
     backdrop-filter: saturate(180%) blur(20px);
-    box-shadow: 0 5px 25px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 25px 10px rgba(0, 0, 0, 0.25);
     color: rgb(255, 255, 255);
-    font-family: 'Inter';
+    font-family: 'Instrument Sans';
     font-weight: 500;
     font-size: 16px;
     border-radius: 25px;
@@ -195,11 +198,10 @@
         transform: scale(1) translateX(0px);
         opacity: 1;
         filter: blur(0px);
-        user-select: initial;
         pointer-events: initial;
     }
 
 .closeSearch:hover {
     cursor: pointer;
-    color: rgb(151, 242, 95);
+    color: var(--blue);
 }

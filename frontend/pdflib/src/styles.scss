@@ -1,11 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap');
 
 html {
     background-color: rgb(21, 21, 21) !important;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: "Instrument Sans", sans-serif; }
 
 .material-symbols-rounded {
   font-variation-settings:
@@ -21,6 +20,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 :root {
   --green: rgb(151, 242, 95);
+  --blue: rgb(0 191 255);
+  --blueBG: rgb(71 167 221 / 10%);
 }
 
 ::placeholder {
@@ -36,11 +37,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .mdc-circular-progress--indeterminate .mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic {
-  stroke: var(--green, transparent) !important;
+  stroke: var(--blue, transparent) !important;
 }
 
 .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle, .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
-  stroke: var(--green, transparent) !important;
+  stroke: var(--blue, transparent) !important;
 }
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
@@ -68,13 +69,47 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .mat-primary .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
-  color: var(--green) !important;
+  color: var(--blue) !important;
 }
 
 .mdc-text-field--filled .mdc-line-ripple::after {
-  border-bottom-color: var(--green) !important;
+  border-bottom-color: var(--blue) !important;
 }
 
 .mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
-  color: var(--green) !important;
+  color: var(--blue) !important;
+}
+
+.mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
+  font-family: 'Instrument Sans' !important;
+  font-weight: 500 !important;
+}
+
+.mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
+  font-family: 'Instrument Sans' !important;
+  font-weight: 500 !important;
+}
+
+.mat-mdc-option .mdc-list-item__primary-text {
+  font-family: 'Instrument Sans' !important;
+  font-weight: 500 !important;
+}
+
+.mdc-text-field {
+  border-top-left-radius: var(--mdc-shape-small, 8px) !important;
+  border-top-right-radius: var(--mdc-shape-small, 8px) !important;
+  border-bottom-right-radius: var(--mdc-shape-small, 8px) !important;
+  border-bottom-left-radius: var(--mdc-shape-small, 8px) !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+  border-bottom-color: transparent !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field--focused{
+  background-color: rgb(34, 34, 34) !important;
+}
+
+.mdc-text-field--focused {
+  background-color: rgba(255, 0, 0, 0)(0, 0, 0) !important;
 }

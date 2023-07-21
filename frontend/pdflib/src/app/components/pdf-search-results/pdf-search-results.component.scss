@@ -12,7 +12,7 @@
 .heading {
     position: relative;
     width: 100%;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Instrument Sans';
     font-size: 22px;
     font-weight: 500;
     color: rgb(138, 138, 138);
@@ -20,7 +20,7 @@
     justify-content: center;
     top: 120px;
     .em {
-        margin-left: 7px;
+        margin-right: 3px;
         font-weight: 600;
         color: rgb(238, 238, 238);
     }
@@ -57,29 +57,6 @@
         align-items: flex-start;
         flex-direction: column;
         row-gap: 10px;
-        .editButton {
-            position: absolute;
-            z-index: 3;
-            top: 10px;
-            right: 10px;
-            width: fit-content;
-            height: fit-content;
-            padding: 5px 10px 5px 10px;
-            border-radius: 6px;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            background-color: rgba(34, 34, 34, 0.666);
-            backdrop-filter: blur(15px);
-            color: rgb(222, 222, 222);
-            opacity: 0;
-            user-select: none;
-            pointer-events: none;
-            transform: scale(0.75);
-            transition: all 0.1s ease-in-out;
-            box-shadow: -5px 5px 50px 5px rgba(0, 0, 0, 0.338);
-        }
         .image {
             width: 100%;
             height: fit-content;
@@ -102,7 +79,7 @@
             max-width: calc(100% - 20px);
             margin-left: 5px;
             .title {
-                font-family: 'Inter', sans-serif;
+                font-family: 'Instrument Sans';
                 font-size: 16px;
                 color: rgb(235, 235, 235);
                 font-weight: 600;
@@ -110,23 +87,23 @@
                 transition: all 0.15s ease-in-out;
             }
             .titleEmpty {
-                font-family: 'Inter', sans-serif;
+                font-family: 'Instrument Sans';
                 font-size: 16px;
                 color: rgb(235, 235, 235);
-                font-weight: 600;
+                font-weight: 500;
                 overflow-wrap: break-word;
                 transition: all 0.15s ease-in-out;
             }
             .author {
-                font-family: 'Inter', sans-serif;
-                font-size: 14px;
+                font-family: 'Instrument Sans';
+                font-size: 13px;
                 color: rgba(235, 235, 235, 0.5);
                 font-weight: 400;
                 transition: all 0.15s ease-in-out;
             }
             .authorEmpty {
-                font-family: 'Inter', sans-serif;
-                font-size: 14px;
+                font-family: 'Instrument Sans';
+                font-size: 13px;
                 color: rgba(235, 235, 235, 0.5);
                 font-weight: 400;
                 transition: all 0.15s ease-in-out;
@@ -136,11 +113,11 @@
 }
 
 .card:hover {
-    filter: brightness(1.1);
-    box-shadow: 0 4px 20px 10px rgba(0, 0, 0, 0.651);
+    background-color: #3f3f3f;
+    box-shadow: 0 4px 20px 10px rgba(0, 0, 0, 0.451);
     z-index: 90;
     .thumbnail {
-        transform: scale(1.02);
+        transform: translateY(-2px);
         cursor: pointer;
     }
     .title {
@@ -165,29 +142,6 @@
         top: 5px;
         right: 5px;
     }
-}
-
-.addButton {
-    width: fit-content;
-    height: fit-content;
-    padding: 2px 6px 2px 6px;
-    border-radius: 6px;
-    border: none;
-    font-size: 12px;
-    font-weight: 500;
-    background-color: rgba(255, 255, 255, 0.301);
-    color: white;
-    transition: all 0.1s ease-in-out;
-}
-
-.addButton:hover {
-    cursor: pointer;
-    background-color: rgb(255, 255, 255);
-    color: black;
-}
-
-.editButton:hover {
-    filter: brightness(0.8);
 }
 
 .pbwidth {
@@ -247,18 +201,18 @@
                 height: 55px;
                 .title {
                     overflow: hidden;
-                    line-height: 33px;
+                    line-height: 30px;
                     height: 60%;
                     max-width: 890px;
-                    font-family: 'Inter';
+                    font-family: 'Instrument Sans';
                     font-weight: 600;
                     font-size: 20px;
-                    color: white;
+                    color: rgb(235, 235, 235);
                 }
                 .author {
                     height: 40%;
                     width: 100%;
-                    font-family: 'Inter';
+                    font-family: 'Instrument Sans';
                     font-weight: 500;
                     font-size: 13px;
                     color: white;
@@ -283,7 +237,7 @@
                     height: 25px;
                     background-color: rgb(14, 14, 14);
                     border-radius: 12px;
-                    font-family: 'Inter';
+                    font-family: 'Instrument Sans';
                     font-weight: 500;
                     font-size: 12px;
                     color: rgb(228, 228, 228);
@@ -298,30 +252,11 @@
     background-color: #343434;
 }
 
-.addButton {
-    width: fit-content;
-    height: fit-content;
-    padding: 2px 6px 2px 6px;
-    border-radius: 6px;
-    border: none;
-    font-size: 12px;
-    font-weight: 500;
-    background-color: rgba(255, 255, 255, 0.301);
-    color: white;
-    transition: all 0.1s ease-in-out;
-}
-
-.addButton:hover {
-    cursor: pointer;
-    background-color: rgb(255, 255, 255);
-    color: black;
-}
-
 .viewModeContainer {
     z-index: 200;
     position: fixed;
     top: 25px;
-    right: calc(50% - 470px);
+    right: calc(50% - 450px);
     width: fit-content;
     height: fit-content;
     display: flex;
@@ -350,7 +285,7 @@
 
 .viewMode:hover {
     cursor: pointer;
-    color: rgb(151, 242, 95);
+    color: var(--blue);
 }
 
 .paginator {

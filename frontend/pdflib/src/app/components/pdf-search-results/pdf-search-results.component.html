@@ -6,6 +6,7 @@
 <div *ngIf="this.mode == 0" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> with tag: <span class="em">{{this.tag}}</span></div>
 <div *ngIf="this.mode == 1" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> with author: <span class="em">{{this.author}}</span></div>
 <div *ngIf="this.mode == 2" class="heading"><span class="em">{{this.totalPages}}&nbsp;</span> Search Result <span *ngIf="this.totalPages != 1">s</span>:</div>
+<div *ngIf="this.mode == 3" class="heading">Showing {{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span> in folder: <span class="em">{{this.folder}}</span></div>
 
 
 <div class="cardContainer">
@@ -18,9 +19,9 @@
                 <div class="itemInfo">
                     <div class="titleAuthorContainer">
                         <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
-                        <div *ngIf="!pdf.Title" class="title" style="opacity: 0.25">Title missing: <button class="addButton">Add +</button> </div>
+                        <div *ngIf="!pdf.Title" class="title" style="opacity: 0.25">Title missing</div>
                         <div *ngIf="pdf.Author" class="author">{{pdf.Author}}</div>
-                        <div *ngIf="!pdf.Author" class="author" style="opacity: 0.25">Author(s) missing: <button class="addButton">Add +</button> </div>
+                        <div *ngIf="!pdf.Author" class="author" style="opacity: 0.25">Author(s) missing</div>
                     </div>
                     <div class="tagsContainer">
                         <div class="tag">{{pdf.NumPages}} Pages</div>
@@ -35,15 +36,14 @@
     <div *ngIf="!listView" class="cardContainerHelper">
         <div class="card" *ngFor="let pdf of pdfs.Previews; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
             <div class="cardContent">
-                <button class="editButton" routerLink='/pdf/edit/{{pdf.Uuid}}'>Edit</button>
                 <div class="image">
                     <img class="thumbnail" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
                 </div>
                 <div class="infoContent">
                     <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
-                    <div *ngIf="!pdf.Title" class="titleEmpty" style="opacity: 0.25">Title missing: <button class="addButton">Add +</button> </div>
+                    <div *ngIf="!pdf.Title" class="titleEmpty" style="opacity: 0.25">Title missing</div>
                     <div *ngIf="pdf.Author" class="author">{{pdf.Author}}</div>
-                    <div *ngIf="!pdf.Author" class="authorEmpty" style="opacity: 0.25">Author(s) missing: <button class="addButton">Add +</button> </div>
+                    <div *ngIf="!pdf.Author" class="authorEmpty" style="opacity: 0.25">Author(s) missing</div>
                 </div>
             </div>
         </div>

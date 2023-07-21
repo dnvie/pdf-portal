@@ -13,44 +13,60 @@
   </div>
 </div>
 
-  <div class="container">
-    <div class="uploadContainer">
-      <input multiple type="file" class="file-input" accept=".pdf" (change)="onFileSelected($event)" #fileUpload>
-      <div class="file-upload">
-        {{fileName || "Select one or multiple files to upload."}}
-        <div *ngIf="!uploading" class="uploadButton" (click)="fileUpload.click()">Select Files</div>
+  <input multiple type="file" class="file-input" accept=".pdf" (change)="onFileSelected($event)" #fileUpload>
+
+  <div class="main">
+    <div class="container">
+      <div class="headingContainer">
+        <div class="title">Upload your files</div>
+        <div class="smallTitle">Files must be .pdf</div>
       </div>
-      <mat-form-field class="full-width" appearance="outline">
-        <mat-label>Tags</mat-label>
-        <mat-chip-grid #chipGrid aria-label="Enter tags">
-          <mat-chip-row *ngFor="let tag of tags" (removed)="removeTag(tag)">
-            {{tag}}
-            <button matChipRemove aria-label="'remove ' + tag">
-              <mat-icon>cancel</mat-icon>
-            </button>
-          </mat-chip-row>
-        </mat-chip-grid>
-        <input placeholder="New tag (Press Enter to add)"
-               [matChipInputFor]="chipGrid"
-               (matChipInputTokenEnd)="add($event)"/>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <mat-label>Folder</mat-label>
-        <input type="text"
-               placeholder="Select a folder"
-               aria-label="Folder"
-               matInput
-               [formControl]="myControl"
-               [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let folder of filteredFolders | async" [value]="folder">
-            {{folder}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <div *ngIf="!uploading" class="uploadButton" (click)="uploadFiles()">Upload</div>
-      <div class="fileNameContainer">
-        <div class="fileName" *ngFor="let pdf of this.pdfFiles">{{pdf.name}}</div>
+      <div class="dropzone" appDropzone (filesDropped)="onFilesDropped($event)">
+        <div>Drag & Drop your files here</div>
+        <div class="dropSmallText">or</div>
+        <div class="button" (click)="fileUpload.click()">Browse files</div>
+      </div>
+      <div *ngIf="this.pdfFiles.length != 0" class="tagsAndFolderContainer">
+        <div class="headingContainer">
+          <div class="title">Add tags and set a folder</div>
+          <div class="smallTitle">Applied to all uploaded files.</div>
+        </div>
+        <div class="tagsAndFolder">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Tags</mat-label>
+            <mat-chip-grid #chipGrid aria-label="Enter tags">
+              <mat-chip-row *ngFor="let tag of tags" (removed)="removeTag(tag)">
+                {{tag}}
+                <button matChipRemove aria-label="'remove ' + tag">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            </mat-chip-grid>
+            <input placeholder="Enter to add tag"
+                   [matChipInputFor]="chipGrid"
+                   (matChipInputTokenEnd)="add($event)"/>
+          </mat-form-field>
+    
+            <mat-form-field class="full-width">
+              <mat-label>Folder</mat-label>
+              <input type="text"
+                     placeholder=""
+                     aria-label="Folder"
+                     matInput
+                     [formControl]="myControl"
+                     [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let folder of filteredFolders | async" [value]="folder">
+                  {{folder}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+        </div>
+      </div>
+      <div class="filesSelected">
+        <div *ngIf="this.pdfFiles.length != 0" class="numberOfFiles">{{this.pdfFiles.length}} File<span *ngIf="this.pdfFiles.length != 1">s</span> selected.</div>
+        <div *ngIf="this.pdfFiles.length == 0" class="numberOfFiles">No files selected yet.</div>
+        <div class="uploadButton" [ngClass]="{ disabled: uploading || this.pdfFiles.length == 0 }" (click)="uploadFiles()">Upload<span class="material-symbols-rounded">upload</span></div>
       </div>
     </div>
   </div>

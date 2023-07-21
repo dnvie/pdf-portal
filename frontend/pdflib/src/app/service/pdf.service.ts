@@ -2,7 +2,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import { PDF, PDFFile } from '../data/pdf';
-import { PDFPreview, PDFPreviews } from '../data/pdfpreview';
+import { HomeData, PDFPreview, PDFPreviews } from '../data/pdfpreview';
 
 
 const baseUrl = 'http://localhost:3000';
@@ -45,6 +45,12 @@ export class PdfService {
         return this.http.get<PDFPreviews>(baseUrl + '/pdfs/search', { params });
     }
 
+    getAllPdfsInFolder(page: number, folder: string): Observable<PDFPreviews> {
+        const params = new HttpParams()
+            .set('page', String(page));
+        return this.http.get<PDFPreviews>(baseUrl + '/folders/' + folder, { params });
+    }
+
     getPdfByUuid(uuid: string): Observable<PDF> {
         return this.http.get<PDF>(baseUrl + '/pdf/' + uuid);
     }
@@ -63,6 +69,23 @@ export class PdfService {
 
     getFolders(): Observable<string[]> {
         return this.http.get<string[]>(baseUrl + '/folders')
+    }
+
+    createFolder(name: string): Observable<string> {
+        return this.http.get<string>(baseUrl + '/folder/' + name);
+    }
+
+    updateFolderName(oldName: string, newName: string): Observable<string> {
+        const newFolder = { name: newName };
+        return this.http.put<string>(baseUrl + '/folders/' + oldName, newFolder)
+    }
+
+    deleteFolder(name: string): Observable<string> {
+        return this.http.delete<string>(baseUrl + '/folders/' + name);
+    }
+
+    getHomeData(): Observable<HomeData> {
+        return this.http.get<HomeData>(baseUrl + '/home');
     }
 
 }

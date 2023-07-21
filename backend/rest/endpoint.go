@@ -254,6 +254,32 @@ func GetAllPDFsBySearch(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func GetAllPDFsByFolder(w http.ResponseWriter, r *http.Request) {
+	pageStr := r.URL.Query().Get("page")
+
+	if pageStr == "" {
+		http.Error(w, "Page parameter is missing", http.StatusBadRequest)
+		return
+	}
+
+	page, err := strconv.Atoi(pageStr)
+	if err != nil {
+		http.Error(w, "Invalid page parameter", http.StatusBadRequest)
+		return
+	}
+
+	name := chi.URLParam(r, "name")
+
+	pdfs := database.GetAllPdfsInFolder(page, name)
+	w.Header().Set("Content-Type", "application/json")
+	pdfJSON, err := json.Marshal(pdfs)
+	if err != nil {
+		io.WriteString(w, "Received Invalid PDFs JSON Object")
+	} else {
+		w.Write(pdfJSON)
+	}
+}
+
 func UpdatePDFFile(w http.ResponseWriter, r *http.Request) {
 	var updatedPdf data.PDFInfo
 	id := chi.URLParam(r, "id")
@@ -299,11 +325,72 @@ func GetFolders(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateFolder(w http.ResponseWriter, r *http.Request) {
+	/*var newFolder struct {
+		Name string `json:"name"`
+	}
+
+	err := json.NewDecoder(r.Body).Decode(&newFolder)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	name := newFolder.Name*/
 	name := chi.URLParam(r, "name")
+
 	if !database.CheckIfFolderExists(name) {
 		database.AddFolder(name)
 		w.WriteHeader(http.StatusOK)
 	} else {
 		http.Error(w, "A Folder with this name already exists!", http.StatusConflict)
+	}
+}
+
+func UpdateFolder(w http.ResponseWriter, r *http.Request) {
+	old := chi.URLParam(r, "old")
+
+	var newFolder struct {
+		Name string `json:"name"`
+	}
+
+	err := json.NewDecoder(r.Body).Decode(&newFolder)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	new := newFolder.Name
+
+	if database.CheckIfFolderExists(old) {
+		if !database.CheckIfFolderExists(new) {
+			database.UpdateFolderName(old, new)
+			w.WriteHeader(http.StatusOK)
+		} else {
+			http.Error(w, "A Folder with this name already exists!", http.StatusConflict)
+		}
+	} else {
+		http.Error(w, "This folder does not exist!", http.StatusConflict)
+	}
+}
+
+func DeleteFolder(w http.ResponseWriter, r *http.Request) {
+	name := chi.URLParam(r, "name")
+
+	if database.CheckIfFolderExists(name) {
+		database.DeleteFolder(name)
+		w.WriteHeader(http.StatusOK)
+	} else {
+		http.Error(w, "This folder does not exist!", http.StatusConflict)
+	}
+}
+
+func GetHomeData(w http.ResponseWriter, r *http.Request) {
+	homeData := database.GetHomeData()
+	w.Header().Set("Content-Type", "application/json")
+	pdfHome, err := json.Marshal(homeData)
+	if err != nil {
+		io.WriteString(w, "Received Invalid PDFs JSON Object")
+	} else {
+		w.Write(pdfHome)
 	}
 }

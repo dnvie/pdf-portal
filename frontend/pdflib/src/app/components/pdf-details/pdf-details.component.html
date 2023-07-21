@@ -5,7 +5,7 @@ Wenn PDF geupdated wurde, animation im header anzeigen mit "File Uploaded Succes
     <div class="container">
         <div class="imageContainer">
             <img class="card" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
-            <div *ngIf="this.pdf.Folder" class="imageButton folder"><span class="material-symbols-rounded">folder</span>{{this.pdf.Folder}}</div>
+            <div *ngIf="this.pdf.Folder" class="imageButton folder" routerLink='/folders/{{this.pdf.Folder}}'><span class="material-symbols-rounded">folder</span>{{this.pdf.Folder}}</div>
             <div class="imageButton edit" routerLink="/pdf/edit/{{pdf.Uuid}}"><span class="material-symbols-rounded">edit</span></div>
         </div>
         <div class="infoContainer">

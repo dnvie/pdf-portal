@@ -1,0 +1,64 @@
+<div class="main">
+    <div class="container">
+        <div class="heading">
+            <span class="material-symbols-rounded">folder</span>Browse folders:
+        </div>
+        <div *ngIf="this.home.Folders" class="folderContainer">
+            <div class="itemContainer" *ngFor="let folder of this.home.Folders" routerLink='/folders/{{folder}}'>
+                <div class="imageContainer">
+                    <img src="/assets/folder.png" alt="">
+                </div>
+                <div class="title">{{folder}}</div>
+                <div class="menu"><span class="material-symbols-rounded">more_vert</span></div>
+            </div>
+            <div class="viewAllButton" routerLink='/folders'>View all <span class="material-symbols-rounded">arrow_right_alt</span></div>
+        </div>
+        <div *ngIf="!this.home.Folders" class="folderContainer">
+            <div class="noContent">No folders created yet.</div>
+        </div>
+
+        <div class="heading" style="margin-top: 50px">
+            <span class="material-symbols-rounded">visibility</span>Recently Viewed:
+        </div>
+        <div *ngIf="this.home.RecentlyViewed" class="cardContainerHelper">
+            <div class="card" *ngFor="let pdf of this.home.RecentlyViewed" routerLink='/pdf/view/{{pdf.Uuid}}'>
+                <div class="cardContent">
+                    <div class="image">
+                        <img class="thumbnail" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
+                    </div>
+                    <div class="infoContent">
+                        <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
+                        <div *ngIf="!pdf.Title" class="titleEmpty" style="opacity: 0.25">Title missing</div>
+                        <div *ngIf="pdf.Author" class="author">{{pdf.Author}}</div>
+                        <div *ngIf="!pdf.Author" class="authorEmpty" style="opacity: 0.25">Author(s) missing</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!this.home.RecentlyViewed" class="cardContainerHelper">
+            <div class="noContent">No PDFs viewed recently.</div>
+        </div>
+
+        <div class="heading">
+            <span class="material-symbols-rounded">upload</span>Recently Uploaded:
+        </div>
+        <div *ngIf="this.home.RecentlyUploaded" class="cardContainerHelper">
+            <div class="card" *ngFor="let pdf of this.home.RecentlyUploaded" routerLink='/pdf/view/{{pdf.Uuid}}'>
+                <div class="cardContent">
+                    <div class="image">
+                        <img class="thumbnail" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
+                    </div>
+                    <div class="infoContent">
+                        <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
+                        <div *ngIf="!pdf.Title" class="titleEmpty" style="opacity: 0.25">Title missing</div>
+                        <div *ngIf="pdf.Author" class="author">{{pdf.Author}}</div>
+                        <div *ngIf="!pdf.Author" class="authorEmpty" style="opacity: 0.25">Author(s) missing</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!this.home.RecentlyUploaded" class="cardContainerHelper">
+            <div class="noContent">No PDFs uploaded recently.</div>
+        </div>
+    </div>
+</div>

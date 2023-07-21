@@ -12,3 +12,9 @@ export interface PDFPreviews {
     Previews?: PDFPreview[]
     TotalCount: number;
 }
+
+export interface HomeData {
+    RecentlyViewed?: PDFPreview[]
+    RecentlyUploaded?: PDFPreview[]
+    Folders?: string[]
+}

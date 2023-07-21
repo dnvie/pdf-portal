@@ -1,1 +1,15 @@
-<p>folders works!</p>
+<div class="viewModeContainer">
+    <div class="viewMode" [routerLink]="['/folder/create']"><span class="material-symbols-rounded">create_new_folder</span></div>
+</div>
+
+<div class="cardContainer">
+    <div class="cardContainerHelper">
+        <div class="itemContainer" *ngFor="let folder of folders" routerLink='/folders/{{folder}}'>
+            <div class="imageContainer">
+                <img src="/assets/folder.png" alt="">
+            </div>
+            <div class="title">{{folder}}</div>
+            <div class="menu" routerLink='/folders/edit/{{folder}}'><span class="material-symbols-rounded">more_vert</span></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+.main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 50px;
+    .container {
+        width: 1400px;
+        height: 800px;
+        margin-top: 150px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+        align-items: center;
+        color: rgb(235, 235, 235);
+        font-size: 30px;
+        font-weight: 500;
+    }
+}
+
+.buttons {
+    margin-top: 25px;
+    display: flex;
+    width: 355px;
+    height: fit-content;
+    justify-content: center;
+    gap: 20px;
+    .button {
+        display: flex;
+        gap: 7px;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Instrument Sans';
+        font-size: 17px;
+        font-weight: 500;
+        height: 50px;
+        width: 170px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        transition: all 0.1s ease-in-out;
+    }
+    .delete {
+        color: rgb(255, 134, 123);
+        background-color: rgb(94, 30, 34)
+        
+    }
+    .save {
+        color: var(--blue);
+        background-color: var(--blueBG);
+    }
+    .button:hover {
+        transform: translateY(-1px);
+        cursor: pointer;
+        box-shadow: 0 10px 15px 1px rgba(0, 0, 0, 0.351);
+    }
+}
+
+
+.full-width {
+    width: 600px;
+}

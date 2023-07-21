@@ -30,7 +30,11 @@ func Serve() {
 	r.Put("/pdf/file/{id}", UpdatePDFFile)
 	r.Delete("/pdf/delete/{id}", DeletePDFFile)
 	r.Get("/folders", GetFolders)
-	r.Post("/folders/{name}", CreateFolder)
+	r.Get("/folder/{name}", CreateFolder)
+	r.Get("/folders/{name}", GetAllPDFsByFolder)
+	r.Put("/folders/{old}", UpdateFolder)
+	r.Delete("/folders/{name}", DeleteFolder)
+	r.Get("/home", GetHomeData)
 
 	http.ListenAndServe(":3000", r)
 }

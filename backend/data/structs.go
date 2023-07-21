@@ -37,3 +37,9 @@ type PDFPreviews struct {
 	Previews   []PDFpreview
 	TotalCount int64
 }
+
+type HomeData struct {
+	RecentlyViewed   []PDFpreview
+	RecentlyUploaded []PDFpreview
+	Folders          []string
+}

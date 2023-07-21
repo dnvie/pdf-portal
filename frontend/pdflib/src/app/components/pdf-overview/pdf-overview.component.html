@@ -1,7 +1,3 @@
-<!--
-    bei suche, nav items in header ausblenden und header zu einer suchleiste machen
-    scroll indicator in header (ganz subtil ohne farbe)
--->
 <div class="viewModeContainer">
     <div *ngIf="listView" class="viewMode" (click)="listView = !listView"><span class="material-symbols-rounded">view_module</span></div>
     <div *ngIf="!listView" class="viewMode" (click)="listView = !listView"><span class="material-symbols-rounded">view_list</span></div>
@@ -17,9 +13,9 @@
                 <div class="itemInfo">
                     <div class="titleAuthorContainer">
                         <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
-                        <div *ngIf="!pdf.Title" class="title" style="opacity: 0.25">Title missing: <button class="addButton" routerLink='/pdf/edit/{{pdf.Uuid}}'>Add +</button> </div>
+                        <div *ngIf="!pdf.Title" class="title" style="opacity: 0.25">Title missing</div>
                         <div *ngIf="pdf.Author" class="author">{{pdf.Author}}</div>
-                        <div *ngIf="!pdf.Author" class="author" style="opacity: 0.25">Author(s) missing: <button class="addButton" routerLink='/pdf/edit/{{pdf.Uuid}}'>Add +</button> </div>
+                        <div *ngIf="!pdf.Author" class="author" style="opacity: 0.25">Author(s) missing</div>
                     </div>
                     <div class="tagsContainer">
                         <div class="tag">{{pdf.NumPages}} Pages</div>
@@ -34,15 +30,14 @@
     <div *ngIf="!listView" class="cardContainerHelper">
         <div class="card" *ngFor="let pdf of pdfs.Previews; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
             <div class="cardContent">
-                <button class="editButton" routerLink='/pdf/edit/{{pdf.Uuid}}'>Edit</button>
                 <div class="image">
                     <img class="thumbnail" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
                 </div>
                 <div class="infoContent">
                     <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
-                    <div *ngIf="!pdf.Title" class="titleEmpty" style="opacity: 0.25">Title missing: <button class="addButton" routerLink='/pdf/edit/{{pdf.Uuid}}'>Add +</button> </div>
+                    <div *ngIf="!pdf.Title" class="titleEmpty" style="opacity: 0.25">Title missing</div>
                     <div *ngIf="pdf.Author" class="author">{{pdf.Author}}</div>
-                    <div *ngIf="!pdf.Author" class="authorEmpty" style="opacity: 0.25">Author(s) missing: <button class="addButton" routerLink='/pdf/edit/{{pdf.Uuid}}'>Add +</button> </div>
+                    <div *ngIf="!pdf.Author" class="authorEmpty" style="opacity: 0.25">Author(s) missing</div>
                 </div>
             </div>
         </div>

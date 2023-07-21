@@ -23,6 +23,7 @@ export class PdfDetailsComponent implements OnInit {
     UploadDate: undefined,
     CreationDate: undefined,
     Filename: undefined,
+    Folder: null
   };
 
   pdfFile: PDFFile = {

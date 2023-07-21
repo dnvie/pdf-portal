@@ -16,6 +16,7 @@
         color: rgb(235, 235, 235);
         font-size: 30px;
         font-weight: 500;
+        font-family: 'Instrument Sans';
         .imageContainer {
             position: relative;
             img {
@@ -31,18 +32,28 @@
                 backdrop-filter: blur(15px);
             }
             .folder {
+                max-width: 310px;
+                width: fit-content;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
                 right: -20px;
-                font-size: 16px;
-                border-radius: 10px;
+                font-size: 15px;
+                font-family: 'Instrument Sans';
+                font-weight: 400;
+                border-radius: 15px;
                 padding: 8px 12px;
                 background-color: rgba(65, 65, 65, 0.8);
                 display: flex;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
                 gap: 4px;
                 span {
                     transform: scale(0.85);
                 }
+            }
+            .folder:hover {
+                cursor: pointer;
             }
             .edit {
                 display: flex;
@@ -74,14 +85,14 @@
             align-items: center;
             text-align: center;
             .title {
-                font-family: 'Inter', sans-serif;
+                font-family: 'Instrument Sans';
                 font-size: 32px;
                 color: rgb(235, 235, 235);
                 font-weight: 600;
                 overflow-wrap: break-word;
             }
             .author {
-                font-family: 'Inter', sans-serif;
+                font-family: 'Instrument Sans';
                 font-size: 22px;
                 color: rgba(235, 235, 235, 0.6);
                 font-weight: 400;
@@ -96,13 +107,13 @@
             }
             .pagesAndSize {
                 margin-top: 25px;
-                font-family: 'Inter', sans-serif;
+                font-family: 'Instrument Sans';
                 font-size: 18px;
                 color: rgba(235, 235, 235, 0.4);
                 font-weight: 400;
             }
             .date {
-                font-family: 'Inter', sans-serif;
+                font-family: 'Instrument Sans';
                 font-size: 18px;
                 color: rgba(235, 235, 235, 0.4);
                 font-weight: 400;
@@ -127,7 +138,7 @@
                     line-height: 34px;
                     background-color: rgb(6, 6, 6);
                     border-radius: 16px;
-                    font-family: 'Inter';
+                    font-family: 'Instrument Sans';
                     font-weight: 500;
                     font-size: 15px;
                     color: rgb(228, 228, 228);
@@ -149,8 +160,8 @@
                     gap: 7px;
                     justify-content: center;
                     align-items: center;
-                    font-family: 'Inter';
-                    font-size: 18px;
+                    font-family: 'Instrument Sans';
+                    font-size: 17px;
                     font-weight: 500;
                     height: 50px;
                     width: 170px;
@@ -159,13 +170,13 @@
                     transition: all 0.1s ease-in-out;
                 }
                 .read {
-                    color: var(--green);
-                    background-color: rgba(129, 221, 71, 0.1);
+                    color: var(--blue);
+                    background-color: var(--blueBG);
                     
                 }
                 .download {
-                    background-color: var(--green);
-                    color: rgb(19, 36, 9);
+                    background-color: var(--blue);
+                    color: rgb(0, 37, 58);
                 }
                 .button:hover {
                     transform: translateY(-1px);
