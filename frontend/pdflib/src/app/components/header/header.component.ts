@@ -1,7 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { EventService } from 'src/app/event-service.service';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +19,6 @@ export class HeaderComponent implements OnInit {
   @ViewChild('searchInput6') searchInput6!: ElementRef<HTMLInputElement>;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private eventService: EventService
   ) {
@@ -59,37 +57,37 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  clear() {
+  clear() {
     document.getElementsByClassName('nav')[0].classList.add('hidden');
     document.getElementsByClassName('nav')[1].classList.add('hidden');
     this.cleared = true;
   }
 
-  unclear() {
+  unclear() {
     document.getElementsByClassName('nav')[0].classList.remove('hidden');
     document.getElementsByClassName('nav')[1].classList.remove('hidden');
     this.cleared = false;
   }
 
-  reduce() {  
+  reduce() {
     setTimeout(this.clear, 1);
-    setTimeout(function(){ document.getElementById('header')?.classList.add('headerCompact');}, 200)
-    setTimeout(function(){ document.getElementById('smallHeader')?.classList.add('headerCompact');}, 200)
+    setTimeout(function () { document.getElementById('header')?.classList.add('headerCompact'); }, 200)
+    setTimeout(function () { document.getElementById('smallHeader')?.classList.add('headerCompact'); }, 200)
     this.cleared = true;
     this.reduced = true;
   }
 
   expand() {
-    setTimeout(function(){ document.getElementById('header')?.classList.remove('headerCompact');}, 1)
-    setTimeout(function(){ document.getElementById('smallHeader')?.classList.remove('headerCompact');}, 1)
+    setTimeout(function () { document.getElementById('header')?.classList.remove('headerCompact'); }, 1)
+    setTimeout(function () { document.getElementById('smallHeader')?.classList.remove('headerCompact'); }, 1)
     setTimeout(this.unclear, 200)
     this.cleared = false;
     this.reduced = false;
   }
 
   expandClear() {
-    setTimeout(function(){ document.getElementById('header')?.classList.remove('headerCompact');}, 1)
-    setTimeout(function(){ document.getElementById('smallHeader')?.classList.remove('headerCompact');}, 1)
+    setTimeout(function () { document.getElementById('header')?.classList.remove('headerCompact'); }, 1)
+    setTimeout(function () { document.getElementById('smallHeader')?.classList.remove('headerCompact'); }, 1)
     this.reduced = false;
     setTimeout(this.unclear, 2300)
     this.cleared = false;
@@ -98,40 +96,40 @@ export class HeaderComponent implements OnInit {
   addSearch() {
     this.clearSearchBars();
     setTimeout(this.clear, 1);
-    setTimeout(function(){ document.getElementById('search')?.classList.add('active');}, 250);
-    setTimeout(function(){ document.getElementById('closeSearch')?.classList.add('active');}, 300);
+    setTimeout(function () { document.getElementById('search')?.classList.add('active'); }, 250);
+    setTimeout(function () { document.getElementById('closeSearch')?.classList.add('active'); }, 300);
   }
 
   removeSearch() {
-    setTimeout(function(){ document.getElementById('search')?.classList.remove('active');},1);
-    setTimeout(function(){ document.getElementById('closeSearch')?.classList.remove('active');}, 50);
+    setTimeout(function () { document.getElementById('search')?.classList.remove('active'); }, 1);
+    setTimeout(function () { document.getElementById('closeSearch')?.classList.remove('active'); }, 50);
     setTimeout(this.unclear, 250);
   }
 
   clearSearchBars() {
-      this.searchInput.nativeElement.value = '';
-      this.searchInput2.nativeElement.value = '';
-      this.searchInput3.nativeElement.value = '';
-      this.searchInput4.nativeElement.value = '';
-      this.searchInput5.nativeElement.value = '';
-      this.searchInput6.nativeElement.value = '';
+    this.searchInput.nativeElement.value = '';
+    this.searchInput2.nativeElement.value = '';
+    this.searchInput3.nativeElement.value = '';
+    this.searchInput4.nativeElement.value = '';
+    this.searchInput5.nativeElement.value = '';
+    this.searchInput6.nativeElement.value = '';
   }
 
   addSmallSearch() {
     this.clearSearchBars();
-    setTimeout(function(){ document.getElementById('smallSearch')?.classList.add('active');}, 1);
+    setTimeout(function () { document.getElementById('smallSearch')?.classList.add('active'); }, 1);
   }
 
   closeSmallSearch() {
-    setTimeout(function(){ document.getElementById('smallSearch')?.classList.remove('active');}, 1);
+    setTimeout(function () { document.getElementById('smallSearch')?.classList.remove('active'); }, 1);
   }
 
   addMessage() {
-    setTimeout(function(){ document.getElementById('messageContainer')?.classList.add('active');},1);
+    setTimeout(function () { document.getElementById('messageContainer')?.classList.add('active'); }, 1);
   }
 
   removeMessage() {
-    setTimeout(function(){ document.getElementById('messageContainer')?.classList.remove('active');},1);
+    setTimeout(function () { document.getElementById('messageContainer')?.classList.remove('active'); }, 1);
   }
 
   showMessageUpdate() {
@@ -181,25 +179,25 @@ export class HeaderComponent implements OnInit {
     setTimeout(this.unclear, 250);
   }
 
-  search(event: KeyboardEvent, searchValueTitle: string, searchValueAuthor: string, searchValueTag: string) {    
-    if (event.keyCode === 13 || event.key === 'Enter' || event.code === 'Enter') {
+  search(event: KeyboardEvent, searchValueTitle: string, searchValueAuthor: string, searchValueTag: string) {
+    if (event.keyCode === 13 || event.key === 'Enter' || event.code === 'Enter') {
       if (searchValueTitle.length != 0 || searchValueAuthor.length != 0 || searchValueTag.length != 0) {
         const queryParams: any = {};
-      if (searchValueTitle.length !== 0) {
-        queryParams.title = searchValueTitle;
-      }
-      if (searchValueAuthor.length !== 0) {
-        queryParams.author = searchValueAuthor;
-      }
-      if (searchValueTag.length !== 0) {
-        queryParams.tag = searchValueTag;
-      }
-      this.router.navigate(['/pdfs/search'], { queryParams });
+        if (searchValueTitle.length !== 0) {
+          queryParams.title = searchValueTitle;
+        }
+        if (searchValueAuthor.length !== 0) {
+          queryParams.author = searchValueAuthor;
+        }
+        if (searchValueTag.length !== 0) {
+          queryParams.tag = searchValueTag;
+        }
+        this.router.navigate(['/pdfs/search'], { queryParams });
       }
     }
   }
 
-  searchByButton(searchValueTitle: string, searchValueAuthor: string, searchValueTag: string) {    
+  searchByButton(searchValueTitle: string, searchValueAuthor: string, searchValueTag: string) {
     if (searchValueTitle.length != 0 || searchValueAuthor.length != 0 || searchValueTag.length != 0) {
       const queryParams: any = {};
       if (searchValueTitle.length !== 0) {

@@ -1,5 +1,6 @@
 <div class="main">
     <div class="container">
+
         <div class="heading">
             <span class="material-symbols-rounded">folder</span>Browse folders:
         </div>
@@ -11,7 +12,8 @@
                 <div class="title">{{folder}}</div>
                 <div class="menu"><span class="material-symbols-rounded">more_vert</span></div>
             </div>
-            <div class="viewAllButton" routerLink='/folders'>View all <span class="material-symbols-rounded">arrow_right_alt</span></div>
+            <div class="viewAllButton" routerLink='/folders'>View all <span
+                    class="material-symbols-rounded">arrow_right_alt</span></div>
         </div>
         <div *ngIf="!this.home.Folders" class="folderContainer">
             <div class="noContent">No folders created yet.</div>

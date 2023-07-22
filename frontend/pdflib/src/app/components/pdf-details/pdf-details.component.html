@@ -1,12 +1,11 @@
-<!--
-Wenn PDF geupdated wurde, animation im header anzeigen mit "File Uploaded Successfully" mit gelben farben wie der edit button (oder grün für success)
--->
 <div class="main">
     <div *ngIf="loaded" class="container">
         <div class="imageContainer">
             <img class="card" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
-            <div *ngIf="this.pdf.Folder" class="imageButton folder" routerLink='/folders/{{this.pdf.Folder}}'><span class="material-symbols-rounded">folder</span>{{this.pdf.Folder}}</div>
-            <div class="imageButton edit" routerLink="/pdf/edit/{{pdf.Uuid}}"><span class="material-symbols-rounded">edit</span></div>
+            <div *ngIf="this.pdf.Folder" class="imageButton folder" routerLink='/folders/{{this.pdf.Folder}}'><span
+                    class="material-symbols-rounded">folder</span>{{this.pdf.Folder}}</div>
+            <div class="imageButton edit" routerLink="/pdf/edit/{{pdf.Uuid}}"><span
+                    class="material-symbols-rounded">edit</span></div>
         </div>
         <div class="infoContainer">
             <div *ngIf="pdf.Title" class="title">{{pdf.Title}}</div>
@@ -20,8 +19,10 @@ Wenn PDF geupdated wurde, animation im header anzeigen mit "File Uploaded Succes
             <div class="date">Creation Date: {{this.formatDate(pdf.CreationDate!)}}</div>
             <div class="date">Upload Date: {{this.formatDate(pdf.UploadDate!)}}</div>
             <div class="buttons">
-                <div class="button read" (click)="getPdf(1)">Read<span class="material-symbols-rounded">menu_book</span></div>
-                <div class="button download" (click)="getPdf(2)">Download<span class="material-symbols-rounded">download</span></div>
+                <div class="button read" (click)="getPdf(1)">Read<span class="material-symbols-rounded">menu_book</span>
+                </div>
+                <div class="button download" (click)="getPdf(2)">Download<span
+                        class="material-symbols-rounded">download</span></div>
             </div>
         </div>
     </div>
@@ -34,15 +35,17 @@ Wenn PDF geupdated wurde, animation im header anzeigen mit "File Uploaded Succes
             <div class="skeletonTitle"></div>
             <div class="skeletonAuthor"></div>
             <div class="tagsContainer">
-               <div class="skeletonTag"></div>
-               <div class="skeletonTag"></div>
+                <div class="skeletonTag"></div>
+                <div class="skeletonTag"></div>
             </div>
             <div class="skeletonPagesAndSize"></div>
             <div class="skeletonDate"></div>
             <div class="skeletonDate"></div>
             <div class="buttons">
-                <div class="button read" (click)="getPdf(1)">Read<span class="material-symbols-rounded">menu_book</span></div>
-                <div class="button download" (click)="getPdf(2)">Download<span class="material-symbols-rounded">download</span></div>
+                <div class="button read" (click)="getPdf(1)">Read<span class="material-symbols-rounded">menu_book</span>
+                </div>
+                <div class="button download" (click)="getPdf(2)">Download<span
+                        class="material-symbols-rounded">download</span></div>
             </div>
         </div>
     </div>

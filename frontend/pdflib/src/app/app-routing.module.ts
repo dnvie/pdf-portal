@@ -10,18 +10,18 @@ import { PdfSearchResultsComponent, ResultMode } from './components/pdf-search-r
 import { PdfUploadComponent } from './components/pdf-upload/pdf-upload.component';
 
 const routes: Routes = [
-  {path: "", component: HomeComponent},
-  {path: "all", component: PdfOverviewComponent},
-  {path: "upload", component: PdfUploadComponent},
-  {path: "pdf/view/:id", component: PdfDetailsComponent},
-  {path: "pdfs/tag/:tag", component: PdfSearchResultsComponent, data: {mode: ResultMode.tag}},
-  {path: "pdfs/author/:author", component: PdfSearchResultsComponent, data: {mode: ResultMode.author}},
-  {path: "pdfs/search", component: PdfSearchResultsComponent, data: {mode: ResultMode.search}},
-  {path: "pdf/edit/:id", component: PdfEditComponent},
-  {path: "folders", component: FoldersComponent},
-  {path: "folders/:folder", component: PdfSearchResultsComponent, data: {mode: ResultMode.folder}},
-  {path: "folders/edit/:folder", component: FolderEditComponent, data: {mode: FolderMode.edit}},
-  {path: "folder/create", component: FolderEditComponent, data: {mode: FolderMode.create}},
+  { path: "", component: HomeComponent },
+  { path: "all", component: PdfOverviewComponent },
+  { path: "upload", component: PdfUploadComponent },
+  { path: "pdf/view/:id", component: PdfDetailsComponent },
+  { path: "pdfs/tag/:tag", component: PdfSearchResultsComponent, data: { mode: ResultMode.tag } },
+  { path: "pdfs/author/:author", component: PdfSearchResultsComponent, data: { mode: ResultMode.author } },
+  { path: "pdfs/search", component: PdfSearchResultsComponent, data: { mode: ResultMode.search } },
+  { path: "pdf/edit/:id", component: PdfEditComponent },
+  { path: "folders", component: FoldersComponent },
+  { path: "folders/:folder", component: PdfSearchResultsComponent, data: { mode: ResultMode.folder } },
+  { path: "folders/edit/:folder", component: FolderEditComponent, data: { mode: FolderMode.edit } },
+  { path: "folder/create", component: FolderEditComponent, data: { mode: FolderMode.create } },
 ];
 
 @NgModule({

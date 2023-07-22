@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { PDFPreviews } from 'src/app/data/pdfpreview';
 import { PdfService } from 'src/app/service/pdf.service';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-pdf-overview',

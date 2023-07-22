@@ -45,7 +45,7 @@
     user-select: none;
     pointer-events: none;
     transition: all 0.25s;
-    animation-timing-function: cubic-bezier(.74, -0.01, .26, 1.04);
+    animation-timing-function: cubic-bezier(0.74, -0.01, 0.26, 1.04);
 }
 
 .loaderContainer.active {
@@ -93,7 +93,7 @@
 }
 
 #message {
-    font-family: 'Instrument Sans';
+    font-family: "Instrument Sans";
     font-weight: 500;
     font-size: 18px;
     color: rgb(235, 235, 235);
@@ -119,7 +119,7 @@
     width: 64px;
     height: 64px;
     color: rgb(255, 255, 255);
-    font-family: 'Instrument Sans';
+    font-family: "Instrument Sans";
     font-weight: 500;
     font-size: 16px;
     border-radius: 200px;
@@ -131,9 +131,9 @@
     user-select: none;
     pointer-events: none;
     transform: scale(0.8);
-    }
+}
 
-  .main {
+.main {
     position: absolute;
     width: 100%;
     height: fit-content;
@@ -165,13 +165,13 @@
                 font-size: 28px;
                 font-weight: 500;
                 color: white;
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
             }
             .smallTitle {
                 font-size: 16px;
                 font-weight: 400;
                 color: rgba(255, 255, 255, 0.336);
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
             }
         }
         .dropzone {
@@ -222,7 +222,7 @@
                 font-size: 20px;
                 font-weight: 500;
                 color: white;
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
             }
             .uploadButton {
                 padding: 10px 30px;
@@ -278,7 +278,6 @@
         gap: 30px;
     }
 }
-
 
 @media only screen and (max-width: 850px) {
     .main {

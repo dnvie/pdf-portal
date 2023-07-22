@@ -11,7 +11,7 @@ export class FoldersComponent implements OnInit {
 
   folders: string[] = []
 
-  constructor(private service: PdfService, private titleService: Title) {}
+  constructor(private service: PdfService, private titleService: Title) { }
 
   ngOnInit(): void {
     this.titleService.setTitle("Folders");

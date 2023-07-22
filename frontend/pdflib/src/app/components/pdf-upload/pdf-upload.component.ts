@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { map, Observable, startWith, Subscription } from 'rxjs';
-import { Component, NgModule, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
 import { EventService } from 'src/app/event-service.service';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -14,7 +14,7 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./pdf-upload.component.scss']
 })
 
-export class PdfUploadComponent implements OnInit{
+export class PdfUploadComponent implements OnInit {
   @ViewChild(HeaderComponent)
   headerComponent!: HeaderComponent;
   fileName = '';
@@ -28,14 +28,13 @@ export class PdfUploadComponent implements OnInit{
   folders: string[] = [];
   filteredFolders!: Observable<string[]>;
 
-  constructor(private http: HttpClient, private eventService: EventService, private service: PdfService, private titleService: Title) {}
+  constructor(private http: HttpClient, private eventService: EventService, private service: PdfService, private titleService: Title) { }
 
   onFileSelected(event: any) {
     const selectedFiles = event.target.files;
     for (let i = 0; i < selectedFiles.length; i++) {
       this.pdfFiles.push(selectedFiles[i]);
     }
-    console.log(this.pdfFiles);
   }
 
   uploadFiles() {
@@ -43,16 +42,16 @@ export class PdfUploadComponent implements OnInit{
       return;
     }
     const formData: FormData = new FormData();
-      for (let i = 0; i < this.pdfFiles.length; i++) {
-        const pdfFile = this.pdfFiles[i];
-        formData.append('pdfFile', pdfFile);
+    for (let i = 0; i < this.pdfFiles.length; i++) {
+      const pdfFile = this.pdfFiles[i];
+      formData.append('pdfFile', pdfFile);
+    }
+    formData.append('tags', JSON.stringify(this.tags));
+    if (this.myControl.value) {
+      if (this.myControl.value !== "") {
+        formData.append('folder', JSON.stringify(this.myControl.value));
       }
-      formData.append('tags', JSON.stringify(this.tags));
-      if (this.myControl.value) {
-        if (this.myControl.value !== "") {
-          formData.append('folder', JSON.stringify(this.myControl.value));
-        }
-      }
+    }
 
     this.fileName = this.pdfFiles.length === 1 ? 'Uploading: ' + this.pdfFiles[0] : 'Uploading: ' + this.pdfFiles.length + ' files';
 
@@ -107,7 +106,6 @@ export class PdfUploadComponent implements OnInit{
     for (let i = 0; i < files.length; i++) {
       this.pdfFiles.push(files[i]);
     }
-    console.log(this.pdfFiles);
   }
 
   removeTag(tag: string) {
@@ -167,13 +165,15 @@ export class PdfUploadComponent implements OnInit{
 
   removeLoaderMessage(msg: string) {
     const spinnerElement = document.getElementById('spinner');
-    var errorElement: HTMLElement | null
+    var errorElement: HTMLElement | null
+    const message = document.getElementById('message');
     if (msg.includes("successfully uploaded")) {
       errorElement = document.getElementById('check');
+      message!.style.color = '#2de358';
     } else {
       errorElement = document.getElementById('error');
+      message!.style.color = '#db1432';
     }
-    const message = document.getElementById('message');
     message!.innerText = msg;
     const loaderContainer = document.getElementById('loaderContainer');
 
@@ -221,7 +221,6 @@ export class PdfUploadComponent implements OnInit{
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.folders.filter(folder => folder.toLowerCase().includes(filterValue));
   }
 }

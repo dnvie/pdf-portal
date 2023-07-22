@@ -98,7 +98,7 @@
             max-width: calc(100% - 20px);
             margin-left: 5px;
             .title {
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 16px;
                 color: rgb(235, 235, 235);
                 font-weight: 600;
@@ -106,7 +106,7 @@
                 transition: all 0.15s ease-in-out;
             }
             .titleEmpty {
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 16px;
                 color: rgb(235, 235, 235);
                 font-weight: 500;
@@ -114,14 +114,14 @@
                 transition: all 0.15s ease-in-out;
             }
             .author {
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 13px;
                 color: rgba(235, 235, 235, 0.5);
                 font-weight: 400;
                 transition: all 0.15s ease-in-out;
             }
             .authorEmpty {
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 13px;
                 color: rgba(235, 235, 235, 0.5);
                 font-weight: 400;
@@ -192,7 +192,7 @@
         margin-right: 12px;
         display: flex;
         align-items: center;
-        font-family: 'Instrument Sans';
+        font-family: "Instrument Sans";
         font-size: 16px;
         color: rgb(228, 228, 228);
         font-weight: 500;
@@ -215,7 +215,7 @@
     cursor: pointer;
     background-color: #343434;
     .imageContainer {
-        img{
+        img {
             transform: scale(0.8);
         }
     }
@@ -252,7 +252,7 @@
 .noContent {
     display: flex;
     align-items: center;
-    font-family: 'Instrument Sans';
+    font-family: "Instrument Sans";
     font-size: 22px;
     color: rgb(147, 147, 147);
     font-weight: 400;

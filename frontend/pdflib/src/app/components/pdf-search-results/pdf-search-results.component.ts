@@ -12,13 +12,12 @@ export enum ResultMode {
   folder
 };
 
-
 @Component({
   selector: 'app-pdf-search-results',
   templateUrl: './pdf-search-results.component.html',
   styleUrls: ['./pdf-search-results.component.scss']
 })
-export class PdfSearchResultsComponent implements OnInit{
+export class PdfSearchResultsComponent implements OnInit {
 
   mode: ResultMode = ResultMode.author;
   loaded = false
@@ -49,7 +48,7 @@ export class PdfSearchResultsComponent implements OnInit{
       this.listView = true;
     }
     this.route.data.subscribe(data => {
-      this.mode = data['mode'];      
+      this.mode = data['mode'];
     });
 
     this.route.params.subscribe(params => {
@@ -139,7 +138,6 @@ export class PdfSearchResultsComponent implements OnInit{
     this.loaded = false;
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
-    //this.loaded = false;
     if (this.mode == 0) {
       this.loadPdfsByAuthorOrTag(this.tag);
     } else if (this.mode == 1) {

@@ -8,7 +8,7 @@ import { PdfService } from 'src/app/service/pdf.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
   home: HomeData = {
     RecentlyUploaded: undefined,
@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit{
     Folders: undefined
   };
 
-  constructor(private service: PdfService, private titleService: Title) {}
-  
+  constructor(private service: PdfService, private titleService: Title) { }
+
   ngOnInit(): void {
     this.service.getHomeData().subscribe({
       next: res => {

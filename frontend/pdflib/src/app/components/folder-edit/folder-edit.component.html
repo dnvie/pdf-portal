@@ -1,15 +1,21 @@
 <div class="main">
     <div class="container">
-        <div *ngIf="this.mode == 0" class="title"><span class="darker"><span class="material-symbols-rounded" style="margin-right: 8px">bookmark_manager</span>Edit folder:</span>&nbsp;{{oldName}}</div>
-        <div *ngIf="this.mode == 1" class="title"><span class="material-symbols-rounded" style="margin-right: 8px">create_new_folder</span>Create new folder</div>
+        <div *ngIf="this.mode == 0" class="title"><span class="darker"><span class="material-symbols-rounded"
+                    style="margin-right: 8px">bookmark_manager</span>Edit folder:</span>&nbsp;{{oldName}}</div>
+        <div *ngIf="this.mode == 1" class="title"><span class="material-symbols-rounded"
+                style="margin-right: 8px">create_new_folder</span>Create new folder</div>
         <mat-form-field class="full-width" appearance="fill">
             <mat-label>Folder name</mat-label>
             <input type="text" matInput name="name" [(ngModel)]="this.newName">
         </mat-form-field>
+
         <div class="buttons">
-            <div *ngIf="this.mode == 0" class="button delete" (click)="deleteFolder()">Delete<span class="material-symbols-rounded">delete_forever</span></div>
-            <div *ngIf="this.mode == 0" class="button save" (click)="updateFolder()">Save<span class="material-symbols-rounded">save</span></div>
-            <div *ngIf="this.mode == 1" class="button save" (click)="createFolder()">Create<span class="material-symbols-rounded">create_new_folder</span></div>
+            <div *ngIf="this.mode == 0" class="button delete" (click)="deleteFolder()">Delete<span
+                    class="material-symbols-rounded">delete_forever</span></div>
+            <div *ngIf="this.mode == 0" class="button save" (click)="updateFolder()">Save<span
+                    class="material-symbols-rounded">save</span></div>
+            <div *ngIf="this.mode == 1" class="button save" (click)="createFolder()">Create<span
+                    class="material-symbols-rounded">create_new_folder</span></div>
         </div>
     </div>
 </div>

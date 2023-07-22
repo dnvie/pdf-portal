@@ -3,10 +3,10 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PDF, PDFFile } from 'src/app/data/pdf';
 import { PdfService } from 'src/app/service/pdf.service';
-import {NgForm, NgModel, NgControl, FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { EventService } from 'src/app/event-service.service';
 
 @Component({
@@ -45,7 +45,7 @@ export class PdfEditComponent implements OnInit {
     public router: Router,
     private titleService: Title,
     private eventService: EventService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.filteredFolders = this.myControl.valueChanges.pipe(
@@ -84,7 +84,7 @@ export class PdfEditComponent implements OnInit {
 
   formatDate(date: string): string {
     if (date) {
-      return date.substring(8,10) + "." + date.substring(5,7) + "." + date.substring(0,4)
+      return date.substring(8, 10) + "." + date.substring(5, 7) + "." + date.substring(0, 4)
     }
     return date
   }
@@ -107,7 +107,7 @@ export class PdfEditComponent implements OnInit {
     event.chipInput?.clear();
   }
 
-  updatePdf() {    
+  updatePdf() {
     this.route.params.subscribe(params => {
       const id = params['id'];
       if (this.tags) {
@@ -125,7 +125,7 @@ export class PdfEditComponent implements OnInit {
         this.pdf.Folder = null
       }
       this.service.updatePdfByUuid(this.pdf, id).subscribe({
-        next: res => {
+        next: () => {
           setTimeout(this.triggerUpdateMessage.bind(this), 1);
           setTimeout(this.triggerHideMessage.bind(this), 2200);
           this.router.navigate(['/pdf/view/' + id])
@@ -144,7 +144,7 @@ export class PdfEditComponent implements OnInit {
       this.route.params.subscribe(params => {
         const id = params['id'];
         this.service.deletePdfByUuid(id).subscribe({
-          next: res => {
+          next: () => {
             setTimeout(this.triggerDeleteMessage.bind(this), 1);
             setTimeout(this.triggerHideMessage.bind(this), 2200);
             this.router.navigate(['/'])
@@ -181,7 +181,6 @@ export class PdfEditComponent implements OnInit {
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.folders.filter(folder => folder.toLowerCase().includes(filterValue));
   }
 

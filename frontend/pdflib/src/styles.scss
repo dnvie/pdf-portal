@@ -1,25 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap");
 
 html {
-    background-color: rgb(21, 21, 21) !important;
+  background-color: rgb(21, 21, 21) !important;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: "Instrument Sans", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Instrument Sans", sans-serif;
+}
 
 .material-symbols-rounded {
-  font-variation-settings:
-  'FILL' 1,
-  'wght' 500,
-  'GRAD' 200,
-  'opsz' 40
+  font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 200, "opsz" 40;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 :root {
-  --green: rgb(151, 242, 95);
   --blue: rgb(0 191 255);
   --blueBG: rgb(71 167 221 / 10%);
   --skeleton: rgb(75, 75, 75);
@@ -29,7 +30,7 @@ body { margin: 0; font-family: "Instrument Sans", sans-serif; }
   color: rgb(150, 150, 150);
 }
 
-:-ms-input-placeholder { 
+:-ms-input-placeholder {
   color: rgb(150, 150, 150);
 }
 
@@ -37,16 +38,19 @@ body { margin: 0; font-family: "Instrument Sans", sans-serif; }
   color: rgb(150, 150, 150);
 }
 
-.mdc-circular-progress--indeterminate .mdc-circular-progress__circle-right .mdc-circular-progress__indeterminate-circle-graphic {
+.mdc-circular-progress--indeterminate
+  .mdc-circular-progress__circle-right
+  .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: var(--blue, transparent) !important;
 }
 
-.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle, .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+.mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: var(--blue, transparent) !important;
 }
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
-  color:rgb(193, 193, 193) !important;
+  color: rgb(193, 193, 193) !important;
 }
 
 .mdc-notched-outline__leading {
@@ -61,7 +65,9 @@ body { margin: 0; font-family: "Instrument Sans", sans-serif; }
   border-color: rgb(91, 91, 91) !important;
 }
 
-.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading, .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch, .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
   border-color: rgb(193, 193, 193) !important;
 }
 
@@ -77,22 +83,23 @@ body { margin: 0; font-family: "Instrument Sans", sans-serif; }
   border-bottom-color: var(--blue) !important;
 }
 
-.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+.mat-primary .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after,
+.mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
   color: var(--blue) !important;
 }
 
 .mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
-  font-family: 'Instrument Sans' !important;
+  font-family: "Instrument Sans" !important;
   font-weight: 500 !important;
 }
 
 .mat-mdc-form-field .mat-mdc-floating-label.mdc-floating-label {
-  font-family: 'Instrument Sans' !important;
+  font-family: "Instrument Sans" !important;
   font-weight: 500 !important;
 }
 
 .mat-mdc-option .mdc-list-item__primary-text {
-  font-family: 'Instrument Sans' !important;
+  font-family: "Instrument Sans" !important;
   font-weight: 500 !important;
 }
 
@@ -107,10 +114,10 @@ body { margin: 0; font-family: "Instrument Sans", sans-serif; }
   border-bottom-color: transparent !important;
 }
 
-.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field--focused{
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field--focused {
   background-color: rgb(34, 34, 34) !important;
 }
 
 .mdc-text-field--focused {
-  background-color: rgba(255, 0, 0, 0)(0, 0, 0) !important;
+  background-color: rgba(255, 0, 0, 0) (0, 0, 0) !important;
 }

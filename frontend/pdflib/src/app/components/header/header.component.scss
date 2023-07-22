@@ -14,16 +14,12 @@
 
 .header {
     position: absolute;
-    //width: fit-content;
-    //height: fit-content;
     width: 726px;
     height: 64px;
-    //padding: 10px 0;
     background-color: rgba(35, 35, 35, 0.7);
     backdrop-filter: saturate(180%) blur(20px);
     border-radius: 25px;
     display: flex;
-    //flex-direction: column;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 5px 25px 10px rgba(0, 0, 0, 0.5);
@@ -81,7 +77,6 @@
 }
 
 .search {
-    //top: 100px;
     min-height: 64px;
     height: fit-content;
     display: flex;
@@ -148,7 +143,6 @@
 .headerHidden {
     opacity: 0;
     transform: translateY(-20px) scale(0.95);
-    //transform: translateY(-90px);
 }
 
 .headerCompact {
@@ -170,7 +164,7 @@
 }
 
 .closeSearch {
-    display: flex !important;;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     width: 70px;
@@ -214,7 +208,7 @@
     gap: 5px;
     align-items: center;
     justify-content: center;
-    font-family: 'Instrument Sans';
+    font-family: "Instrument Sans";
     font-weight: 500;
     color: rgb(235, 235, 235);
     transform: scale(0.95);
@@ -246,7 +240,7 @@
     }
 
     .closeSearchContainer {
-       display: none !important;
+        display: none !important;
     }
 
     .smallHeader {
@@ -416,9 +410,8 @@
     .headerHidden {
         opacity: 0;
         transform: translateY(-20px) scale(0.95);
-        //transform: translateY(-90px);
     }
-    
+
     .headerCompact {
         width: 64px;
         border-radius: 100px;

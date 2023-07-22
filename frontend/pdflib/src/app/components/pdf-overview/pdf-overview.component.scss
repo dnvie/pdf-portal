@@ -62,7 +62,7 @@
             max-width: calc(100% - 20px);
             margin-left: 5px;
             .title {
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 16px;
                 color: rgb(235, 235, 235);
                 font-weight: 600;
@@ -70,7 +70,7 @@
                 transition: all 0.15s ease-in-out;
             }
             .titleEmpty {
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 16px;
                 color: rgb(235, 235, 235);
                 font-weight: 500;
@@ -78,14 +78,14 @@
                 transition: all 0.15s ease-in-out;
             }
             .author {
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 13px;
                 color: rgba(235, 235, 235, 0.5);
                 font-weight: 400;
                 transition: all 0.15s ease-in-out;
             }
             .authorEmpty {
-                font-family: 'Instrument Sans';
+                font-family: "Instrument Sans";
                 font-size: 13px;
                 color: rgba(235, 235, 235, 0.5);
                 font-weight: 400;
@@ -173,7 +173,7 @@
                     line-height: 30px;
                     height: 60%;
                     max-width: 890px;
-                    font-family: 'Instrument Sans';
+                    font-family: "Instrument Sans";
                     font-weight: 600;
                     font-size: 20px;
                     color: rgb(235, 235, 235);
@@ -181,7 +181,7 @@
                 .author {
                     height: 40%;
                     width: 100%;
-                    font-family: 'Instrument Sans';
+                    font-family: "Instrument Sans";
                     font-weight: 500;
                     font-size: 13px;
                     color: white;
@@ -206,7 +206,7 @@
                     height: 25px;
                     background-color: rgb(14, 14, 14);
                     border-radius: 12px;
-                    font-family: 'Instrument Sans';
+                    font-family: "Instrument Sans";
                     font-weight: 500;
                     font-size: 12px;
                     color: rgb(228, 228, 228);
@@ -243,14 +243,14 @@
     backdrop-filter: saturate(180%) blur(20px);
     box-shadow: 0 5px 25px 10px rgba(0, 0, 0, 0.25);
     color: rgb(255, 255, 255);
-    font-family: 'Instrument Sans';
+    font-family: "Instrument Sans";
     font-weight: 500;
     font-size: 16px;
     border-radius: 25px;
     display: flex;
     gap: 7px;
     transition: all 0.1s ease-in-out;
-    }
+}
 
 .viewMode:hover {
     cursor: pointer;
@@ -302,15 +302,15 @@
                 opacity: var(--skeletonOpacity);
                 filter: var(--skeletonFilter);
                 background-image: linear-gradient(
-                  90deg,
-                  rgba(rgba(255, 255, 255), 0) 0,
-                  rgba(rgba(255, 255, 255), 0.1) 20%,
-                  rgba(rgba(255, 255, 255), 0.2) 60%,
-                  rgba(rgba(255, 255, 255), 0)
+                    90deg,
+                    rgba(rgba(255, 255, 255), 0) 0,
+                    rgba(rgba(255, 255, 255), 0.1) 20%,
+                    rgba(rgba(255, 255, 255), 0.2) 60%,
+                    rgba(rgba(255, 255, 255), 0)
                 );
                 animation: shimmer 1s infinite ease-in-out;
-                content: '';
-              }
+                content: "";
+            }
         }
     }
     .skeletonInfoContent {
@@ -339,15 +339,15 @@
             opacity: var(--skeletonOpacity);
             filter: var(--skeletonFilter);
             background-image: linear-gradient(
-              90deg,
-              rgba(rgba(255, 255, 255), 0) 0,
-              rgba(rgba(255, 255, 255), 0.05) 20%,
-              rgba(rgba(255, 255, 255), 0.1) 60%,
-              rgba(rgba(255, 255, 255), 0)
+                90deg,
+                rgba(rgba(255, 255, 255), 0) 0,
+                rgba(rgba(255, 255, 255), 0.05) 20%,
+                rgba(rgba(255, 255, 255), 0.1) 60%,
+                rgba(rgba(255, 255, 255), 0)
             );
             animation: shimmer 1s infinite ease-in-out;
-            content: '';
-          }
+            content: "";
+        }
     }
     .skeletonAuthor {
         position: relative;
@@ -367,15 +367,15 @@
             opacity: var(--skeletonOpacity);
             filter: var(--skeletonFilter);
             background-image: linear-gradient(
-              90deg,
-              rgba(rgba(255, 255, 255), 0) 0,
-              rgba(rgba(255, 255, 255), 0.1) 20%,
-              rgba(rgba(255, 255, 255), 0.2) 60%,
-              rgba(rgba(255, 255, 255), 0)
+                90deg,
+                rgba(rgba(255, 255, 255), 0) 0,
+                rgba(rgba(255, 255, 255), 0.1) 20%,
+                rgba(rgba(255, 255, 255), 0.2) 60%,
+                rgba(rgba(255, 255, 255), 0)
             );
             animation: shimmer 1s infinite ease-in-out;
-            content: '';
-          }
+            content: "";
+        }
     }
 }
 
@@ -406,24 +406,24 @@
             overflow: hidden;
             background-color: var(--skeleton);
             &::after {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            transform: translateX(-100%);
-            opacity: var(--skeletonOpacity);
-            filter: var(--skeletonFilter);
-            background-image: linear-gradient(
-              90deg,
-              rgba(rgba(255, 255, 255), 0) 0,
-              rgba(rgba(255, 255, 255), 0.1) 20%,
-              rgba(rgba(255, 255, 255), 0.2) 60%,
-              rgba(rgba(255, 255, 255), 0)
-            );
-            animation: shimmer 1s infinite ease-in-out;
-            content: '';
-          }
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                transform: translateX(-100%);
+                opacity: var(--skeletonOpacity);
+                filter: var(--skeletonFilter);
+                background-image: linear-gradient(
+                    90deg,
+                    rgba(rgba(255, 255, 255), 0) 0,
+                    rgba(rgba(255, 255, 255), 0.1) 20%,
+                    rgba(rgba(255, 255, 255), 0.2) 60%,
+                    rgba(rgba(255, 255, 255), 0)
+                );
+                animation: shimmer 1s infinite ease-in-out;
+                content: "";
+            }
         }
         .skeletonItemInfo {
             display: flex;
@@ -449,24 +449,24 @@
                     background-color: var(--skeleton);
                     border-radius: 10px;
                     &::after {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            transform: translateX(-100%);
-            opacity: var(--skeletonOpacity);
-            filter: var(--skeletonFilter);
-            background-image: linear-gradient(
-              90deg,
-              rgba(rgba(255, 255, 255), 0) 0,
-              rgba(rgba(255, 255, 255), 0.1) 20%,
-              rgba(rgba(255, 255, 255), 0.2) 60%,
-              rgba(rgba(255, 255, 255), 0)
-            );
-            animation: shimmer 1s infinite ease-in-out;
-            content: '';
-          }
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        transform: translateX(-100%);
+                        opacity: var(--skeletonOpacity);
+                        filter: var(--skeletonFilter);
+                        background-image: linear-gradient(
+                            90deg,
+                            rgba(rgba(255, 255, 255), 0) 0,
+                            rgba(rgba(255, 255, 255), 0.1) 20%,
+                            rgba(rgba(255, 255, 255), 0.2) 60%,
+                            rgba(rgba(255, 255, 255), 0)
+                        );
+                        animation: shimmer 1s infinite ease-in-out;
+                        content: "";
+                    }
                 }
                 .skeletonAuthor {
                     position: relative;
@@ -476,24 +476,24 @@
                     background-color: var(--skeleton);
                     border-radius: 7px;
                     &::after {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            transform: translateX(-100%);
-            opacity: var(--skeletonOpacity);
-            filter: var(--skeletonFilter);
-            background-image: linear-gradient(
-              90deg,
-              rgba(rgba(255, 255, 255), 0) 0,
-              rgba(rgba(255, 255, 255), 0.1) 20%,
-              rgba(rgba(255, 255, 255), 0.2) 60%,
-              rgba(rgba(255, 255, 255), 0)
-            );
-            animation: shimmer 1s infinite ease-in-out;
-            content: '';
-          }
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        transform: translateX(-100%);
+                        opacity: var(--skeletonOpacity);
+                        filter: var(--skeletonFilter);
+                        background-image: linear-gradient(
+                            90deg,
+                            rgba(rgba(255, 255, 255), 0) 0,
+                            rgba(rgba(255, 255, 255), 0.1) 20%,
+                            rgba(rgba(255, 255, 255), 0.2) 60%,
+                            rgba(rgba(255, 255, 255), 0)
+                        );
+                        animation: shimmer 1s infinite ease-in-out;
+                        content: "";
+                    }
                 }
             }
             .skeletonTagsContainer {
@@ -526,14 +526,14 @@
                         opacity: var(--skeletonOpacity);
                         filter: var(--skeletonFilter);
                         background-image: linear-gradient(
-                        90deg,
-                        rgba(rgba(255, 255, 255), 0) 0,
-                        rgba(rgba(255, 255, 255), 0.1) 20%,
-                        rgba(rgba(255, 255, 255), 0.2) 60%,
-                        rgba(rgba(255, 255, 255), 0)
+                            90deg,
+                            rgba(rgba(255, 255, 255), 0) 0,
+                            rgba(rgba(255, 255, 255), 0.1) 20%,
+                            rgba(rgba(255, 255, 255), 0.2) 60%,
+                            rgba(rgba(255, 255, 255), 0)
                         );
                         animation: shimmer 1s infinite ease-in-out;
-                        content: '';
+                        content: "";
                     }
                 }
             }
@@ -543,7 +543,7 @@
 
 @keyframes shimmer {
     100% {
-      transform: translateX(100%);
+        transform: translateX(100%);
     }
 }
 
@@ -714,6 +714,3 @@
         }
     }
 }
-
-
-

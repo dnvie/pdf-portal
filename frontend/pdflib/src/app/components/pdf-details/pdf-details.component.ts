@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PDF, PDFFile } from 'src/app/data/pdf';
 import { PdfService } from 'src/app/service/pdf.service';
 import { ActivatedRoute } from '@angular/router';
-import { DomSanitizer, SafeResourceUrl, Title } from '@angular/platform-browser';
+import { SafeResourceUrl, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pdf-details',
@@ -36,7 +36,7 @@ export class PdfDetailsComponent implements OnInit {
     private service: PdfService,
     public route: ActivatedRoute,
     private titleService: Title
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -57,7 +57,7 @@ export class PdfDetailsComponent implements OnInit {
 
   formatDate(date: string): string {
     if (date) {
-      return date.substring(8,10) + "." + date.substring(5,7) + "." + date.substring(0,4)
+      return date.substring(8, 10) + "." + date.substring(5, 7) + "." + date.substring(0, 4)
     }
     return date
   }
@@ -68,7 +68,6 @@ export class PdfDetailsComponent implements OnInit {
       this.service.getPdfFileByUuid(id).subscribe({
         next: res => {
           this.pdfFile = res;
-          console.log(this.pdfFile);
           const byteCharacters = atob(this.pdfFile.File!);
           const byteNumbers = new Array(byteCharacters.length);
           for (let i = 0; i < byteCharacters.length; i++) {
@@ -78,7 +77,7 @@ export class PdfDetailsComponent implements OnInit {
           const pdfData = new Blob([byteArray], { type: 'application/pdf' });
           const pdfUrl = URL.createObjectURL(pdfData);
 
-          if(type == 1) {
+          if (type == 1) {
             window.open(pdfUrl, '_blank');
           } else {
             const link = document.createElement('a');

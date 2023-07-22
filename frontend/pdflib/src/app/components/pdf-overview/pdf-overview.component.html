@@ -1,6 +1,8 @@
 <div class="viewModeContainer">
-    <div *ngIf="listView" class="viewMode" (click)="toggleGridView()"><span class="material-symbols-rounded">view_module</span></div>
-    <div *ngIf="!listView" class="viewMode" (click)="toggleListView()"><span class="material-symbols-rounded">view_list</span></div>
+    <div *ngIf="listView" class="viewMode" (click)="toggleGridView()"><span
+            class="material-symbols-rounded">view_module</span></div>
+    <div *ngIf="!listView" class="viewMode" (click)="toggleListView()"><span
+            class="material-symbols-rounded">view_list</span></div>
 </div>
 
 <div *ngIf="loaded" class="cardContainer">
@@ -43,15 +45,9 @@
         </div>
     </div>
 
-    <mat-paginator *ngIf="this.pdfs.TotalCount > 48" class="paginator"
-                 [length]="totalPages"
-                 [pageSize]="pageSize"
-                 [hidePageSize]="true"
-                 [pageIndex]="currentPage"
-                 [showFirstLastButtons]="true"
-                 (page)="onPageChange($event)"
-  ></mat-paginator>
-
+    <mat-paginator *ngIf="this.pdfs.TotalCount > 48" class="paginator" [length]="totalPages" [pageSize]="pageSize"
+        [hidePageSize]="true" [pageIndex]="currentPage" [showFirstLastButtons]="true" (page)="onPageChange($event)">
+    </mat-paginator>
 </div>
 
 <div *ngIf="!loaded" class="cardContainer">
@@ -85,13 +81,7 @@
         </div>
     </div>
 
-    <mat-paginator *ngIf="this.pdfs.TotalCount > 48" class="paginator"
-                 [length]="totalPages"
-                 [pageSize]="pageSize"
-                 [hidePageSize]="true"
-                 [pageIndex]="currentPage"
-                 [showFirstLastButtons]="true"
-                 (page)="onPageChange($event)"
-  ></mat-paginator>
-
+    <mat-paginator *ngIf="this.pdfs.TotalCount > 48" class="paginator" [length]="totalPages" [pageSize]="pageSize"
+        [hidePageSize]="true" [pageIndex]="currentPage" [showFirstLastButtons]="true" (page)="onPageChange($event)">
+    </mat-paginator>
 </div>

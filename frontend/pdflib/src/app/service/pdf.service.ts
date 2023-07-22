@@ -1,16 +1,15 @@
-import {HttpClient, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { PDF, PDFFile } from '../data/pdf';
-import { HomeData, PDFPreview, PDFPreviews } from '../data/pdfpreview';
+import { HomeData, PDFPreviews } from '../data/pdfpreview';
 
 
 const baseUrl = 'http://localhost:3000';
 
 @Injectable({
     providedIn: 'root'
-  })
-  
+})
 
 export class PdfService {
 
@@ -54,7 +53,7 @@ export class PdfService {
     getPdfByUuid(uuid: string): Observable<PDF> {
         return this.http.get<PDF>(baseUrl + '/pdf/' + uuid);
     }
-    
+
     getPdfFileByUuid(uuid: string): Observable<PDFFile> {
         return this.http.get<PDFFile>(baseUrl + '/pdf/file/' + uuid);
     }
