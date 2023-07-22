@@ -22,27 +22,6 @@
                 height: 500px;
                 border-radius: 10px;
             }
-            .folder {
-                position: absolute;
-                padding: 8px 12px;
-                background-color: rgba(65, 65, 65, 0.8);
-                top: -12px;
-                right: -20px;
-                width: fit-content;
-                height: fit-content;
-                font-size: 15px;
-                font-family: 'Instrument Sans';
-                font-weight: 400;
-                border-radius: 15px;
-                backdrop-filter: blur(15px);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                gap: 4px;
-                span {
-                    transform: scale(0.85);
-                }
-            }
         }
         .infoContainer {
             display: flex;
@@ -159,15 +138,6 @@
             .imageContainer {
                 img {
                     height: 300px;
-                }
-                .folder {
-                    font-size: 12px;
-                    font-weight: 500;
-                    border-radius: 14px;
-                    padding: 6px 10px;
-                    span {
-                        transform: scale(0.75);
-                    }
                 }
             }
         }

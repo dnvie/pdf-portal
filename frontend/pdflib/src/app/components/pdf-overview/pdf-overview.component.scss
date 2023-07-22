@@ -197,7 +197,6 @@
                 height: 25px;
                 margin-bottom: 8px;
                 overflow: hidden;
-                //justify-content: center;
                 .tag {
                     display: flex;
                     justify-content: center;
@@ -567,6 +566,26 @@
             }
         }
     }
+    .skeletonContainer {
+        width: 700px;
+        .skeletonContent {
+            width: 680px;
+            .skeletonItemInfo {
+                width: 580px;
+                .skeletonTitleAuthorContainer {
+                    .skeletonTitle {
+                        width: 400px;
+                    }
+                    .skeletonAuthor {
+                        width: 300px;
+                    }
+                }
+                .skeletonTagsContainer {
+                    width: 100%;
+                }
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 910px) {
@@ -579,7 +598,7 @@
     }
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 880px) {
     .card {
         width: 200px;
         .cardContent {
@@ -608,6 +627,31 @@
         }
     }
 
+    .skeletonCard {
+        width: 200px;
+        .skeletonCardContent {
+            width: 185px;
+            .skeletonImage {
+                height: 265px;
+                width: 185px;
+            }
+        }
+        .skeletonInfoContent {
+            row-gap: 7px;
+            width: 180px;
+        }
+        .skeletonTitle {
+            width: 150px;
+            height: 20px;
+            border-radius: 8px;
+        }
+        .skeletonAuthor {
+            width: 120px;
+            height: 15px;
+            border-radius: 6px;
+        }
+    }
+
     .itemContainer {
         width: 500px;
         .itemContent {
@@ -623,6 +667,23 @@
             }
         }
     }
+    .skeletonContainer {
+        width: 500px;
+        .skeletonContent {
+            width: 480px;
+            .skeletonItemInfo {
+                width: 380px;
+                .skeletonTitleAuthorContainer {
+                    .skeletonTitle {
+                        width: 300px;
+                    }
+                    .skeletonAuthor {
+                        width: 220px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 560px) {
@@ -632,6 +693,23 @@
             width: 380px;
             .itemInfo {
                 width: 280px;
+            }
+        }
+    }
+    .skeletonContainer {
+        width: 400px;
+        .skeletonContent {
+            width: 380px;
+            .skeletonItemInfo {
+                width: 280px;
+                .skeletonTitleAuthorContainer {
+                    .skeletonTitle {
+                        width: 240px;
+                    }
+                    .skeletonAuthor {
+                        width: 180px;
+                    }
+                }
             }
         }
     }

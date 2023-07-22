@@ -6,6 +6,7 @@ import { EventService } from 'src/app/event-service.service';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { FormControl } from '@angular/forms';
 import { PdfService } from 'src/app/service/pdf.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pdf-upload',
@@ -27,7 +28,7 @@ export class PdfUploadComponent implements OnInit{
   folders: string[] = [];
   filteredFolders!: Observable<string[]>;
 
-  constructor(private http: HttpClient, private eventService: EventService, private service: PdfService) {}
+  constructor(private http: HttpClient, private eventService: EventService, private service: PdfService, private titleService: Title) {}
 
   onFileSelected(event: any) {
     const selectedFiles = event.target.files;
@@ -219,6 +220,7 @@ export class PdfUploadComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Upload Files");
     this.filteredFolders = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),

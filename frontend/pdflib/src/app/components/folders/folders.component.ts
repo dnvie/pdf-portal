@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { PdfService } from 'src/app/service/pdf.service';
 
 @Component({
@@ -10,9 +11,10 @@ export class FoldersComponent implements OnInit {
 
   folders: string[] = []
 
-  constructor(private service: PdfService) {}
+  constructor(private service: PdfService, private titleService: Title) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle("Folders");
     this.service.getFolders().subscribe(
       data => {
         this.folders = data

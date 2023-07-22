@@ -15,6 +15,9 @@ export class HeaderComponent implements OnInit {
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
   @ViewChild('searchInput2') searchInput2!: ElementRef<HTMLInputElement>;
   @ViewChild('searchInput3') searchInput3!: ElementRef<HTMLInputElement>;
+  @ViewChild('searchInput4') searchInput4!: ElementRef<HTMLInputElement>;
+  @ViewChild('searchInput5') searchInput5!: ElementRef<HTMLInputElement>;
+  @ViewChild('searchInput6') searchInput6!: ElementRef<HTMLInputElement>;
 
   constructor(
     private route: ActivatedRoute,
@@ -123,6 +126,9 @@ export class HeaderComponent implements OnInit {
       this.searchInput.nativeElement.value = '';
       this.searchInput2.nativeElement.value = '';
       this.searchInput3.nativeElement.value = '';
+      this.searchInput4.nativeElement.value = '';
+      this.searchInput5.nativeElement.value = '';
+      this.searchInput6.nativeElement.value = '';
   }
 
   addSmallSearch() {
@@ -165,6 +171,7 @@ export class HeaderComponent implements OnInit {
         queryParams.tag = searchValueTag;
       }
       this.router.navigate(['/pdfs/search'], { queryParams });
+      this.closeSmallSearch();
     }
   }
 

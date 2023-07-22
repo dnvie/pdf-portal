@@ -2,7 +2,6 @@
     <div class="container">
         <div  *ngIf="loaded" class="imageContainer">
             <img class="card" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
-            <div *ngIf="this.pdf.Folder" class="imageButton folder"><span class="material-symbols-rounded">folder</span>{{this.pdf.Folder}}</div>
         </div>
         <div *ngIf="!loaded" class="imageContainer">
           <div class="skeletonImage"></div>
