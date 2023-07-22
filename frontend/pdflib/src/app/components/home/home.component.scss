@@ -259,6 +259,115 @@
     padding: 30px 10px;
 }
 
+.noContentFolder {
+    .containerFolder {
+        width: fit-content;
+        height: fit-content;
+        padding: 50px 75px;
+        background-color: rgb(33, 33, 33);
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .headingContainerFolder {
+            height: fit-content;
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            .title {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                font-size: 28px;
+                font-weight: 500;
+                color: white;
+                font-family: "Instrument Sans";
+            }
+            .icon {
+                transform: scale(1.5);
+                color: var(--blue);
+            }
+            .smallTitle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                font-size: 16px;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 0.336);
+                font-family: "Instrument Sans";
+            }
+            .link {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: rgba(255, 255, 255, 0.536);
+            }
+            .link:hover {
+                cursor: pointer;
+                color: rgba(255, 255, 255, 0.736);
+            }
+        }
+    }
+}
+
+.noContent {
+    .container2 {
+        width: 1310px;
+        height: fit-content;
+        padding: 50px 0px;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .headingContainer {
+            height: fit-content;
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            .title {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                font-size: 28px;
+                font-weight: 500;
+                color: white;
+                font-family: "Instrument Sans";
+            }
+            .icon {
+                transform: scale(1.5);
+                color: var(--blue);
+            }
+            .smallTitle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                font-size: 16px;
+                font-weight: 400;
+                color: rgba(255, 255, 255, 0.336);
+                font-family: "Instrument Sans";
+            }
+            .link {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: rgba(255, 255, 255, 0.536);
+            }
+            .link:hover {
+                cursor: pointer;
+                color: rgba(255, 255, 255, 0.736);
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1400px) {
     .container {
         width: 1060px !important;
@@ -271,6 +380,13 @@
     }
     .card:last-child {
         display: none;
+    }
+
+    .noContent {
+        .container2 {
+            width: 1040px;
+            padding: 40px 0px;
+        }
     }
 }
 
@@ -292,6 +408,12 @@
     }
     .card:nth-child(4) {
         display: none;
+    }
+
+    .noContent {
+        .container2 {
+            width: 770px;
+        }
     }
 }
 
@@ -336,6 +458,21 @@
             }
         }
     }
+
+    .noContent {
+        .container2 {
+            width: 620px;
+            padding: 30px 0px;
+            .headingContainer {
+                .title {
+                    font-size: 24px;
+                }
+                .smallTitle {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 690px) {
@@ -353,5 +490,20 @@
 
     .card:nth-child(4) {
         display: flex;
+    }
+
+    .noContent {
+        .container2 {
+            width: 400px;
+            padding: 30px 0px;
+            .headingContainer {
+                .title {
+                    font-size: 24px;
+                }
+                .smallTitle {
+                    font-size: 14px;
+                }
+            }
+        }
     }
 }

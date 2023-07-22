@@ -14,4 +14,13 @@
                     class="material-symbols-rounded">more_vert</span></div>
         </div>
     </div>
+
+    <div *ngIf="this.folders.length == 0" class="noContent">
+        <div class="container">
+            <div class="headingContainer">
+                <div class="title"><span class="material-symbols-rounded icon">folder_off</span>No folders created yet.</div>
+                <div class="smallTitle">Create your first one <span class="link" routerLink='/folder/create'>here<span class="material-symbols-rounded icon2">arrow_outward</span></span></div>
+            </div>
+        </div>
+    </div>
 </div>

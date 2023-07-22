@@ -4,22 +4,35 @@
         <div class="heading">
             <span class="material-symbols-rounded">folder</span>Browse folders:
         </div>
-        <div *ngIf="this.home.Folders" class="folderContainer">
+        <div *ngIf="this.home.Folders" class="folderContainer" style="margin-bottom: 50px">
             <div class="itemContainer" *ngFor="let folder of this.home.Folders" routerLink='/folders/{{folder}}'>
                 <div class="imageContainer">
                     <img src="/assets/folder.png" alt="">
                 </div>
                 <div class="title">{{folder}}</div>
-                <div class="menu"><span class="material-symbols-rounded">more_vert</span></div>
+                <div class="menu"><span class="material-symbols-rounded"
+                        routerLink='/folders/edit/{{folder}}'>more_vert</span></div>
             </div>
             <div class="viewAllButton" routerLink='/folders'>View all <span
                     class="material-symbols-rounded">arrow_right_alt</span></div>
         </div>
-        <div *ngIf="!this.home.Folders" class="folderContainer">
-            <div class="noContent">No folders created yet.</div>
+        <div *ngIf="!this.home.Folders" class="cardContainerHelper">
+            <div class="folderContainer">
+                <div class="noContent">
+                    <div class="container2">
+                        <div class="headingContainer">
+                            <div class="title"><span class="material-symbols-rounded icon">folder_off</span>No folders
+                                created yet.</div>
+                            <div class="smallTitle">Create your first one <span class="link"
+                                    routerLink='/folder/create'>here<span
+                                        class="material-symbols-rounded icon2">arrow_outward</span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="heading" style="margin-top: 50px">
+        <div class="heading">
             <span class="material-symbols-rounded">visibility</span>Recently Viewed:
         </div>
         <div *ngIf="this.home.RecentlyViewed" class="cardContainerHelper">
@@ -38,7 +51,18 @@
             </div>
         </div>
         <div *ngIf="!this.home.RecentlyViewed" class="cardContainerHelper">
-            <div class="noContent">No PDFs viewed recently.</div>
+            <div class="folderContainer">
+                <div class="noContent">
+                    <div class="container2">
+                        <div class="headingContainer">
+                            <div class="title"><span class="material-symbols-rounded icon">scan_delete</span>No PDFs
+                                viewed yet.</div>
+                            <div class="smallTitle">View your first PDF <span class="link" routerLink='/all'>here<span
+                                        class="material-symbols-rounded icon2">arrow_outward</span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="heading">
@@ -60,7 +84,19 @@
             </div>
         </div>
         <div *ngIf="!this.home.RecentlyUploaded" class="cardContainerHelper">
-            <div class="noContent">No PDFs uploaded recently.</div>
+            <div class="folderContainer">
+                <div class="noContent">
+                    <div class="container2">
+                        <div class="headingContainer">
+                            <div class="title"><span class="material-symbols-rounded icon">scan_delete</span>No PDFs
+                                uploaded yet.</div>
+                            <div class="smallTitle">Upload your first one <span class="link"
+                                    routerLink='/upload'>here<span
+                                        class="material-symbols-rounded icon2">arrow_outward</span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
