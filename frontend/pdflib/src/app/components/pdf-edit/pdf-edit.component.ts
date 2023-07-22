@@ -7,6 +7,7 @@ import {NgForm, NgModel, NgControl, FormControl} from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { EventService } from 'src/app/event-service.service';
 
 @Component({
   selector: 'app-pdf-edit',
@@ -42,7 +43,8 @@ export class PdfEditComponent implements OnInit {
     private service: PdfService,
     public route: ActivatedRoute,
     public router: Router,
-    private titleService: Title
+    private titleService: Title,
+    private eventService: EventService
   ) {}
 
   ngOnInit() {
@@ -124,10 +126,13 @@ export class PdfEditComponent implements OnInit {
       }
       this.service.updatePdfByUuid(this.pdf, id).subscribe({
         next: res => {
-          console.log('Successfully updated');
+          setTimeout(this.triggerUpdateMessage.bind(this), 1);
+          setTimeout(this.triggerHideMessage.bind(this), 2200);
           this.router.navigate(['/pdf/view/' + id])
         },
         error: err => {
+          setTimeout(this.triggerUpdateErrorMessage.bind(this), 1);
+          setTimeout(this.triggerHideMessage.bind(this), 2200);
           console.log(err);
         }
       });
@@ -140,15 +145,38 @@ export class PdfEditComponent implements OnInit {
         const id = params['id'];
         this.service.deletePdfByUuid(id).subscribe({
           next: res => {
-            console.log('Successfully deleted');
+            setTimeout(this.triggerDeleteMessage.bind(this), 1);
+            setTimeout(this.triggerHideMessage.bind(this), 2200);
             this.router.navigate(['/'])
           },
           error: err => {
+            setTimeout(this.triggerDeleteErrorMessage.bind(this), 1);
+            setTimeout(this.triggerHideMessage.bind(this), 2200);
             console.log(err);
           }
         });
       });
     }
+  }
+
+  triggerUpdateMessage() {
+    this.eventService.triggerUpdateEvent();
+  }
+
+  triggerDeleteMessage() {
+    this.eventService.triggerDeleteEvent();
+  }
+
+  triggerUpdateErrorMessage() {
+    this.eventService.triggerUpdateErrorEvent();
+  }
+
+  triggerDeleteErrorMessage() {
+    this.eventService.triggerDeleteErrorEvent();
+  }
+
+  triggerHideMessage() {
+    this.eventService.triggerHideMessageEvent();
   }
 
   private _filter(value: string): string[] {

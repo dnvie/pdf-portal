@@ -92,11 +92,11 @@
     color: rgb(255, 70, 70);
 }
 
-#errorMessage {
+#message {
     font-family: 'Instrument Sans';
-    font-weight: 600;
+    font-weight: 500;
     font-size: 18px;
-    color: rgb(255, 70, 70);
+    color: rgb(235, 235, 235);
     opacity: 0;
     transform: scale(0.98);
     user-select: none;
@@ -104,7 +104,7 @@
     transition: all 0.25s ease-in-out;
 }
 
-#errorMessage.active {
+#message.active {
     opacity: 1;
     transform: scale(1);
     user-select: initial;

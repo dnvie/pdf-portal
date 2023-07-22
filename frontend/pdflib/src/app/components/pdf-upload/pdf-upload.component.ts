@@ -68,8 +68,12 @@ export class PdfUploadComponent implements OnInit{
         if (event.type === HttpEventType.UploadProgress) {
           this.uploadProgress = Math.round((100 * event.loaded) / event.total!);
         } else if (event.type === HttpEventType.Response) {
+          if (this.pdfFiles.length == 1) {
+            this.removeLoaderMessage('1 file successfully uploaded');
+          } else {
+            this.removeLoaderMessage(this.pdfFiles.length + ' files successfully uploaded');
+          }
           this.pdfFiles = [];
-          this.removeLoader();
           this.tags = [];
           this.myControl.patchValue("");
           this.service.getFolders().subscribe({
@@ -87,13 +91,13 @@ export class PdfUploadComponent implements OnInit{
         this.pdfFiles = [];
 
         if (error.status == 409) {
-          this.removeLoaderError('Duplicate files were omitted');
+          this.removeLoaderMessage('Duplicate files were ignored');
         } else if (error.status == 400) {
-          this.removeLoaderError('No file(s) selected');
+          this.removeLoaderMessage('No file(s) selected');
         } else if (error.status == 0) {
-          this.removeLoaderError('The backend seems to be offline');
+          this.removeLoaderMessage('The backend seems to be offline');
         } else {
-          this.removeLoaderError('Error uploading files: Error ' + error.status);
+          this.removeLoaderMessage('Error uploading files: Error ' + error.status);
         }
       }
     );
@@ -161,36 +165,16 @@ export class PdfUploadComponent implements OnInit{
     }, 350);
   }
 
-  removeLoader() {
-    const loaderContainer = document.getElementById('loaderContainer');
+  removeLoaderMessage(msg: string) {
     const spinnerElement = document.getElementById('spinner');
-    const checkElement = document.getElementById('check');
-
-    setTimeout(function () {
-      spinnerElement?.classList.remove('active');
-    }, 1000);
-
-    setTimeout(function () {
-      checkElement?.classList.add('active');
-    }, 1150);
-
-    setTimeout(function () {
-      checkElement?.classList.remove('active');
-    }, 2300);
-
-    setTimeout(this.triggerExpandInHeader.bind(this), 2500);
-    setTimeout(this.reset.bind(this), 2500);
-    setTimeout(function () {
-      loaderContainer?.classList.remove('active');
-    }, 2500);
-    setTimeout(this.setUploadingFalse.bind(this), 2500);
-  }
-
-  removeLoaderError(message: string) {
-    const spinnerElement = document.getElementById('spinner');
-    const errorElement = document.getElementById('error');
-    const errorMessage = document.getElementById('errorMessage');
-    errorMessage!.innerText = message;
+    var errorElement: HTMLElement | null
+    if (msg.includes("successfully uploaded")) {
+      errorElement = document.getElementById('check');
+    } else {
+      errorElement = document.getElementById('error');
+    }
+    const message = document.getElementById('message');
+    message!.innerText = msg;
     const loaderContainer = document.getElementById('loaderContainer');
 
     setTimeout(function () {
@@ -207,10 +191,10 @@ export class PdfUploadComponent implements OnInit{
 
     setTimeout(this.triggerExpandClearInHeader.bind(this), 2500);
     setTimeout(function () {
-      errorMessage?.classList.add('active');
+      message?.classList.add('active');
     }, 2700);
     setTimeout(function () {
-      errorMessage?.classList.remove('active');
+      message?.classList.remove('active');
     }, 4500);
     setTimeout(this.reset.bind(this), 2500);
     setTimeout(function () {

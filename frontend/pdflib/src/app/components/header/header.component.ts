@@ -42,20 +42,6 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  hideNav() {
-    const navItems = document.getElementsByClassName('navItem')
-    for (let i = 0; i < navItems.length; i++) {
-      setTimeout(function(){navItems[i].classList.add('navItemHidden');}, i*40)
-    }
-  }
-
-  showNav() {
-    const navItems = document.getElementsByClassName('navItem')
-    for (let i = 0; i < navItems.length; i++) {
-      setTimeout(function(){navItems[i].classList.remove('navItemHidden');}, i*40)
-    }
-  }
-
   setActiveNav(id: number) {
     const navItems = document.getElementsByClassName('navItem')
     const navItemsSmall = document.getElementsByClassName('navItemSmall')
@@ -140,6 +126,61 @@ export class HeaderComponent implements OnInit {
     setTimeout(function(){ document.getElementById('smallSearch')?.classList.remove('active');}, 1);
   }
 
+  addMessage() {
+    setTimeout(function(){ document.getElementById('messageContainer')?.classList.add('active');},1);
+  }
+
+  removeMessage() {
+    setTimeout(function(){ document.getElementById('messageContainer')?.classList.remove('active');},1);
+  }
+
+  showMessageUpdate() {
+    document.getElementById('messageContainer')!.innerHTML = `<span class="material-symbols-rounded">check_circle</span> Successfully updated`;
+    document.getElementById('messageContainer')!.style.color = "#2de358";
+    setTimeout(this.clear, 1);
+    setTimeout(this.addMessage, 250);
+  }
+
+  showMessageDelete() {
+    document.getElementById('messageContainer')!.innerHTML = `<span class="material-symbols-rounded">delete</span> Successfully deleted`;
+    document.getElementById('messageContainer')!.style.color = "#2de358";
+    setTimeout(this.clear, 1);
+    setTimeout(this.addMessage, 250);
+  }
+
+  showErrorUpdate() {
+    document.getElementById('messageContainer')!.innerHTML = `<span class="material-symbols-rounded">error</span> Update failed`;
+    document.getElementById('messageContainer')!.style.color = "#db1432";
+    setTimeout(this.clear, 1);
+    setTimeout(this.addMessage, 250);
+  }
+
+  showErrorDelete() {
+    document.getElementById('messageContainer')!.innerHTML = `<span class="material-symbols-rounded">error</span> Deletion failed`;
+    document.getElementById('messageContainer')!.style.color = "#db1432";
+    setTimeout(this.clear, 1);
+    setTimeout(this.addMessage, 250);
+  }
+
+  showFolderExists() {
+    document.getElementById('messageContainer')!.innerHTML = `<span class="material-symbols-rounded">error</span> Folder already exists`;
+    document.getElementById('messageContainer')!.style.color = "#db1432";
+    setTimeout(this.clear, 1);
+    setTimeout(this.addMessage, 250);
+  }
+
+  showFolderCreated() {
+    document.getElementById('messageContainer')!.innerHTML = `<span class="material-symbols-rounded">check_circle</span> Folder created`;
+    document.getElementById('messageContainer')!.style.color = "#2de358";
+    setTimeout(this.clear, 1);
+    setTimeout(this.addMessage, 250);
+  }
+
+  hideMessage() {
+    setTimeout(this.removeMessage, 1);
+    setTimeout(this.unclear, 250);
+  }
+
   search(event: KeyboardEvent, searchValueTitle: string, searchValueAuthor: string, searchValueTag: string) {    
     if (event.keyCode === 13 || event.key === 'Enter' || event.code === 'Enter') {
       if (searchValueTitle.length != 0 || searchValueAuthor.length != 0 || searchValueTag.length != 0) {
@@ -185,9 +226,26 @@ export class HeaderComponent implements OnInit {
     this.eventService.expandClearEvent$.subscribe(() => {
       this.expandClear();
     });
-    /*this.eventService.unclearEvent$.subscribe(() => {
-      this.unclear();
-    });*/
+    this.eventService.showUpdateEvent$.subscribe(() => {
+      this.showMessageUpdate();
+    });
+    this.eventService.showDeleteEvent$.subscribe(() => {
+      this.showMessageDelete();
+    });
+    this.eventService.showUpdateErrorEvent$.subscribe(() => {
+      this.showErrorUpdate();
+    });
+    this.eventService.showDeleteErrorEvent$.subscribe(() => {
+      this.showErrorDelete();
+    });
+    this.eventService.showFolderExistsEvent$.subscribe(() => {
+      this.showFolderExists();
+    });
+    this.eventService.showFolderCreatedEvent$.subscribe(() => {
+      this.showFolderCreated();
+    });
+    this.eventService.hideMessageEvent$.subscribe(() => {
+      this.hideMessage();
+    });
   }
-
 }
