@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PDF, PDFFile } from 'src/app/data/pdf';
 import { PdfService } from 'src/app/service/pdf.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SafeResourceUrl, Title } from '@angular/platform-browser';
 
 @Component({
@@ -35,6 +35,7 @@ export class PdfDetailsComponent implements OnInit {
   constructor(
     private service: PdfService,
     public route: ActivatedRoute,
+    public router: Router,
     private titleService: Title
   ) { }
 
@@ -49,7 +50,11 @@ export class PdfDetailsComponent implements OnInit {
           this.loaded = true;
         },
         error: err => {
-          console.log(err);
+          if (err.status == 400) {
+            this.router.navigate(['/404'])
+          } else {
+            console.log(err);
+          }
         }
       });
     });

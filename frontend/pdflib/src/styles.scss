@@ -23,7 +23,9 @@ body {
 :root {
   --blue: rgb(0 191 255);
   --blueBG: rgb(71 167 221 / 10%);
-  --skeleton: rgb(75, 75, 75);
+  --skeleton: rgb(75, 75, 75, 0);
+  --skeletonOpacity: 0.2;
+  --skeletonFilter: brightness(100);
 }
 
 ::placeholder {

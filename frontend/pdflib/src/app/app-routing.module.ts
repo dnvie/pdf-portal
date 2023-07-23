@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundError } from 'rxjs';
 import { FolderEditComponent, FolderMode } from './components/folder-edit/folder-edit.component';
 import { FoldersComponent } from './components/folders/folders.component';
 import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PdfDetailsComponent } from './components/pdf-details/pdf-details.component';
 import { PdfEditComponent } from './components/pdf-edit/pdf-edit.component';
 import { PdfOverviewComponent } from './components/pdf-overview/pdf-overview.component';
@@ -11,6 +13,7 @@ import { PdfUploadComponent } from './components/pdf-upload/pdf-upload.component
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
+  { path: "*", pathMatch: 'full', component: HomeComponent },
   { path: "all", component: PdfOverviewComponent },
   { path: "upload", component: PdfUploadComponent },
   { path: "pdf/view/:id", component: PdfDetailsComponent },
@@ -22,6 +25,7 @@ const routes: Routes = [
   { path: "folders/:folder", component: PdfSearchResultsComponent, data: { mode: ResultMode.folder } },
   { path: "folders/edit/:folder", component: FolderEditComponent, data: { mode: FolderMode.edit } },
   { path: "folder/create", component: FolderEditComponent, data: { mode: FolderMode.create } },
+  { path: "404", component: NotFoundComponent }
 ];
 
 @NgModule({

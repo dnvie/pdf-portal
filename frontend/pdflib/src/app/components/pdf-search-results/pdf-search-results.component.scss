@@ -312,9 +312,7 @@
     align-items: center;
     height: fit-content;
     width: 250px;
-    background-color: rgb(43, 43, 43);
     border-radius: 10px;
-    box-shadow: 0 5px 20px 5px rgba(0, 0, 0, 0.051);
     overflow: hidden;
     transition: all 0.1s ease-in-out;
     .skeletonCardContent {
@@ -429,7 +427,6 @@
     align-items: center;
     width: 1000px;
     height: 120px;
-    background-color: #212121;
     border-radius: 12px;
     transition: all 0.1s ease-in-out;
     .skeletonContent {
@@ -487,7 +484,7 @@
                     position: relative;
                     overflow: hidden;
                     height: 50%;
-                    width: 600px;
+                    width: 100%;
                     background-color: var(--skeleton);
                     border-radius: 10px;
                     &::after {
@@ -514,7 +511,7 @@
                     position: relative;
                     overflow: hidden;
                     height: 30%;
-                    width: 400px;
+                    width: 75%;
                     background-color: var(--skeleton);
                     border-radius: 7px;
                     &::after {
@@ -583,6 +580,41 @@
     }
 }
 
+.noContent {
+    .container {
+        width: 725px;
+        height: fit-content;
+        padding: 75px 0px;
+        background-color: rgb(33, 33, 33);
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .headingContainer {
+            height: fit-content;
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            .title {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+                font-size: 28px;
+                font-weight: 500;
+                color: white;
+                font-family: "Instrument Sans";
+            }
+            .icon {
+                transform: scale(1.5);
+                color: var(--blue);
+            }
+        }
+    }
+}
+
 @keyframes shimmer {
     100% {
         transform: translateX(100%);
@@ -637,6 +669,22 @@
 
     .viewMode {
         width: 64px;
+    }
+
+    .noContent {
+        .container {
+            width: 525px;
+            padding: 75px 0px;
+            .headingContainer {
+                gap: 10px;
+                .title {
+                    font-size: 24px;
+                }
+                .icon {
+                    transform: scale(1.4);
+                }
+            }
+        }
     }
 }
 
@@ -751,6 +799,22 @@
                     .skeletonAuthor {
                         width: 180px;
                     }
+                }
+            }
+        }
+    }
+
+    .noContent {
+        .container {
+            width: 425px;
+            padding: 75px 0px;
+            .headingContainer {
+                gap: 10px;
+                .title {
+                    font-size: 24px;
+                }
+                .icon {
+                    transform: scale(1.3);
                 }
             }
         }

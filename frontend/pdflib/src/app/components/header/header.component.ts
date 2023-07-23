@@ -148,21 +148,21 @@ export class HeaderComponent implements OnInit {
 
   showErrorUpdate() {
     document.getElementById('messageContainer')!.innerHTML = `<span class="material-symbols-rounded">error</span> Update failed`;
-    document.getElementById('messageContainer')!.style.color = "#db1432";
+    document.getElementById('messageContainer')!.style.color = "#fa1437";
     setTimeout(this.clear, 1);
     setTimeout(this.addMessage, 250);
   }
 
   showErrorDelete() {
     document.getElementById('messageContainer')!.innerHTML = `<span class="material-symbols-rounded">error</span> Deletion failed`;
-    document.getElementById('messageContainer')!.style.color = "#db1432";
+    document.getElementById('messageContainer')!.style.color = "#fa1437";
     setTimeout(this.clear, 1);
     setTimeout(this.addMessage, 250);
   }
 
   showFolderExists() {
     document.getElementById('messageContainer')!.innerHTML = `<span class="material-symbols-rounded">error</span> Folder already exists`;
-    document.getElementById('messageContainer')!.style.color = "#db1432";
+    document.getElementById('messageContainer')!.style.color = "#fa1437";
     setTimeout(this.clear, 1);
     setTimeout(this.addMessage, 250);
   }

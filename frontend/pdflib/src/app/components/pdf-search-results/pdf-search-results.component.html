@@ -10,9 +10,9 @@
         with tag:<span class="em">&nbsp;{{this.tag}}</span></div>
     <div *ngIf="this.mode == 1" class="heading">{{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span>
         with author:<span class="em">&nbsp;{{this.author}}</span></div>
-    <div *ngIf="this.mode == 2" class="heading"><span class="em">{{this.totalPages}}&nbsp;</span> Search Result <span
+    <div *ngIf="this.mode == 2 && this.totalPages != 0" class="heading"><span class="em">{{this.totalPages}}&nbsp;</span> Search Result <span
             *ngIf="this.totalPages != 1">s</span>:</div>
-    <div *ngIf="this.mode == 3" class="heading">{{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span>
+    <div *ngIf="this.mode == 3 && this.totalPages != 0" class="heading">{{this.totalPages}} PDF<span *ngIf="this.totalPages != 1">s&nbsp;</span>
         in folder:<span class="em">&nbsp;{{this.folder}}</span></div>
 </div>
 
@@ -56,7 +56,23 @@
         </div>
     </div>
 
-    <mat-paginator class="paginator" [length]="totalPages" [pageSize]="pageSize" [pageIndex]="currentPage"
+    <div *ngIf="this.totalPages == 0" class="noContent">
+        <div *ngIf="this.mode == 2" class="container">
+            <div class="headingContainer">
+                <div class="title"><span class="material-symbols-rounded icon">scan_delete</span>No search results.</div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="this.totalPages == 0" class="noContent">
+        <div *ngIf="this.mode == 3" class="container">
+            <div class="headingContainer">
+                <div class="title"><span class="material-symbols-rounded icon">folder_open</span>This folder is empty.</div>
+            </div>
+        </div>
+    </div>
+
+    <mat-paginator *ngIf="this.totalPages != 0" class="paginator" [length]="totalPages" [pageSize]="pageSize" [pageIndex]="currentPage"
         [hidePageSize]="true" [showFirstLastButtons]="true" (page)="onPageChange($event)"></mat-paginator>
 
     <div *ngIf="!loaded" class="cardContainer">
@@ -89,9 +105,4 @@
                 </div>
             </div>
         </div>
-
-        <mat-paginator *ngIf="this.pdfs.TotalCount > 48" class="paginator" [length]="totalPages" [pageSize]="pageSize"
-            [hidePageSize]="true" [pageIndex]="currentPage" [showFirstLastButtons]="true" (page)="onPageChange($event)">
-        </mat-paginator>
-
     </div>

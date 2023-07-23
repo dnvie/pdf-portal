@@ -24,6 +24,7 @@ import { FoldersComponent } from './components/folders/folders.component';
 import { FolderEditComponent } from './components/folder-edit/folder-edit.component';
 import { HomeComponent } from './components/home/home.component';
 import { DropzoneDirective } from 'src/app/directives/dropzone.directive';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { DropzoneDirective } from 'src/app/directives/dropzone.directive';
     FoldersComponent,
     FolderEditComponent,
     HomeComponent,
-    DropzoneDirective
+    DropzoneDirective,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

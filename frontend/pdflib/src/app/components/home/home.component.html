@@ -16,7 +16,7 @@
             <div class="viewAllButton" routerLink='/folders'>View all <span
                     class="material-symbols-rounded">arrow_right_alt</span></div>
         </div>
-        <div *ngIf="!this.home.Folders" class="cardContainerHelper">
+        <div *ngIf="!this.home.Folders && loaded" class="cardContainerHelper">
             <div class="folderContainer">
                 <div class="noContent">
                     <div class="container2">
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="!this.home.RecentlyViewed" class="cardContainerHelper">
+        <div *ngIf="!this.home.RecentlyViewed && loaded" class="cardContainerHelper">
             <div class="folderContainer">
                 <div class="noContent">
                     <div class="container2">
@@ -83,7 +83,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="!this.home.RecentlyUploaded" class="cardContainerHelper">
+        <div *ngIf="!this.home.RecentlyUploaded && loaded" class="cardContainerHelper">
             <div class="folderContainer">
                 <div class="noContent">
                     <div class="container2">

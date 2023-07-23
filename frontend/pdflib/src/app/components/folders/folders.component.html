@@ -3,7 +3,7 @@
             class="material-symbols-rounded">create_new_folder</span></div>
 </div>
 
-<div class="cardContainer">
+<div *ngIf="loaded" class="cardContainer">
     <div class="cardContainerHelper">
         <div class="itemContainer" *ngFor="let folder of folders" routerLink='/folders/{{folder}}'>
             <div class="imageContainer">

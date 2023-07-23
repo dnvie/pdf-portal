@@ -68,7 +68,11 @@ export class PdfEditComponent implements OnInit {
           this.loaded = true;
         },
         error: err => {
-          console.log(err);
+          if (err.status == 400) {
+            this.router.navigate(['/404'])
+          } else {
+            console.log(err);
+          }
         }
       });
       this.service.getFolders().subscribe({

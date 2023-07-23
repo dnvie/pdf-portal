@@ -18,7 +18,7 @@ func ConnectDatabase() {
 		panic(err)
 	}
 
-	statement2 := `DROP TABLE pdf_tags`
+	/*statement2 := `DROP TABLE pdf_tags`
 	_, err = database.Exec(statement2)
 	if err != nil {
 		panic(err)
@@ -38,7 +38,7 @@ func ConnectDatabase() {
 	_, err = database.Exec(statement4)
 	if err != nil {
 		panic(err)
-	}
+	}*/
 
 	statement := `CREATE TABLE IF NOT EXISTS folders (
 		id SERIAL PRIMARY KEY,
@@ -390,9 +390,11 @@ func GetAllPdfDataByTag(page int, tagname string) structs.PDFPreviews {
 	FROM pdf
 	INNER JOIN pdf_tags ON pdf.id = pdf_tags.pdf_id
 	INNER JOIN tags ON pdf_tags.tag_id = tags.id
-	WHERE REPLACE(tags.name, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
-	ORDER BY pdf.upload_date, pdf.id DESC OFFSET $2 LIMIT $3
+	WHERE LOWER(REPLACE(tags.name, ' ', '')) = LOWER(REPLACE($1, ' ', ''))
+	ORDER BY pdf.upload_date, pdf.id DESC
+	OFFSET $2 LIMIT $3
 	`
+
 	rows, err := Database.Query(statement, tagname, offset, limit)
 	if err != nil {
 		panic(err)
@@ -416,7 +418,7 @@ func GetAllPdfDataByTag(page int, tagname string) structs.PDFPreviews {
 	FROM pdf
 	INNER JOIN pdf_tags ON pdf.id = pdf_tags.pdf_id
 	INNER JOIN tags ON pdf_tags.tag_id = tags.id
-	WHERE REPLACE(tags.name, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+	WHERE LOWER(REPLACE(tags.name, ' ', '')) = LOWER(REPLACE($1, ' ', ''))
 	`
 	var count int64
 	err = Database.QueryRow(statement, tagname).Scan(&count)
@@ -438,7 +440,7 @@ func GetAllPdfDataByAuthor(page int, author string) structs.PDFPreviews {
 	statement := `
 	SELECT pdf.id, pdf.title, pdf.author, pdf.image, pdf.size, pdf.number_of_pages
 	FROM pdf
-	WHERE REPLACE(pdf.author, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+	WHERE LOWER(REPLACE(pdf.author, ' ', '')) = LOWER(REPLACE($1, ' ', ''))
 	ORDER BY pdf.upload_date, pdf.id DESC OFFSET $2 LIMIT $3
 	`
 	rows, err := Database.Query(statement, author, offset, limit)
@@ -462,7 +464,7 @@ func GetAllPdfDataByAuthor(page int, author string) structs.PDFPreviews {
 	statement = `
 	SELECT COUNT(*)
 	FROM pdf
-	WHERE REPLACE(pdf.author, ' ', '') ILIKE '%' || REPLACE($1, ' ', '') || '%'
+	WHERE LOWER(REPLACE(pdf.author, ' ', '')) = LOWER(REPLACE($1, ' ', ''))
 	`
 	var count int64
 	err = Database.QueryRow(statement, author).Scan(&count)

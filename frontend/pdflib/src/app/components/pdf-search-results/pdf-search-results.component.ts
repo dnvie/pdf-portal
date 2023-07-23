@@ -78,7 +78,6 @@ export class PdfSearchResultsComponent implements OnInit {
         this.titleService.setTitle('Folder: ' + this.folder)
         this.loadPdfsInFolder(this.folder)
       }
-      this.loaded = true;
     });
   }
 

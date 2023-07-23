@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
     RecentlyViewed: undefined,
     Folders: undefined
   };
+  loaded = false
 
   constructor(private service: PdfService, private titleService: Title) { }
 
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit {
       next: res => {
         this.home = res;
         this.titleService.setTitle('PDF Portal - Home');
+        this.loaded = true;
       },
       error: err => {
         console.log(err);

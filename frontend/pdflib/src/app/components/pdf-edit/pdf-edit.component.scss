@@ -20,6 +20,7 @@
             position: relative;
             img {
                 height: 500px;
+                max-width: 850px;
                 border-radius: 10px;
             }
         }
@@ -130,6 +131,18 @@
     }
 }
 
+@media only screen and (max-width: 850px) {
+    .main {
+        .container {
+            .imageContainer {
+                img {
+                    max-width: 550px;
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 600px) {
     .main {
         .container {
@@ -137,6 +150,7 @@
             .imageContainer {
                 img {
                     height: 300px;
+                    max-width: 400px;
                 }
             }
         }

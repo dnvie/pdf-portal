@@ -10,6 +10,7 @@ import { PdfService } from 'src/app/service/pdf.service';
 export class FoldersComponent implements OnInit {
 
   folders: string[] = []
+  loaded = false;
 
   constructor(private service: PdfService, private titleService: Title) { }
 
@@ -18,6 +19,7 @@ export class FoldersComponent implements OnInit {
     this.service.getFolders().subscribe(
       data => {
         this.folders = data
+        this.loaded = true;
       },
       error => {
         console.log("error loading folders", error);
