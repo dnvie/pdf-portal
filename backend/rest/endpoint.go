@@ -11,7 +11,9 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strconv"
+	"strings"
 	"sync"
 
 	"github.com/go-chi/chi"
@@ -33,13 +35,21 @@ func UploadPDF(w http.ResponseWriter, r *http.Request) {
 
 	files := r.MultipartForm.File["pdfFile"]
 
+	var pdfFiles []*multipart.FileHeader
+	for _, fileHeader := range files {
+		ext := filepath.Ext(fileHeader.Filename)
+		if strings.ToLower(ext) == ".pdf" {
+			pdfFiles = append(pdfFiles, fileHeader)
+		}
+	}
+
 	if len(files) == 0 {
 		http.Error(w, "No files uploaded", http.StatusBadRequest)
 		return
 	}
 
 	var wg sync.WaitGroup
-	for _, fileHeader := range files {
+	for _, fileHeader := range pdfFiles {
 		wg.Add(1)
 		go func(fileHeader *multipart.FileHeader) {
 			defer wg.Done()

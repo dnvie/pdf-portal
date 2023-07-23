@@ -33,7 +33,9 @@ export class PdfUploadComponent implements OnInit {
   onFileSelected(event: any) {
     const selectedFiles = event.target.files;
     for (let i = 0; i < selectedFiles.length; i++) {
-      this.pdfFiles.push(selectedFiles[i]);
+      if (selectedFiles[i].type === "application/pdf") {
+        this.pdfFiles.push(selectedFiles[i]);
+      }
     }
   }
 
@@ -44,6 +46,7 @@ export class PdfUploadComponent implements OnInit {
     const formData: FormData = new FormData();
     for (let i = 0; i < this.pdfFiles.length; i++) {
       const pdfFile = this.pdfFiles[i];
+      
       formData.append('pdfFile', pdfFile);
     }
     formData.append('tags', JSON.stringify(this.tags));
@@ -104,7 +107,9 @@ export class PdfUploadComponent implements OnInit {
 
   onFilesDropped(files: FileList) {
     for (let i = 0; i < files.length; i++) {
-      this.pdfFiles.push(files[i]);
+      if (files[i].type === "application/pdf") {
+        this.pdfFiles.push(files[i]);
+      }
     }
   }
 
