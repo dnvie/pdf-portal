@@ -1,12 +1,12 @@
 <div class="main">
   <div class="container">
-    <div *ngIf="loaded" class="imageContainer">
+    <div *ngIf="loaded" class="imageContainer unrevealed">
       <img class="card" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
     </div>
     <div *ngIf="!loaded" class="imageContainer">
       <div class="skeletonImage"></div>
     </div>
-    <div class="infoContainer">
+    <div class="infoContainer unrevealed">
       <mat-form-field class="full-width" appearance="fill">
         <mat-label>Title</mat-label>
         <input type="text" matInput name="title" [(ngModel)]="pdf.Title">

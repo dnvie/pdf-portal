@@ -18,6 +18,7 @@
         font-weight: 500;
         .imageContainer {
             position: relative;
+            transition: all 0.1s ease-in-out;
             img {
                 height: 500px;
                 max-width: 850px;
@@ -33,6 +34,7 @@
             height: fit-content;
             align-items: center;
             text-align: center;
+            transition: all 0.1s ease-in-out;
             .buttons {
                 margin-top: 25px;
                 display: flex;
@@ -101,6 +103,12 @@
         animation: shimmer 1s infinite ease-in-out;
         content: "";
     }
+}
+
+.unrevealed {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(3px);
 }
 
 @keyframes shimmer {

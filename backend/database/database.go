@@ -18,28 +18,6 @@ func ConnectDatabase() {
 		panic(err)
 	}
 
-	/*statement2 := `DROP TABLE pdf_tags`
-	_, err = database.Exec(statement2)
-	if err != nil {
-		panic(err)
-	}
-	statement1 := `DROP TABLE tags`
-	_, err = database.Exec(statement1)
-	if err != nil {
-		panic(err)
-	}
-	statement3 := `DROP TABLE pdf`
-	_, err = database.Exec(statement3)
-	if err != nil {
-		panic(err)
-	}
-
-	statement4 := `DROP TABLE folders`
-	_, err = database.Exec(statement4)
-	if err != nil {
-		panic(err)
-	}*/
-
 	statement := `CREATE TABLE IF NOT EXISTS folders (
 		id SERIAL PRIMARY KEY,
 		name TEXT UNIQUE

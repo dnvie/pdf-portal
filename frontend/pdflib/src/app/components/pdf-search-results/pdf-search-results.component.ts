@@ -88,6 +88,8 @@ export class PdfSearchResultsComponent implements OnInit {
           this.pdfs = res
           this.totalPages = res.TotalCount;
           this.loaded = true;
+          setTimeout(this.revealItems, 1);
+          setTimeout(this.revealCards, 1);
         },
         error: err => {
           console.log(err);
@@ -99,6 +101,8 @@ export class PdfSearchResultsComponent implements OnInit {
           this.pdfs = res
           this.totalPages = res.TotalCount;
           this.loaded = true;
+          setTimeout(this.revealItems, 1);
+          setTimeout(this.revealCards, 1);
         },
         error: err => {
           console.log(err);
@@ -113,6 +117,8 @@ export class PdfSearchResultsComponent implements OnInit {
         this.pdfs = res
         this.totalPages = res.TotalCount;
         this.loaded = true;
+        setTimeout(this.revealItems, 1);
+        setTimeout(this.revealCards, 1);
       },
       error: err => {
         console.log(err);
@@ -126,6 +132,8 @@ export class PdfSearchResultsComponent implements OnInit {
         this.pdfs = res
         this.totalPages = res.TotalCount;
         this.loaded = true;
+        setTimeout(this.revealItems, 1);
+        setTimeout(this.revealCards, 1);
       },
       error: err => {
         console.log(err);
@@ -163,10 +171,38 @@ export class PdfSearchResultsComponent implements OnInit {
   toggleListView() {
     this.listView = true;
     localStorage.setItem('listView', 'true')
+    setTimeout(this.revealItems, 1);
   }
 
   toggleGridView() {
     this.listView = false;
     localStorage.setItem('listView', 'false')
+    setTimeout(this.revealCards, 1);
+  }
+
+  revealItems() {
+    setTimeout(function () { document.getElementsByClassName('noContent')[0]?.classList.remove('unrevealed'); }, 1);
+    const items = document.getElementsByClassName('itemContainer');
+    console.log(items);
+    
+
+    for (let i = 0; i < items.length; i++) {
+        setTimeout(function () {
+            items[i]?.classList.remove('unrevealed');
+        }, i * 10);
+    }
+  }
+
+  revealCards() {
+    setTimeout(function () { document.getElementsByClassName('noContent')[0]?.classList.remove('unrevealed'); }, 1);
+    const cards = document.getElementsByClassName('card');
+    console.log(cards);
+    
+
+    for (let i = 0; i < cards.length; i++) {
+        setTimeout(function () {
+            cards[i]?.classList.remove('unrevealed');
+        }, i * 10);
+    }
   }
 }

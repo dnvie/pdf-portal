@@ -270,9 +270,7 @@
     align-items: center;
     height: fit-content;
     width: 250px;
-    //background-color: rgb(43, 43, 43);
     border-radius: 10px;
-    //box-shadow: 0 5px 20px 5px rgba(0, 0, 0, 0.051);
     overflow: hidden;
     transition: all 0.1s ease-in-out;
     .skeletonCardContent {
@@ -387,7 +385,6 @@
     align-items: center;
     width: 1000px;
     height: 120px;
-    //background-color: #212121;
     border-radius: 12px;
     transition: all 0.1s ease-in-out;
     .skeletonContent {
@@ -542,6 +539,7 @@
 }
 
 .noContent {
+    transition: all 0.1s ease-in-out;
     .container {
         width: 725px;
         height: fit-content;
@@ -594,6 +592,12 @@
             }
         }
     }
+}
+
+.unrevealed {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(3px);
 }
 
 @keyframes shimmer {

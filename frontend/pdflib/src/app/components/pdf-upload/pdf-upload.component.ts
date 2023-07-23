@@ -204,6 +204,7 @@ export class PdfUploadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(this.revealItems, 20);
     this.titleService.setTitle("Upload Files");
     this.filteredFolders = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -217,6 +218,13 @@ export class PdfUploadComponent implements OnInit {
         console.log(err);
       }
     });
+  }
+
+  revealItems() {
+    setTimeout(function () { document.getElementById('container')?.classList.remove('unrevealed'); }, 40);
+    setTimeout(function () { document.getElementsByClassName('headingContainer')[0]?.classList.remove('unrevealed'); }, 80);
+    setTimeout(function () { document.getElementsByClassName('dropzone')[0]?.classList.remove('unrevealed'); }, 120);
+    setTimeout(function () { document.getElementsByClassName('filesSelected')[0]?.classList.remove('unrevealed'); }, 160);
   }
 
   private _filter(value: string): string[] {

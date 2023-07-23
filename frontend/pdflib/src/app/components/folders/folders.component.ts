@@ -20,11 +20,25 @@ export class FoldersComponent implements OnInit {
       data => {
         this.folders = data
         this.loaded = true;
+        setTimeout(this.revealItems, 20);
       },
       error => {
         console.log("error loading folders", error);
       },
     );
+  }
+
+  revealItems() {
+    setTimeout(function () { document.getElementById('noContentContainer')?.classList.remove('unrevealed'); }, 60);
+    const items = document.getElementsByClassName('itemContainer');
+    console.log(items);
+    
+
+    for (let i = 0; i < items.length; i++) {
+        setTimeout(function () {
+            items[i]?.classList.remove('unrevealed');
+        }, i * 10);
+    }
   }
 
 }

@@ -154,6 +154,7 @@
         justify-content: center;
         align-items: center;
         gap: 50px;
+        transition: all 0.1s ease-in-out;
         .headingContainer {
             height: fit-content;
             width: fit-content;
@@ -161,6 +162,7 @@
             flex-direction: column;
             gap: 7px;
             align-items: center;
+            transition: all 0.1s ease-in-out;
             .title {
                 font-size: 28px;
                 font-weight: 500;
@@ -218,6 +220,7 @@
             flex-direction: column;
             align-items: center;
             row-gap: 20px;
+            transition: all 0.1s ease-in-out;
             .numberOfFiles {
                 font-size: 20px;
                 font-weight: 500;
@@ -277,6 +280,12 @@
         align-items: center;
         gap: 30px;
     }
+}
+
+.unrevealed {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(3px);
 }
 
 @media only screen and (max-width: 850px) {

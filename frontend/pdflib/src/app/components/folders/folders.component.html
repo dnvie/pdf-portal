@@ -5,7 +5,7 @@
 
 <div *ngIf="loaded" class="cardContainer">
     <div class="cardContainerHelper">
-        <div class="itemContainer" *ngFor="let folder of folders" routerLink='/folders/{{folder}}'>
+        <div class="itemContainer unrevealed" *ngFor="let folder of folders" routerLink='/folders/{{folder}}'>
             <div class="imageContainer">
                 <img src="/assets/folder.png" alt="">
             </div>
@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <div *ngIf="this.folders.length == 0" class="noContent">
+    <div *ngIf="!this.folders" class="noContent unrevealed" id="noContentContainer">
         <div class="container">
             <div class="headingContainer">
                 <div class="title"><span class="material-symbols-rounded icon">folder_off</span>No folders created yet.</div>

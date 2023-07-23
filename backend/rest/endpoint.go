@@ -2,7 +2,6 @@ package rest
 
 import (
 	"PDFLib/data"
-	constants "PDFLib/data"
 	"PDFLib/database"
 	"PDFLib/utility"
 	"bufio"
@@ -53,7 +52,7 @@ func UploadPDF(w http.ResponseWriter, r *http.Request) {
 			}
 			defer file.Close()
 
-			dst, err := os.Create(constants.PDF_PATH + id.String() + ".pdf")
+			dst, err := os.Create(data.PDF_PATH + id.String() + ".pdf")
 			if err != nil {
 				http.Error(w, "Failed to create the file", http.StatusInternalServerError)
 				return
@@ -87,7 +86,7 @@ func UploadPDF(w http.ResponseWriter, r *http.Request) {
 			pdfInfo := utility.GetPdfInfo(id.String(), file, fileHeader)
 			pdfInfo.Folder = folder
 			if database.CheckIfFilenameExists(pdfInfo.Filename) {
-				err := os.Remove(constants.PDF_PATH + id.String() + ".pdf")
+				err := os.Remove(data.PDF_PATH + id.String() + ".pdf")
 				if err != nil {
 					panic(err)
 				}
@@ -131,7 +130,7 @@ func GetPDFFile(w http.ResponseWriter, r *http.Request) {
 	var file data.PDFFile
 	id := chi.URLParam(r, "id")
 	if database.CheckIfFileExists(id) {
-		fileContent, err := utility.ReadPDFFile(constants.PDF_PATH + id + ".pdf")
+		fileContent, err := utility.ReadPDFFile(data.PDF_PATH + id + ".pdf")
 		if err != nil {
 			panic(err)
 		}
@@ -302,7 +301,7 @@ func DeletePDFFile(w http.ResponseWriter, r *http.Request) {
 
 	if database.CheckIfFileExists(id) {
 		database.DeletePdfData(id)
-		err := os.Remove(constants.PDF_PATH + id + ".pdf")
+		err := os.Remove(data.PDF_PATH + id + ".pdf")
 		if err != nil {
 			panic(err)
 		}
@@ -325,17 +324,6 @@ func GetFolders(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateFolder(w http.ResponseWriter, r *http.Request) {
-	/*var newFolder struct {
-		Name string `json:"name"`
-	}
-
-	err := json.NewDecoder(r.Body).Decode(&newFolder)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	name := newFolder.Name*/
 	name := chi.URLParam(r, "name")
 
 	if !database.CheckIfFolderExists(name) {

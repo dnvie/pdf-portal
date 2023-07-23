@@ -27,6 +27,7 @@
     height: fit-content;
     font-size: 26px;
     font-weight: 500;
+    transition: all 0.1s ease-in-out;
 }
 
 .cardContainer {
@@ -53,6 +54,7 @@
     align-items: flex-start;
     padding: 20px;
     margin-bottom: 50px;
+    transition: all 0.1s ease-in-out;
 }
 
 .card {
@@ -170,7 +172,7 @@
     height: 75px;
     background-color: #212121;
     border-radius: 20px;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.15s ease-in-out;
     gap: 10px;
     .imageContainer {
         display: flex;
@@ -366,6 +368,12 @@
             }
         }
     }
+}
+
+.unrevealed {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(3px);
 }
 
 @media only screen and (max-width: 1400px) {

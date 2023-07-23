@@ -48,6 +48,7 @@ export class PdfDetailsComponent implements OnInit {
           this.pdf = res;
           this.titleService.setTitle(this.pdf.Title ? this.pdf.Title : this.pdf.Filename!);
           this.loaded = true;
+          setTimeout(this.revealItems, 1);
         },
         error: err => {
           if (err.status == 400) {
@@ -97,5 +98,10 @@ export class PdfDetailsComponent implements OnInit {
         }
       });
     });
+  }
+
+  revealItems() {
+    setTimeout(function () { document.getElementsByClassName('imageContainer')[0]?.classList.remove('unrevealed'); }, 80);
+    setTimeout(function () { document.getElementsByClassName('infoContainer')[0]?.classList.remove('unrevealed'); }, 120);
   }
 }

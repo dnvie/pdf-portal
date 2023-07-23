@@ -41,6 +41,7 @@ export class FolderEditComponent implements OnInit {
     } else {
       this.titleService.setTitle("Creating new folder");
     }
+    setTimeout(this.revealItems, 20);
   }
 
   updateFolder() {
@@ -124,5 +125,12 @@ export class FolderEditComponent implements OnInit {
 
   triggerHideMessage() {
     this.eventService.triggerHideMessageEvent();
+  }
+
+  revealItems() {
+    setTimeout(function () { document.getElementsByClassName('title')[0]?.classList.remove('unrevealed'); }, 20);
+    setTimeout(function () { document.getElementsByClassName('full-width')[0]?.classList.remove('unrevealed'); }, 40);
+    setTimeout(function () { document.getElementsByClassName('button')[0]?.classList.remove('unrevealed'); }, 60);
+    setTimeout(function () { document.getElementsByClassName('button')[1]?.classList.remove('unrevealed'); }, 60);
   }
 }

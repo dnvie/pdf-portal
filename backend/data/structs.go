@@ -16,7 +16,6 @@ type PDFInfo struct {
 	Tags         []string
 	Image        string
 	Folder       string
-	//File         string
 }
 
 type PDFFile struct {

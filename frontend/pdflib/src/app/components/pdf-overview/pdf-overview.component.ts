@@ -42,6 +42,8 @@ export class PdfOverviewComponent implements OnInit {
         this.pdfs = data
         this.totalPages = data.TotalCount;
         this.loaded = true;
+        setTimeout(this.revealItems, 1);
+        setTimeout(this.revealCards, 1);
       },
       error => {
         console.log("error loading network info", error);
@@ -52,11 +54,13 @@ export class PdfOverviewComponent implements OnInit {
   toggleListView() {
     this.listView = true;
     localStorage.setItem('listView', 'true')
+    setTimeout(this.revealItems, 1);
   }
 
   toggleGridView() {
     this.listView = false;
     localStorage.setItem('listView', 'false')
+    setTimeout(this.revealCards, 1);
   }
 
   isListView(): boolean {
@@ -69,6 +73,28 @@ export class PdfOverviewComponent implements OnInit {
     this.pageSize = event.pageSize;
     this.loadPdfs();
     window.scrollTo(0, 0);
+  }
+
+  revealItems() {
+    setTimeout(function () { document.getElementsByClassName('noContent')[0]?.classList.remove('unrevealed'); }, 1);
+    const items = document.getElementsByClassName('itemContainer');
+
+    for (let i = 0; i < items.length; i++) {
+        setTimeout(function () {
+            items[i]?.classList.remove('unrevealed');
+        }, i * 10);
+    }
+  }
+
+  revealCards() {
+    setTimeout(function () { document.getElementsByClassName('noContent')[0]?.classList.remove('unrevealed'); }, 1);
+    const cards = document.getElementsByClassName('card');  
+
+    for (let i = 0; i < cards.length; i++) {
+        setTimeout(function () {
+            cards[i]?.classList.remove('unrevealed');
+        }, i * 10);
+    }
   }
 
 }

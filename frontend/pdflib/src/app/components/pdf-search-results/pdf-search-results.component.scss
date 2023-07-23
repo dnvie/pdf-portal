@@ -581,6 +581,7 @@
 }
 
 .noContent {
+    transition: all 0.1s ease-in-out;
     .container {
         width: 725px;
         height: fit-content;
@@ -613,6 +614,12 @@
             }
         }
     }
+}
+
+.unrevealed {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(3px);
 }
 
 @keyframes shimmer {

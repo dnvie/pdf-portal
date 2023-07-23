@@ -18,7 +18,7 @@
 
 <div *ngIf="loaded" class="cardContainer">
     <div *ngIf="listView" class="cardContainerHelper">
-        <div class="itemContainer" *ngFor="let pdf of pdfs.Previews; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
+        <div class="itemContainer unrevealed" *ngFor="let pdf of pdfs.Previews; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
             <div class="itemContent">
                 <div class="imageContainer">
                     <img src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
@@ -41,7 +41,7 @@
     </div>
 
     <div *ngIf="!listView" class="cardContainerHelper">
-        <div class="card" *ngFor="let pdf of pdfs.Previews; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
+        <div class="card unrevealed" *ngFor="let pdf of pdfs.Previews; let i = index" routerLink='/pdf/view/{{pdf.Uuid}}'>
             <div class="cardContent">
                 <div class="image">
                     <img class="thumbnail" src='data:image/jpeg;base64,{{pdf.Image}}' alt="">
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div *ngIf="this.totalPages == 0" class="noContent">
+    <div *ngIf="this.totalPages == 0" class="noContent unrevealed">
         <div *ngIf="this.mode == 2" class="container">
             <div class="headingContainer">
                 <div class="title"><span class="material-symbols-rounded icon">scan_delete</span>No search results.</div>
@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <div *ngIf="this.totalPages == 0" class="noContent">
+    <div *ngIf="this.totalPages == 0" class="noContent unrevealed">
         <div *ngIf="this.mode == 3" class="container">
             <div class="headingContainer">
                 <div class="title"><span class="material-symbols-rounded icon">folder_open</span>This folder is empty.</div>

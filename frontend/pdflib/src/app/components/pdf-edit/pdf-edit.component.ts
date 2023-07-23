@@ -66,6 +66,7 @@ export class PdfEditComponent implements OnInit {
           }
           this.titleService.setTitle("Editing " + (this.pdf.Title ? this.pdf.Title : this.pdf.Filename!));
           this.loaded = true;
+          setTimeout(this.revealItems, 1);
         },
         error: err => {
           if (err.status == 400) {
@@ -181,6 +182,11 @@ export class PdfEditComponent implements OnInit {
 
   triggerHideMessage() {
     this.eventService.triggerHideMessageEvent();
+  }
+
+  revealItems() {
+    setTimeout(function () { document.getElementsByClassName('imageContainer')[0]?.classList.remove('unrevealed'); }, 80);
+    setTimeout(function () { document.getElementsByClassName('infoContainer')[0]?.classList.remove('unrevealed'); }, 120);
   }
 
   private _filter(value: string): string[] {

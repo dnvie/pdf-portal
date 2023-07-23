@@ -20,21 +20,24 @@ func Serve() {
 		MaxAge:           300,
 	}))
 
-	r.Post("/upload", UploadPDF)
 	r.Get("/pdf/{id}", GetPDF)
 	r.Get("/pdfs", GetAllPDFs)
 	r.Get("/pdf/file/{id}", GetPDFFile)
 	r.Get("/pdfs/tag/{tag}", GetAllPDFsByTag)
 	r.Get("/pdfs/author/{author}", GetAllPDFsByAuthor)
 	r.Get("/pdfs/search", GetAllPDFsBySearch)
-	r.Put("/pdf/file/{id}", UpdatePDFFile)
-	r.Delete("/pdf/delete/{id}", DeletePDFFile)
 	r.Get("/folders", GetFolders)
 	r.Get("/folder/{name}", CreateFolder)
 	r.Get("/folders/{name}", GetAllPDFsByFolder)
-	r.Put("/folders/{old}", UpdateFolder)
-	r.Delete("/folders/{name}", DeleteFolder)
 	r.Get("/home", GetHomeData)
+
+	r.Post("/upload", UploadPDF)
+
+	r.Put("/pdf/file/{id}", UpdatePDFFile)
+	r.Put("/folders/{old}", UpdateFolder)
+
+	r.Delete("/pdf/delete/{id}", DeletePDFFile)
+	r.Delete("/folders/{name}", DeleteFolder)
 
 	http.ListenAndServe(":3000", r)
 }
