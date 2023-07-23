@@ -31,8 +31,6 @@ export class FoldersComponent implements OnInit {
   revealItems() {
     setTimeout(function () { document.getElementById('noContentContainer')?.classList.remove('unrevealed'); }, 60);
     const items = document.getElementsByClassName('itemContainer');
-    console.log(items);
-    
 
     for (let i = 0; i < items.length; i++) {
         setTimeout(function () {

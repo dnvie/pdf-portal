@@ -183,8 +183,6 @@ export class PdfSearchResultsComponent implements OnInit {
   revealItems() {
     setTimeout(function () { document.getElementsByClassName('noContent')[0]?.classList.remove('unrevealed'); }, 1);
     const items = document.getElementsByClassName('itemContainer');
-    console.log(items);
-    
 
     for (let i = 0; i < items.length; i++) {
         setTimeout(function () {
@@ -194,10 +192,14 @@ export class PdfSearchResultsComponent implements OnInit {
   }
 
   revealCards() {
-    setTimeout(function () { document.getElementsByClassName('noContent')[0]?.classList.remove('unrevealed'); }, 1);
+    const noContent = document.getElementsByClassName('noContent');
+
+    for (let i = 0; i < noContent.length; i++) {
+        setTimeout(function () {
+          noContent[i]?.classList.remove('unrevealed');
+        }, 80);
+    }
     const cards = document.getElementsByClassName('card');
-    console.log(cards);
-    
 
     for (let i = 0; i < cards.length; i++) {
         setTimeout(function () {
