@@ -227,9 +227,15 @@ export class PdfUploadComponent implements OnInit {
 
   revealItems() {
     setTimeout(function () { document.getElementById('container')?.classList.remove('unrevealed'); }, 40);
-    setTimeout(function () { document.getElementsByClassName('headingContainer')[0]?.classList.remove('unrevealed'); }, 80);
-    setTimeout(function () { document.getElementsByClassName('dropzone')[0]?.classList.remove('unrevealed'); }, 120);
-    setTimeout(function () { document.getElementsByClassName('filesSelected')[0]?.classList.remove('unrevealed'); }, 160);
+
+    setTimeout(function () { document.getElementsByClassName('title')[0]?.classList.remove('unrevealed'); }, 60);
+    setTimeout(function () { document.getElementsByClassName('smallTitle')[0]?.classList.remove('unrevealed'); }, 80);    
+    setTimeout(function () { document.getElementsByClassName('dropzone')[0]?.classList.remove('unrevealed'); }, 100);
+    setTimeout(function () { document.getElementById('dropzoneTitle')?.classList.remove('unrevealed'); }, 120);
+    setTimeout(function () { document.getElementsByClassName('dropSmallText')[0]?.classList.remove('unrevealed'); }, 140);
+    setTimeout(function () { document.getElementsByClassName('button')[0]?.classList.remove('unrevealed'); }, 160);
+    setTimeout(function () { document.getElementsByClassName('filesSelected')[0]?.classList.remove('unrevealed'); }, 180);
+    setTimeout(function () { document.getElementsByClassName('uploadButton')[0]?.classList.remove('unrevealed'); }, 200);
   }
 
   private _filter(value: string): string[] {
