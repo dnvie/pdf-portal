@@ -2,6 +2,9 @@
 
 Manage your Pdf Library via a web interface, written with a go backend and an angular frontend.
 
+Frontend-Demo: http://dnvie.com/pdfportal
+(This demo is only the frontend without any backend, using dummy data!)
+
 Features:
 - Upload one or multiple pdf files at once
 - Add tags to pdf files
